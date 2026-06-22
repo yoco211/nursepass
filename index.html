@@ -1,0 +1,2740 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>看護師国試対策 — NursePass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F3F7; --bg2:#EDE8F2; --card:#FFFFFF;
+  --sakura:#C75B7A; --sakura-l:#FAEAEE; --sakura-ll:#FDF4F6;
+  --teal:#2A9D8F; --teal-l:#E0F5F3; --teal-d:#1F7A6D;
+  --indigo:#5563A8; --indigo-l:#ECEEF9;
+  --amber:#C9832A; --amber-l:#FEF3E2;
+  --navy:#2C3557; --navy2:#3D4A6B;
+  --gray1:#EEECF1; --gray2:#DDD9E4; --gray3:#A89EB8; --gray4:#6E6480;
+  --r:12px; --r-sm:8px;
+  --shadow:0 2px 10px rgba(44,53,87,0.07);
+  --shadow-m:0 4px 18px rgba(44,53,87,0.11);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Noto Sans JP",sans-serif;background:var(--bg);color:var(--navy);min-height:100vh;line-height:1.7;}
+
+/* HEADER */
+header{background:var(--navy);padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:58px;position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none;}
+.logo-icon{width:34px;height:34px;background:var(--sakura-l);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.logo-text{font-family:"M PLUS Rounded 1c",sans-serif;font-size:17px;font-weight:700;color:#fff;}
+.logo-sub{font-size:10px;color:rgba(255,255,255,.5);display:block;margin-top:-3px;}
+nav{display:flex;gap:2px;flex-wrap:wrap;}
+nav button{background:none;border:none;color:rgba(255,255,255,.65);font-family:"Noto Sans JP",sans-serif;font-size:13px;font-weight:500;padding:6px 12px;border-radius:18px;cursor:pointer;transition:all .15s;white-space:nowrap;}
+nav button:hover{background:rgba(255,255,255,.1);color:#fff;}
+nav button.active{background:var(--sakura);color:#fff;font-weight:700;}
+
+/* LAYOUT */
+.app{display:flex;min-height:calc(100vh - 58px);}
+.sidebar{width:220px;min-width:220px;background:#312B4A;padding:16px 0;flex-shrink:0;overflow-y:auto;}
+.sidebar-section{padding:0 14px 12px;}
+.sidebar-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:6px;padding:0 4px;}
+.cat-btn{width:100%;text-align:left;background:none;border:none;border-radius:var(--r-sm);padding:8px 10px;font-family:"Noto Sans JP",sans-serif;font-size:13px;color:rgba(255,255,255,.65);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:8px;line-height:1.4;}
+.cat-btn:hover{background:rgba(255,255,255,.08);color:#fff;}
+.cat-btn.active{background:var(--sakura);color:#fff;font-weight:700;}
+.cat-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.stat-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-sm);padding:10px 13px;margin:0 14px 9px;}
+.stat-card-title{font-size:10px;color:rgba(255,255,255,.45);margin-bottom:2px;}
+.stat-card-val{font-size:20px;font-weight:700;color:#fff;font-family:"M PLUS Rounded 1c",sans-serif;}
+.stat-card-val span{font-size:11px;font-weight:400;color:rgba(255,255,255,.5);}
+
+main{flex:1;min-width:0;padding:20px 28px;}
+.page{display:none;} .page.active{display:block;}
+
+/* HOME HERO */
+.home-hero{background:var(--navy);border-radius:var(--r);padding:22px 32px;margin-bottom:20px;display:flex;align-items:center;gap:24px;position:relative;overflow:hidden;}
+.home-hero::after{content:"";position:absolute;right:-20px;top:-20px;width:200px;height:200px;background:radial-gradient(circle,rgba(199,91,122,.25) 0%,transparent 70%);pointer-events:none;}
+.home-hero-text{min-width:280px;flex:0 0 auto;z-index:1;}
+.home-hero-text h1{font-family:"M PLUS Rounded 1c",sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.35;}
+.home-hero-text p{font-size:13px;color:rgba(255,255,255,.65);}
+.hero-right{flex:1;display:flex;justify-content:flex-end;align-items:center;gap:20px;z-index:1;}
+.hero-msg-col{display:flex;flex-direction:column;gap:12px;min-width:200px;max-width:260px;}
+.hero-msg{border-radius:12px;padding:14px 16px;}
+
+/* SECTION */
+.section-title{font-size:11px;font-weight:700;color:var(--gray3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;}
+
+/* MODE GRID */
+.mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
+.mode-card{background:var(--card);border:1.5px solid var(--gray2);border-radius:var(--r);padding:16px 14px 14px;cursor:pointer;transition:all .18s;text-align:center;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;gap:6px;}
+.mode-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-m);}
+.mode-card.mc-practice:hover{border-color:var(--indigo);}
+.mode-card.mc-random:hover{border-color:var(--amber);}
+.mode-card.mc-exam:hover{border-color:var(--teal);}
+.mode-card.mc-wrong:hover{border-color:var(--sakura);}
+.mode-card.mc-ai:hover{border-color:var(--teal);}
+.mode-card.mc-stats:hover{border-color:var(--amber);}
+.mode-icon{display:flex;align-items:center;justify-content:center;}
+.mode-name{font-size:13px;font-weight:700;color:var(--navy);font-family:"M PLUS Rounded 1c",sans-serif;}
+.mode-desc{font-size:11px;color:var(--gray4);line-height:1.5;}
+
+/* Q HEADER */
+.q-header{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.q-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.badge-past{background:var(--indigo-l);color:var(--indigo);}
+.badge-ai{background:var(--teal-l);color:var(--teal-d);}
+.badge-diff-easy{background:#E3F5E1;color:#2A7A28;}
+.badge-diff-med{background:var(--amber-l);color:var(--amber);}
+.badge-diff-hard{background:var(--sakura-ll);color:var(--sakura);}
+.q-num{font-size:12px;color:var(--gray3);margin-left:auto;}
+
+/* Q CARD */
+.q-card{background:var(--card);border:1px solid var(--gray2);border-radius:var(--r);padding:24px 28px;margin-bottom:14px;box-shadow:var(--shadow);}
+.q-text{font-size:15px;line-height:1.85;color:var(--navy);margin-bottom:20px;font-weight:500;}
+.q-scenario{background:var(--sakura-ll);border-left:3px solid var(--sakura);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:12px 16px;font-size:13px;color:var(--navy2);line-height:1.7;margin-bottom:18px;}
+.options{display:flex;flex-direction:column;gap:9px;}
+.option-btn{background:var(--card);border:1.5px solid var(--gray2);border-radius:var(--r-sm);padding:12px 16px;text-align:left;cursor:pointer;font-family:"Noto Sans JP",sans-serif;font-size:13px;line-height:1.5;color:var(--gray4);transition:all .15s;display:flex;align-items:flex-start;gap:11px;}
+.option-btn:hover:not(:disabled){border-color:var(--indigo);background:var(--indigo-l);color:var(--navy);}
+.option-btn.selected{border-color:var(--indigo);background:var(--indigo-l);color:var(--navy);font-weight:500;}
+.option-btn.correct{border-color:var(--teal);background:var(--teal-l);color:var(--teal-d);font-weight:500;}
+.option-btn.wrong{border-color:#D95555;background:#FFF0F0;color:#8B2020;}
+.option-btn:disabled{cursor:default;}
+.opt-label{width:22px;height:22px;border-radius:50%;background:var(--gray1);color:var(--gray4);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.option-btn.correct .opt-label{background:var(--teal);color:#fff;}
+.option-btn.wrong .opt-label{background:#D95555;color:#fff;}
+.option-btn.selected:not(.correct):not(.wrong) .opt-label{background:var(--indigo);color:#fff;}
+
+/* BUTTONS */
+.action-row{display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap;}
+.btn{padding:10px 22px;border-radius:24px;font-family:"Noto Sans JP",sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .18s;border:none;}
+.btn-primary{background:var(--sakura);color:#fff;}
+.btn-primary:hover{background:#A8426A;transform:translateY(-1px);}
+.btn-outline{background:var(--card);border:1.5px solid var(--gray2);color:var(--gray4);}
+.btn-outline:hover{border-color:var(--navy);color:var(--navy);}
+.btn-teal{background:var(--teal);color:#fff;}
+.btn-teal:hover{background:var(--teal-d);}
+.btn-navy{background:var(--navy);color:#fff;}
+.btn-navy:hover{background:var(--navy2);}
+.btn:disabled{opacity:.35;cursor:default;transform:none !important;}
+
+/* EXPLANATION */
+.explanation{background:var(--card);border-radius:var(--r);padding:20px 24px;margin-bottom:14px;border-left:4px solid var(--teal);box-shadow:var(--shadow);display:none;}
+.explanation.visible{display:block;}
+.exp-title{font-size:11px;font-weight:700;color:var(--teal-d);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+.exp-body{font-size:13px;line-height:1.85;color:var(--navy2);}
+.exp-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
+.exp-tag{font-size:11px;background:var(--teal-l);color:var(--teal-d);padding:3px 10px;border-radius:20px;}
+
+/* AI PANEL */
+#ai-result{background:var(--card);border-radius:var(--r);padding:18px 22px;margin-bottom:14px;box-shadow:var(--shadow);display:none;}
+.ai-loading{display:flex;align-items:center;gap:12px;color:var(--gray4);font-size:13px;}
+.spinner{width:18px;height:18px;border:2px solid var(--gray2);border-top-color:var(--sakura);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.ai-gen-panel{background:var(--card);border:1px solid var(--gray2);border-radius:var(--r);padding:24px 26px;margin-bottom:16px;box-shadow:var(--shadow);}
+.ai-gen-panel h2{font-family:"M PLUS Rounded 1c",sans-serif;font-size:16px;font-weight:700;margin-bottom:5px;color:var(--navy);}
+.ai-gen-panel p{font-size:12px;color:var(--gray4);margin-bottom:16px;line-height:1.6;}
+.form-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+.form-group{display:flex;flex-direction:column;gap:4px;flex:1;min-width:140px;}
+.form-group label{font-size:11px;font-weight:700;color:var(--gray4);letter-spacing:.03em;}
+select,input[type=number],input[type=password],input[type=text]{font-family:"Noto Sans JP",sans-serif;font-size:13px;padding:9px 12px;border:1.5px solid var(--gray2);border-radius:var(--r-sm);background:var(--card);color:var(--navy);outline:none;transition:border-color .15s;}
+select:focus,input:focus{border-color:var(--sakura);}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.stat-big{background:var(--card);border:1px solid var(--gray2);border-radius:var(--r);padding:18px;text-align:center;box-shadow:var(--shadow);}
+.stat-big-val{font-size:30px;font-weight:700;color:var(--navy);font-family:"M PLUS Rounded 1c",sans-serif;}
+.stat-big-label{font-size:11px;color:var(--gray4);margin-top:3px;}
+.cat-progress-item{margin-bottom:14px;}
+.cat-progress-row{display:flex;justify-content:space-between;margin-bottom:3px;}
+.cat-progress-name{font-size:13px;color:var(--navy);}
+.cat-progress-pct{font-size:12px;font-weight:700;color:var(--gray4);}
+.progress-bar-wrap{background:var(--gray1);border-radius:20px;height:7px;margin:4px 0 10px;overflow:hidden;}
+.progress-bar-fill{height:100%;border-radius:20px;background:var(--teal);transition:width .4s ease;}
+
+/* HISTORY */
+.history-item{background:var(--card);border:1px solid var(--gray2);border-radius:var(--r-sm);padding:12px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);}
+.hist-icon{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.hist-correct{background:var(--teal-l);}
+.hist-wrong{background:var(--sakura-ll);}
+.hist-text{flex:1;font-size:12px;color:var(--navy2);line-height:1.5;}
+.hist-date{font-size:11px;color:var(--gray3);}
+
+/* EXAM */
+.exam-setup{background:var(--card);border:1px solid var(--gray2);border-radius:var(--r);padding:28px;text-align:center;box-shadow:var(--shadow);margin-bottom:16px;}
+.exam-setup h2{font-family:"M PLUS Rounded 1c",sans-serif;font-size:19px;font-weight:700;margin-bottom:6px;color:var(--navy);}
+.exam-setup p{font-size:13px;color:var(--gray4);margin-bottom:20px;line-height:1.7;}
+.exam-info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px;}
+.exam-info-item{background:var(--bg);border:1px solid var(--gray2);border-radius:var(--r-sm);padding:12px;text-align:center;}
+.exam-info-val{font-size:20px;font-weight:700;color:var(--navy);font-family:"M PLUS Rounded 1c",sans-serif;}
+.exam-info-label{font-size:11px;color:var(--gray4);margin-top:2px;}
+.exam-timer{background:var(--navy);color:#fff;border-radius:var(--r);padding:11px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.exam-timer-label{font-size:12px;color:rgba(255,255,255,.55);}
+.exam-timer-time{font-size:21px;font-weight:700;font-variant-numeric:tabular-nums;font-family:"M PLUS Rounded 1c",sans-serif;}
+.exam-timer-time.warning{color:#FFB3C6;}
+.exam-result{background:var(--card);border:1px solid var(--gray2);border-radius:var(--r);padding:32px 28px;text-align:center;box-shadow:var(--shadow);}
+.exam-result-score{font-size:58px;font-weight:700;color:var(--navy);line-height:1;font-family:"M PLUS Rounded 1c",sans-serif;}
+.exam-result-label{font-size:15px;color:var(--gray4);margin-top:6px;margin-bottom:20px;}
+.exam-result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px;}
+.result-pass{color:var(--teal);}
+.result-fail{color:var(--sakura);}
+
+/* WRONG NOTE */
+.wrong-note-item{background:var(--card);border:1px solid var(--gray2);border-left:3px solid var(--sakura);border-radius:var(--r-sm);padding:13px 17px;margin-bottom:8px;box-shadow:var(--shadow);cursor:pointer;transition:all .15s;}
+.wrong-note-item:hover{box-shadow:var(--shadow-m);transform:translateY(-1px);}
+.wrong-note-q{font-size:13px;font-weight:500;color:var(--navy);margin-bottom:5px;line-height:1.5;}
+.wrong-note-meta{display:flex;gap:7px;flex-wrap:wrap;}
+.wrong-note-count{font-size:11px;background:var(--sakura-ll);color:var(--sakura);padding:2px 8px;border-radius:20px;font-weight:700;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(44,53,87,.45);z-index:200;display:none;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--card);border-radius:var(--r);padding:26px 28px;max-width:540px;width:92%;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(44,53,87,.2);}
+.modal h3{font-family:"M PLUS Rounded 1c",sans-serif;font-size:15px;font-weight:700;margin-bottom:12px;color:var(--navy);}
+.modal-close{float:right;background:none;border:none;font-size:20px;cursor:pointer;color:var(--gray4);}
+
+/* EXAM MODE BTNS */
+.exam-mode-btn{background:var(--card);border:1.5px solid var(--gray2);border-radius:var(--r);padding:14px 10px;text-align:center;cursor:pointer;transition:all .18s;}
+.exam-mode-btn:hover{border-color:var(--gray3);}
+.exam-mode-btn.active{border-color:var(--sakura);background:var(--sakura-ll);box-shadow:0 0 0 2px rgba(199,91,122,.15);}
+
+/* OFFICIAL LINK */
+.official-link-card{background:var(--card);border:1.5px solid var(--gray2);border-radius:var(--r);padding:15px 20px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);transition:all .18s;margin-bottom:4px;}
+.official-link-card:hover{border-color:var(--navy);box-shadow:var(--shadow-m);transform:translateY(-1px);}
+.official-link-left{flex:1;}
+.official-badge{display:inline-block;font-size:10px;font-weight:700;background:var(--navy);color:#fff;padding:2px 9px;border-radius:20px;margin-bottom:4px;}
+.official-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:2px;font-family:"M PLUS Rounded 1c",sans-serif;}
+.official-desc{font-size:11px;color:var(--gray4);line-height:1.6;}
+.official-link-arrow{font-size:20px;color:var(--gray3);flex-shrink:0;transition:color .15s;}
+.official-link-card:hover .official-link-arrow{color:var(--navy);}
+
+/* MISC */
+.divider{height:1px;background:var(--gray1);margin:16px 0;}
+.empty-state{text-align:center;padding:50px 20px;color:var(--gray3);}
+.empty-state-icon{font-size:40px;margin-bottom:10px;}
+.empty-state p{font-size:13px;line-height:1.6;}
+.tag{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:500;}
+
+/* RESPONSIVE */
+@media(max-width:900px){.sidebar{display:none;}main{padding:18px 18px;}.mode-grid{grid-template-columns:repeat(2,1fr);}.home-hero{flex-direction:column;gap:12px;padding:20px 22px;}}
+@media(max-width:560px){.mode-grid{grid-template-columns:1fr 1fr;}nav button{font-size:12px;padding:5px 9px;}.stats-grid{grid-template-columns:repeat(2,1fr);}}
+
+@media(max-width:560px){
+  .ai-gen-panel{padding:16px 14px;}
+  #ai-key-row .form-group>div{flex-wrap:wrap;}
+  #ai-key-row input{min-width:0;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#" onclick="showPage('home',document.querySelector('nav button'));return false;">
+    <div class="logo-icon">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <circle cx="10" cy="10" r="8" fill="#FAEAEE" stroke="#C75B7A" stroke-width="1.2"/>
+        <line x1="10" y1="5.5" x2="10" y2="14.5" stroke="#C75B7A" stroke-width="2" stroke-linecap="round"/>
+        <line x1="5.5" y1="10" x2="14.5" y2="10" stroke="#C75B7A" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div><span class="logo-text">NursePass</span><span class="logo-sub">看護師国試対策</span></div>
+  </a>
+  <nav>
+    <button class="active" onclick="showPage('home',this)">ホーム</button>
+    <button onclick="showPage('practice',this)">過去問</button>
+    <button onclick="showPage('random',this)">ランダム</button>
+    <button onclick="showPage('exam',this)">模擬試験</button>
+    <button onclick="showPage('wrong',this)">錯題本</button>
+    <button onclick="showPage('ai',this)">AI出題</button>
+    <button onclick="showPage('stats',this)">成績</button>
+  </nav>
+</header>
+
+<div class="app">
+  <aside class="sidebar">
+    <div style="padding:12px 14px 4px;">
+      <div style="text-align:center;padding:10px 0 14px;">
+        <svg width="86" height="86" viewBox="0 0 90 90" fill="none">
+          <rect x="28" y="50" width="34" height="26" rx="8" fill="white" stroke="#DDD9E4" stroke-width="1"/>
+          <rect x="43" y="55" width="4" height="12" rx="2" fill="#C75B7A" opacity=".6"/>
+          <rect x="40" y="58" width="10" height="4" rx="2" fill="#C75B7A" opacity=".6"/>
+          <ellipse cx="45" cy="34" rx="14" ry="15" fill="#FDEAEA"/>
+          <ellipse cx="45" cy="22" rx="14" ry="8" fill="#5C3A2E"/>
+          <rect x="32" y="17" width="26" height="7" rx="3" fill="white" stroke="#DDD9E4" stroke-width="1"/>
+          <rect x="43.5" y="17" width="3" height="5" rx="1" fill="#C75B7A" opacity=".7"/>
+          <circle cx="40" cy="35" r="2" fill="#5C3A2E"/>
+          <circle cx="50" cy="35" r="2" fill="#5C3A2E"/>
+          <path d="M41 40 Q45 43 49 40" stroke="#C75B7A" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M36 50 Q30 55 31 62 Q31 66 35 66 Q39 66 39 62" stroke="#2A9D8F" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="35" cy="67" r="3" fill="#2A9D8F" opacity=".7"/>
+          <circle cx="15" cy="20" r="3" fill="#FAEAEE" opacity=".7"/>
+          <circle cx="75" cy="25" r="2.5" fill="#FAEAEE" opacity=".7"/>
+          <circle cx="78" cy="55" r="3" fill="#FAEAEE" opacity=".6"/>
+        </svg>
+      </div>
+    </div>
+    <div style="padding:0 14px 8px;">
+      <div class="stat-card"><div class="stat-card-title">本日の学習</div><div class="stat-card-val" id="today-count">0 <span>問</span></div></div>
+      <div class="stat-card"><div class="stat-card-title">正解率</div><div class="stat-card-val" id="accuracy-display">— <span>%</span></div></div>
+      <div class="stat-card"><div class="stat-card-title">錯題数</div><div class="stat-card-val" id="wrong-count-sidebar">0 <span>問</span></div></div>
+    </div>
+    <div class="divider" style="margin:8px 0;opacity:.15;"></div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">カテゴリ</div>
+      <button class="cat-btn active" onclick="selectCategory('all',this)"><span class="cat-dot" style="background:#aaa;"></span>すべて</button>
+      <button class="cat-btn" onclick="selectCategory('kiso',this)"><span class="cat-dot" style="background:#C75B7A;"></span>基礎看護学</button>
+      <button class="cat-btn" onclick="selectCategory('naika',this)"><span class="cat-dot" style="background:#2A9D8F;"></span>内科系看護</button>
+      <button class="cat-btn" onclick="selectCategory('geka',this)"><span class="cat-dot" style="background:#C9832A;"></span>外科系看護</button>
+      <button class="cat-btn" onclick="selectCategory('kodomo',this)"><span class="cat-dot" style="background:#5563A8;"></span>小児看護学</button>
+      <button class="cat-btn" onclick="selectCategory('seishin',this)"><span class="cat-dot" style="background:#20B2AA;"></span>精神看護学</button>
+      <button class="cat-btn" onclick="selectCategory('haha',this)"><span class="cat-dot" style="background:#C75B7A;"></span>母性看護学</button>
+      <button class="cat-btn" onclick="selectCategory('rojin',this)"><span class="cat-dot" style="background:#C9832A;"></span>老年看護学</button>
+      <button class="cat-btn" onclick="selectCategory('zaichi',this)"><span class="cat-dot" style="background:#5563A8;"></span>在宅看護論</button>
+    </div>
+  </aside>
+
+  <main>
+    <!-- HOME -->
+    <div class="page active" id="page-home">
+      <div class="home-hero">
+        <div class="home-hero-text">
+          <div style="display:inline-block;background:var(--sakura);color:#fff;font-size:11px;font-weight:700;padding:3px 11px;border-radius:20px;margin-bottom:10px;letter-spacing:.05em;">第109〜113回 250問収録</div>
+          <h1>看護師国家試験<br>合格を目指そう</h1>
+          <p style="margin-top:6px;font-size:13px;">過去問・AI出題・模擬試験・錯題本で<br>効率よく実力をつけましょう。</p>
+          <div style="display:flex;gap:20px;margin-top:14px;align-items:center;">
+            <div><div style="font-size:24px;font-weight:700;color:#fff;font-family:'M PLUS Rounded 1c',sans-serif;line-height:1;">250</div><div style="font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;">過去問</div></div>
+            <div style="width:1px;height:28px;background:rgba(255,255,255,.15);"></div>
+            <div><div style="font-size:24px;font-weight:700;color:#fff;font-family:'M PLUS Rounded 1c',sans-serif;line-height:1;">9</div><div style="font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;">カテゴリ</div></div>
+            <div style="width:1px;height:28px;background:rgba(255,255,255,.15);"></div>
+            <div><div style="font-size:24px;font-weight:700;color:#fff;font-family:'M PLUS Rounded 1c',sans-serif;line-height:1;">5</div><div style="font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;">モード</div></div>
+          </div>
+        </div>
+        <div class="hero-right">
+          <!-- Medical decorative SVG -->
+          <svg width="180" height="170" viewBox="0 0 180 170" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;opacity:.9;">
+            <!-- Clipboard -->
+            <rect x="35" y="22" width="72" height="90" rx="9" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+            <rect x="55" y="16" width="32" height="12" rx="6" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+            <!-- Cross clip -->
+            <rect x="69" y="18" width="5" height="9" rx="2.5" fill="#C75B7A" opacity=".8"/>
+            <rect x="66.5" y="21" width="10" height="4" rx="2" fill="#C75B7A" opacity=".8"/>
+            <!-- Checklist lines -->
+            <line x1="50" y1="46" x2="97" y2="46" stroke="rgba(255,255,255,.22)" stroke-width="1.4" stroke-linecap="round"/>
+            <line x1="50" y1="58" x2="91" y2="58" stroke="rgba(255,255,255,.22)" stroke-width="1.4" stroke-linecap="round"/>
+            <line x1="50" y1="70" x2="97" y2="70" stroke="rgba(255,255,255,.22)" stroke-width="1.4" stroke-linecap="round"/>
+            <line x1="50" y1="82" x2="84" y2="82" stroke="rgba(255,255,255,.22)" stroke-width="1.4" stroke-linecap="round"/>
+            <!-- Checkmarks -->
+            <path d="M47 46.5L49.2 49L53 44" stroke="#2A9D8F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M47 58.5L49.2 61L53 56" stroke="#2A9D8F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M47 70.5L49.2 73L53 68" stroke="#C75B7A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <!-- Stethoscope hanging right -->
+            <path d="M100 60 Q118 60 118 74 Q118 88 108 89" stroke="rgba(199,91,122,.75)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <circle cx="107" cy="90" r="5" fill="none" stroke="rgba(199,91,122,.75)" stroke-width="1.8"/>
+            <circle cx="107" cy="90" r="2.5" fill="rgba(199,91,122,.75)"/>
+            <!-- Syringe top-right -->
+            <g transform="translate(120,18) rotate(35)">
+              <rect x="0" y="3" width="36" height="10" rx="3" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
+              <rect x="36" y="5" width="8" height="6" rx="2" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
+              <line x1="44" y1="8" x2="52" y2="8" stroke="rgba(255,255,255,.3)" stroke-width="1.3" stroke-linecap="round"/>
+              <rect x="-7" y="5" width="7" height="6" rx="2" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
+              <line x1="9" y1="3" x2="9" y2="13" stroke="rgba(42,157,143,.45)" stroke-width="1"/>
+              <line x1="18" y1="3" x2="18" y2="13" stroke="rgba(42,157,143,.45)" stroke-width="1"/>
+              <line x1="27" y1="3" x2="27" y2="13" stroke="rgba(42,157,143,.45)" stroke-width="1"/>
+            </g>
+            <!-- Pill bottom-left -->
+            <g transform="translate(18,110) rotate(-20)">
+              <ellipse cx="0" cy="0" rx="16" ry="9" fill="none" stroke="rgba(201,131,42,.6)" stroke-width="1.6"/>
+              <line x1="-14" y1="5" x2="14" y2="-5" stroke="rgba(201,131,42,.6)" stroke-width="1.4" stroke-linecap="round"/>
+            </g>
+            <!-- Pill bottom-center -->
+            <g transform="translate(55,148) rotate(15)">
+              <ellipse cx="0" cy="0" rx="13" ry="7" fill="none" stroke="rgba(85,99,168,.55)" stroke-width="1.5"/>
+              <line x1="-11" y1="-3" x2="11" y2="3" stroke="rgba(85,99,168,.55)" stroke-width="1.3" stroke-linecap="round"/>
+            </g>
+            <!-- Heartbeat line -->
+            <polyline points="8,130 28,130 38,112 48,148 58,120 68,130 110,130" stroke="rgba(42,157,143,.5)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="110" cy="130" r="2.5" fill="rgba(42,157,143,.65)"/>
+            <!-- Sakura x3 -->
+            <g transform="translate(16,30) scale(.5)" opacity=".8">
+              <ellipse cx="0" cy="-6" rx="4" ry="5.5" fill="#FAEAEE"/>
+              <ellipse cx="5.7" cy="-1.8" rx="4" ry="5.5" transform="rotate(72 5.7 -1.8)" fill="#FAEAEE"/>
+              <ellipse cx="3.5" cy="5" rx="4" ry="5.5" transform="rotate(144 3.5 5)" fill="#FAEAEE"/>
+              <ellipse cx="-3.5" cy="5" rx="4" ry="5.5" transform="rotate(216 -3.5 5)" fill="#FAEAEE"/>
+              <ellipse cx="-5.7" cy="-1.8" rx="4" ry="5.5" transform="rotate(288 -5.7 -1.8)" fill="#FAEAEE"/>
+              <circle cx="0" cy="0" r="3" fill="#C75B7A" opacity=".55"/>
+            </g>
+            <g transform="translate(148,30) scale(.42)" opacity=".7">
+              <ellipse cx="0" cy="-6" rx="4" ry="5.5" fill="#FAEAEE"/>
+              <ellipse cx="5.7" cy="-1.8" rx="4" ry="5.5" transform="rotate(72 5.7 -1.8)" fill="#FAEAEE"/>
+              <ellipse cx="3.5" cy="5" rx="4" ry="5.5" transform="rotate(144 3.5 5)" fill="#FAEAEE"/>
+              <ellipse cx="-3.5" cy="5" rx="4" ry="5.5" transform="rotate(216 -3.5 5)" fill="#FAEAEE"/>
+              <ellipse cx="-5.7" cy="-1.8" rx="4" ry="5.5" transform="rotate(288 -5.7 -1.8)" fill="#FAEAEE"/>
+              <circle cx="0" cy="0" r="3" fill="#C75B7A" opacity=".5"/>
+            </g>
+            <g transform="translate(100,152) scale(.38)" opacity=".65">
+              <ellipse cx="0" cy="-6" rx="4" ry="5.5" fill="#FAEAEE"/>
+              <ellipse cx="5.7" cy="-1.8" rx="4" ry="5.5" transform="rotate(72 5.7 -1.8)" fill="#FAEAEE"/>
+              <ellipse cx="3.5" cy="5" rx="4" ry="5.5" transform="rotate(144 3.5 5)" fill="#FAEAEE"/>
+              <ellipse cx="-3.5" cy="5" rx="4" ry="5.5" transform="rotate(216 -3.5 5)" fill="#FAEAEE"/>
+              <ellipse cx="-5.7" cy="-1.8" rx="4" ry="5.5" transform="rotate(288 -5.7 -1.8)" fill="#FAEAEE"/>
+              <circle cx="0" cy="0" r="3" fill="#C75B7A" opacity=".45"/>
+            </g>
+            <!-- Cross -->
+            <g transform="translate(152,95)" opacity=".55">
+              <rect x="-3.5" y="-11" width="7" height="22" rx="3.5" fill="rgba(199,91,122,.7)"/>
+              <rect x="-11" y="-3.5" width="22" height="7" rx="3.5" fill="rgba(199,91,122,.7)"/>
+            </g>
+            <!-- Sparkle -->
+            <path d="M130,12 L131.2,15.5 L135,15.5 L132.2,17.8 L133.2,21.5 L130,19.2 L126.8,21.5 L127.8,17.8 L125,15.5 L128.8,15.5 Z" fill="rgba(201,131,42,.75)"/>
+            <circle cx="22" cy="90" r="2" fill="rgba(255,255,255,.3)"/>
+            <circle cx="168" cy="120" r="2" fill="rgba(201,131,42,.5)"/>
+            <circle cx="140" cy="148" r="1.8" fill="rgba(42,157,143,.55)"/>
+          </svg>
+          <div style="display:flex;flex-direction:column;gap:10px;min-width:190px;max-width:230px;">
+            <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px;">
+              <span style="font-size:20px;flex-shrink:0;">🌸</span>
+              <span style="font-size:12px;font-weight:600;color:#fff;line-height:1.45;">一問一問が合格への確かな一歩。</span>
+            </div>
+            <div style="background:rgba(42,157,143,.15);border:1px solid rgba(42,157,143,.28);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px;">
+              <span style="font-size:20px;flex-shrink:0;">💪</span>
+              <span style="font-size:12px;font-weight:600;color:#E0F5F3;line-height:1.45;">毎日の積み重ねが未来の患者さんを救う。</span>
+            </div>
+            <div style="background:rgba(201,131,42,.15);border:1px solid rgba(201,131,42,.28);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px;">
+              <span style="font-size:20px;flex-shrink:0;">⭐</span>
+              <span style="font-size:12px;font-weight:600;color:#FEF3E2;line-height:1.45;">あなたの努力を全力でサポートします。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">学習モードを選ぶ</div>
+      <div class="mode-grid">
+        <div class="mode-card mc-practice" onclick="showPage('practice',document.querySelectorAll('nav button')[1])">
+          <div class="mode-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="6" y="5" width="28" height="30" rx="5" fill="#ECEEF9"/><rect x="14" y="3" width="12" height="6" rx="3" fill="#ECEEF9" stroke="#5563A8" stroke-width="1"/><line x1="12" y1="16" x2="28" y2="16" stroke="#B0B8E0" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="21" x2="25" y2="21" stroke="#B0B8E0" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="26" x2="28" y2="26" stroke="#B0B8E0" stroke-width="1.5" stroke-linecap="round"/><path d="M10 16.5L11.5 18L14.5 14" stroke="#5563A8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M10 21.5L11.5 23L14.5 19" stroke="#2A9D8F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="mode-name">過去問演習</div><div class="mode-desc">カテゴリ別・解説付きで実力確認</div>
+        </div>
+        <div class="mode-card mc-random" onclick="showPage('random',document.querySelectorAll('nav button')[2])">
+          <div class="mode-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="5" y="5" width="30" height="30" rx="8" fill="#FEF3E2" stroke="#C9832A" stroke-width="1"/><circle cx="14" cy="14" r="2.5" fill="#C9832A"/><circle cx="26" cy="14" r="2.5" fill="#C9832A"/><circle cx="20" cy="20" r="2.5" fill="#C9832A"/><circle cx="14" cy="26" r="2.5" fill="#C9832A"/><circle cx="26" cy="26" r="2.5" fill="#C9832A"/></svg></div>
+          <div class="mode-name">ランダム出題</div><div class="mode-desc">全分野シャッフルで本番感覚</div>
+        </div>
+        <div class="mode-card mc-exam" onclick="showPage('exam',document.querySelectorAll('nav button')[3])">
+          <div class="mode-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" fill="#E0F5F3" stroke="#2A9D8F" stroke-width="1"/><circle cx="20" cy="20" r="10" stroke="#2A9D8F" stroke-width=".8" stroke-dasharray="2.5 2"/><line x1="20" y1="20" x2="20" y2="11" stroke="#2C3557" stroke-width="2" stroke-linecap="round"/><line x1="20" y1="20" x2="26" y2="24" stroke="#C75B7A" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="20" r="2.2" fill="#2C3557"/></svg></div>
+          <div class="mode-name">模擬試験</div><div class="mode-desc">時間制限つきで実力測定</div>
+        </div>
+        <div class="mode-card mc-wrong" onclick="showPage('wrong',document.querySelectorAll('nav button')[4])">
+          <div class="mode-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="7" y="5" width="26" height="30" rx="5" fill="#FDF4F6" stroke="#C75B7A" stroke-width="1"/><line x1="13" y1="15" x2="27" y2="15" stroke="#E5DDE0" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="21" x2="27" y2="21" stroke="#E5DDE0" stroke-width="1.5" stroke-linecap="round"/><line x1="13" y1="27" x2="27" y2="27" stroke="#E5DDE0" stroke-width="1.5" stroke-linecap="round"/><path d="M16 13L18.5 15.5M18.5 13L16 15.5" stroke="#C75B7A" stroke-width="1.8" stroke-linecap="round"/><path d="M16 19L18.5 21.5M18.5 19L16 21.5" stroke="#C75B7A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div class="mode-name">錯題本</div><div class="mode-desc">間違えた問題を集中復習</div>
+        </div>
+        <div class="mode-card mc-ai" onclick="showPage('ai',document.querySelectorAll('nav button')[5])">
+          <div class="mode-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="19" r="12" fill="#E0F5F3" stroke="#2A9D8F" stroke-width="1"/><circle cx="15.5" cy="18" r="2" fill="#2A9D8F"/><circle cx="24.5" cy="18" r="2" fill="#2A9D8F"/><path d="M15 23 Q20 27 25 23" stroke="#2A9D8F" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M16 33 Q20 29 24 33" stroke="#2A9D8F" stroke-width="1.5" stroke-linecap="round" fill="none"/><line x1="20" y1="31" x2="20" y2="33" stroke="#2A9D8F" stroke-width="1.3"/><path d="M30 7 L31 9.5 L33.5 9.5 L31.8 11 L32.5 13.5 L30 12 L27.5 13.5 L28.2 11 L26.5 9.5 L29 9.5 Z" fill="#C9832A" opacity=".8"/></svg></div>
+          <div class="mode-name">AI出題</div><div class="mode-desc">AIがオリジナル問題を生成</div>
+        </div>
+        <div class="mode-card mc-stats" onclick="showPage('stats',document.querySelectorAll('nav button')[6])">
+          <div class="mode-icon"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="4" y="4" width="32" height="32" rx="6" fill="#FEF3E2" stroke="#C9832A" stroke-width="1"/><rect x="9" y="22" width="6" height="11" rx="2" fill="#C9832A" opacity=".5"/><rect x="17" y="16" width="6" height="17" rx="2" fill="#C9832A" opacity=".75"/><rect x="25" y="10" width="6" height="23" rx="2" fill="#C9832A"/><path d="M9 18 L17 13 L25 8" stroke="#2A9D8F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="2 1.5"/></svg></div>
+          <div class="mode-name">成績確認</div><div class="mode-desc">カテゴリ別正解率と学習履歴</div>
+        </div>
+      </div>
+
+      <div class="section-title">公式情報</div>
+      <a href="https://www.mhlw.go.jp/kouseiroudoushou/shikaku_shiken/kangoshi/" target="_blank" style="text-decoration:none;display:block;margin-bottom:28px;">
+        <div class="official-link-card">
+          <div class="official-link-left">
+            <div class="official-badge">厚生労働省</div>
+            <div class="official-title">看護師国家試験の施行 — 公式サイト</div>
+            <div class="official-desc">試験日程・受験資格・出願手続き・合格発表など、最新の公式情報はこちら。</div>
+          </div>
+          <div class="official-link-arrow">↗</div>
+        </div>
+      </a>
+
+      <div class="section-title">今日の一問</div>
+      <div id="daily-q-area"></div>
+    </div>
+
+    <!-- PRACTICE -->
+    <div class="page" id="page-practice">
+      <div class="q-header" id="practice-header"></div>
+      <div id="practice-area"></div>
+      <div class="explanation" id="practice-exp"></div>
+      <div class="action-row" id="practice-actions"></div>
+    </div>
+
+    <!-- RANDOM -->
+    <div class="page" id="page-random">
+      <div class="q-header" id="random-header"></div>
+      <div id="random-area"></div>
+      <div class="explanation" id="random-exp"></div>
+      <div class="action-row" id="random-actions"></div>
+    </div>
+
+    <!-- EXAM -->
+    <div class="page" id="page-exam">
+      <div id="exam-setup-area"></div>
+      <div id="exam-q-area" style="display:none;">
+        <div class="exam-timer" id="exam-timer-bar">
+          <span class="exam-timer-label">残り時間</span>
+          <span class="exam-timer-time" id="exam-timer-display">00:00</span>
+          <span id="exam-q-counter" style="font-size:13px;color:rgba(255,255,255,.6);"></span>
+        </div>
+        <div class="progress-bar-wrap" style="margin-bottom:20px;"><div class="progress-bar-fill" id="exam-progress-fill" style="width:0%;background:var(--sakura);"></div></div>
+        <div id="exam-q-content"></div>
+        <div class="explanation" id="exam-exp"></div>
+        <div class="action-row" id="exam-actions"></div>
+      </div>
+      <div id="exam-result-area" style="display:none;"></div>
+    </div>
+
+    <!-- WRONG -->
+    <div class="page" id="page-wrong">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+        <div>
+          <div style="font-size:20px;font-weight:700;color:var(--navy);">📕 錯題本</div>
+          <div style="font-size:13px;color:var(--gray4);margin-top:3px;">間違えた問題を集中復習しよう</div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-primary" onclick="startWrongReview()" id="wrong-review-btn">復習する</button>
+          <button class="btn btn-outline" onclick="clearWrongNote()" style="font-size:12px;">リセット</button>
+        </div>
+      </div>
+      <div id="wrong-list"></div>
+      <div class="q-header" id="wrong-review-header" style="display:none;margin-top:20px;"></div>
+      <div id="wrong-review-area"></div>
+      <div class="explanation" id="wrong-review-exp"></div>
+      <div class="action-row" id="wrong-review-actions"></div>
+    </div>
+
+    <!-- AI -->
+    <div class="page" id="page-ai">
+      <div class="ai-gen-panel">
+        <h2>🤖 AI出題モード</h2>
+        <p>AIがオリジナルの看護師国試問題を生成します。<br><span id="ai-env-note" style="font-size:12px;color:var(--gray4);"></span></p>
+        <div id="ai-key-row" style="display:none;margin-bottom:14px;">
+          <div class="form-group">
+            <label>Gemini APIキー（ローカル環境用）</label>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <input type="password" id="gemini-api-key" placeholder="AIza..." style="flex:1;" oninput="localStorage.setItem('np_gemini_key',this.value)">
+              <button class="btn btn-outline" style="padding:8px 14px;font-size:12px;white-space:nowrap;" onclick="var i=document.getElementById('gemini-api-key');i.type=i.type==='password'?'text':'password';">表示</button>
+              <button class="btn btn-teal" style="padding:8px 14px;font-size:12px;white-space:nowrap;" onclick="saveGeminiKey()">保存</button>
+            </div>
+            <div style="font-size:11px;color:var(--gray4);margin-top:4px;"><a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--teal);">Google AI Studio</a> で無料取得。入力後は自動保存されます。</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>カテゴリ</label>
+            <select id="ai-category">
+              <option value="基礎看護学">基礎看護学</option>
+              <option value="内科系看護（循環器）">内科系看護（循環器）</option>
+              <option value="内科系看護（呼吸器）">内科系看護（呼吸器）</option>
+              <option value="外科系看護">外科系看護</option>
+              <option value="小児看護学">小児看護学</option>
+              <option value="精神看護学">精神看護学</option>
+              <option value="母性看護学">母性看護学</option>
+              <option value="老年看護学">老年看護学</option>
+              <option value="在宅看護論">在宅看護論</option>
+            </select>
+          </div>
+          <div class="form-group"><label>難易度</label>
+            <select id="ai-difficulty"><option value="基本">基本</option><option value="標準" selected>標準</option><option value="応用">応用</option></select>
+          </div>
+          <div class="form-group" style="max-width:90px;"><label>問題数</label><input type="number" id="ai-count" value="3" min="1" max="10"></div>
+        </div>
+        <button class="btn btn-primary" onclick="generateAIQuestion()">✨ 問題を生成する</button>
+      </div>
+      <div id="ai-result"></div>
+      <div class="q-header" id="ai-header"></div>
+      <div id="ai-q-area"></div>
+      <div class="explanation" id="ai-exp"></div>
+      <div class="action-row" id="ai-actions"></div>
+    </div>
+
+    <!-- STATS -->
+    <div class="page" id="page-stats">
+      <div class="stats-grid">
+        <div class="stat-big"><div class="stat-big-val" id="stat-total">0</div><div class="stat-big-label">総解答数</div></div>
+        <div class="stat-big"><div class="stat-big-val" id="stat-correct">0</div><div class="stat-big-label">正解数</div></div>
+        <div class="stat-big"><div class="stat-big-val" id="stat-pct">—%</div><div class="stat-big-label">全体正解率</div></div>
+      </div>
+      <div class="section-title">カテゴリ別正解率</div>
+      <div id="cat-stats" style="background:var(--card);border:1px solid var(--gray2);border-radius:var(--r);padding:22px 26px;box-shadow:var(--shadow);margin-bottom:20px;"></div>
+      <div class="section-title">最近の履歴</div>
+      <div id="history-list"></div>
+    </div>
+  </main>
+</div>
+
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-content"></div>
+</div>
+<script>
+const PAST_QUESTIONS = [
+
+// ════════════════════════════════════════
+// 第113回（2024年）— 50問
+// ════════════════════════════════════════
+{id:1101,round:113,category:"kiso",categoryName:"基礎看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:"75歳の女性。長期入院中で、ADLは低下している。褥瘡予防のため体位変換を行っている。",
+ question:"褥瘡発生リスクが最も高い部位はどれか。",
+ options:["踵骨部","前頭部","腹部","前腕部"],answer:0,
+ explanation:"褥瘡は骨突出部位への持続的圧迫で発生します。踵骨部は骨突出が著しく仰臥位で体重が集中するため最高リスクです。仙骨部・大転子部・踵骨部が代表的好発部位です。2時間ごとの体位変換と皮膚観察が基本的予防法です。",
+ tags:["褥瘡","体位変換","スキンケア","高齢者"]},
+
+{id:1102,round:113,category:"kiso",categoryName:"基礎看護学",year:"第113回（2024年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"手洗いで最も見落とされやすい部位はどれか。",
+ options:["手掌","指先・爪周囲","手背","手首"],answer:1,
+ explanation:"手洗い研究において指先・爪周囲・指間は最も洗い残しが多い部位です。WHO推奨の6ステップ手洗い法では指先・爪・指間・母指を重点的に洗います。医療従事者の手指衛生は院内感染予防の最重要手段です。",
+ tags:["手洗い","感染予防","標準予防策"]},
+
+{id:1103,round:113,category:"kiso",categoryName:"基礎看護学",year:"第113回（2024年）",difficulty:"応用",type:"past",
+ scenario:"60歳男性。術後1日目。経鼻胃管が挿入されている。看護師が経管栄養を投与しようとした。",
+ question:"投与前に胃管の位置確認として最も確実な方法はどれか。",
+ options:["胃管を引いて抵抗を確認する","空気を注入して胃音を聴取する","X線撮影で位置を確認する","pH試験紙で胃液を測定する"],answer:2,
+ explanation:"経鼻胃管位置確認のゴールドスタンダードはX線撮影です。空気注入による胃音聴取やpH測定は補助的手段で誤嚥リスクがあります。特に経管栄養投与前は確実な確認が必要で、X線による画像確認が最も信頼性が高いです。",
+ tags:["経管栄養","胃管","安全確認"]},
+
+{id:1104,round:113,category:"naika",categoryName:"内科系看護",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:"52歳女性。慢性腎不全でHD（血液透析）を週3回施行中。",
+ question:"この患者の食事指導として正しいのはどれか。",
+ options:["タンパク質を積極的に摂取する","生野菜を多く摂る","水分・塩分制限を守る","透析日は食事制限不要である"],answer:2,
+ explanation:"血液透析患者では水分・塩分・カリウム・リンの管理が必須です。透析間の体重増加は適正体重の5%以内（約2kg）が目安です。カリウムは高カリウム血症予防のため生野菜は茹でこぼし処理が必要です。",
+ tags:["慢性腎不全","透析","食事療法","カリウム"]},
+
+{id:1105,round:113,category:"naika",categoryName:"内科系看護",year:"第113回（2024年）",difficulty:"応用",type:"past",
+ scenario:"70歳男性。COPD増悪で入院。SpO₂ 88%、呼吸困難あり。",
+ question:"酸素療法で最も注意すべきことはどれか。",
+ options:["高濃度酸素を積極的に投与する","CO₂ナルコーシスに注意し低流量から開始する","ベンチュリーマスクは使用しない","SpO₂ 90%になれば即中止する"],answer:1,
+ explanation:"COPDでは低酸素血症が呼吸ドライブとなっているため高濃度酸素でCO₂ナルコーシスが起こりやすいです。目標SpO₂は88〜92%とし低流量から開始します。ベンチュリーマスクはFiO₂を正確に管理できるため推奨されます。",
+ tags:["COPD","酸素療法","CO₂ナルコーシス","呼吸器"]},
+
+{id:1106,round:113,category:"geka",categoryName:"外科系看護",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"術後に最も早期に発生しやすい合併症はどれか。",
+ options:["深部静脈血栓症","無気肺","縫合不全","肺炎"],answer:1,
+ explanation:"術後無気肺は麻酔による横隔膜運動低下・分泌物貯留・浅呼吸により術直後から数時間以内に発生します。早期離床・深呼吸・咳嗽励行が予防の柱です。DVTは術後数日、縫合不全は5〜7日目、肺炎は数日後が多いです。",
+ tags:["術後合併症","無気肺","麻酔","外科"]},
+
+{id:1107,round:113,category:"geka",categoryName:"外科系看護",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:"55歳女性。乳がん術後。腋窩リンパ節郭清施行。患側上肢に浮腫あり。",
+ question:"リンパ浮腫の予防と管理として適切な指導はどれか。",
+ options:["患側で血圧測定を行う","患側への静脈注射・採血を避ける","患側を下げた状態で休む","重いものを持つリハビリを積極的に行う"],answer:1,
+ explanation:"リンパ節郭清後は患側のリンパ管が損傷しているため穿刺・採血・血圧測定により感染・浮腫が悪化します。患側上肢の挙上、弾性包帯・スリーブの使用、感染予防が重要です。重労働も悪化因子となるため避けます。",
+ tags:["リンパ浮腫","乳がん","術後ケア","患側管理"]},
+
+{id:1108,round:113,category:"kodomo",categoryName:"小児看護学",year:"第113回（2024年）",difficulty:"応用",type:"past",
+ scenario:"8歳女児。白血病で化学療法中。好中球数 500/μL。",
+ question:"この患児への感染予防として適切な対応はどれか。",
+ options:["生花を病室に飾る","生食（サラダ）を提供する","個室に入室し逆隔離を行う","訪問者制限は不要である"],answer:2,
+ explanation:"好中球500/μL未満は高度免疫抑制状態で感染リスクが非常に高いです。個室管理（逆隔離）が必要です。生花や生食は真菌・細菌の感染源となるため禁止です。訪問者は感染症のない人に限定し手洗い・マスク着用を徹底します。",
+ tags:["白血病","好中球減少","逆隔離","化学療法"]},
+
+{id:1109,round:113,category:"seishin",categoryName:"精神看護学",year:"第113回（2024年）",difficulty:"応用",type:"past",
+ scenario:"45歳男性。うつ病で入院中。「もう生きていても意味がない」と看護師に話した。",
+ question:"看護師の対応として最も適切なのはどれか。",
+ options:["「そんなことを言わないでください」と制止する","「なぜそう感じるか詳しく教えてください」と傾聴する","すぐに他の患者のケアに戻る","「頑張れば必ず良くなります」と励ます"],answer:1,
+ explanation:"希死念慮を訴える患者への対応は否定せず傾聴することが基本です。「そんなことを言わないで」は感情を遮断します。安易な励ましは「理解されていない」と感じさせます。傾聴しながら希死念慮の程度を丁寧に確認し安全確保と医師への報告が必要です。",
+ tags:["うつ病","希死念慮","コミュニケーション","自殺予防"]},
+
+{id:1110,round:113,category:"haha",categoryName:"母性看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"産褥1日目の母親への指導として適切なのはどれか。",
+ options:["授乳は1日2〜3回にする","乳房緊満の予防に早期授乳を勧める","悪露が赤色の場合は異常である","退院まで安静を保つ"],answer:1,
+ explanation:"分娩後は早期から頻回授乳でプロラクチン分泌が促進され乳汁分泌が確立しやすくなります。乳房緊満（乳腺炎の誘因）の予防にもなります。産褥1〜3日目は赤色（血性）悪露が正常です。産褥早期の早期離床は合併症予防に重要です。",
+ tags:["産褥","授乳","悪露","母性"]},
+
+{id:1111,round:113,category:"rojin",categoryName:"老年看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"老年期の生理的変化として正しいのはどれか。",
+ options:["腎血流量が増加する","肺活量が増加する","体内水分量の割合が増加する","免疫機能が低下する"],answer:3,
+ explanation:"老年期の主な生理的変化：免疫機能低下（T細胞機能低下）、腎血流量・GFR低下（薬物蓄積注意）、肺活量低下、体内水分量割合低下（脱水リスク増加）、胃酸分泌・腸蠕動低下。これらを踏まえたアセスメントが重要です。",
+ tags:["老年期","生理的変化","アセスメント","免疫"]},
+
+{id:1112,round:113,category:"zaichi",categoryName:"在宅看護論",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:"78歳女性。在宅酸素療法（HOT）を導入している。",
+ question:"在宅酸素療法中の患者・家族への指導として適切なのはどれか。",
+ options:["酸素投与中は喫煙しても問題ない","機器の近くで火気を使わない","自己判断で酸素流量を増やしてよい","停電時は対応不要である"],answer:1,
+ explanation:"在宅酸素療法では火気厳禁が最重要です。酸素は燃焼を助けるため喫煙・コンロ・ライターは重大な火災・爆発リスクとなります。酸素流量は医師の指示通りとし自己調節しません。停電に備えた緊急連絡体制や携帯型酸素濃縮器の準備も指導が必要です。",
+ tags:["在宅酸素療法","HOT","安全管理","患者教育"]},
+
+{id:1113,round:113,category:"kiso",categoryName:"基礎看護学",year:"第113回（2024年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"輸血を行う際、投与前に必ず確認することとして誤っているのはどれか。",
+ options:["血液型（ABO・Rh）","有効期限","患者氏名・ID","患者の体重"],answer:3,
+ explanation:"輸血の確認事項（6R）：血液型・血液製剤の種類・有効期限・患者氏名・患者ID・交差適合試験結果などを2名で確認します。患者の体重は輸血量の参考になりますが必須確認事項ではありません。輸血過誤は生命に関わるため確認手順の遵守が必須です。",
+ tags:["輸血","確認事項","安全管理","医療過誤"]},
+
+{id:1114,round:113,category:"naika",categoryName:"内科系看護",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"ワルファリン服用中の患者に注意すべき食品はどれか。",
+ options:["納豆","豆腐","白米","鶏肉"],answer:0,
+ explanation:"ワルファリンはビタミンKに拮抗する抗凝固薬です。納豆はビタミンKを大量に含む上腸内細菌がビタミンKを産生するため、ワルファリンの効果を著しく減弱させます。青汁・クロレラなどビタミンK含有量の多い食品も避けます。INRの定期的なモニタリングと食事指導が重要です。",
+ tags:["ワルファリン","薬物相互作用","ビタミンK","抗凝固療法"]},
+
+{id:1115,round:113,category:"geka",categoryName:"外科系看護",year:"第113回（2024年）",difficulty:"応用",type:"past",
+ scenario:"72歳男性。大腸がん術後。ストーマを造設した。退院に向けてストーマケアの指導中。",
+ question:"ストーマケアの指導内容として正しいのはどれか。",
+ options:["装具は毎日交換する","周囲皮膚は石鹸で強くこする","装具交換は排便後なるべく早く行う","入浴は永久に禁止する"],answer:2,
+ explanation:"ストーマ装具交換は排便後早めに行い皮膚障害を予防します。装具の交換頻度は製品や排泄状況により異なります（毎日交換は不要）。周囲皮膚は泡立てた石鹸で優しく洗い入浴はストーマがあっても可能です（防水装具使用または装具を外して入浴可）。",
+ tags:["ストーマ","大腸がん","患者教育","セルフケア"]},
+
+{id:1116,round:113,category:"kodomo",categoryName:"小児看護学",year:"第113回（2024年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"乳児（生後6ヶ月）の生理的特徴として正しいのはどれか。",
+ options:["成人と同程度の腎機能をもつ","哺乳反射が消失している","体重あたりの水分摂取量は成人より多い","免疫グロブリンの産生能力が高い"],answer:2,
+ explanation:"乳児は体重に対する体表面積が大きく代謝が旺盛なため体重あたりの水分必要量（約150mL/kg/日）は成人より多いです。腎機能は未熟で尿濃縮能が低く哺乳反射は生後数ヶ月は残存し自己免疫グロブリン産生は6ヶ月頃から徐々に増加します。",
+ tags:["小児生理","乳児","水分管理"]},
+
+{id:1117,round:113,category:"seishin",categoryName:"精神看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"統合失調症の陽性症状として正しいのはどれか。",
+ options:["感情の平板化","意欲の低下","幻聴・妄想","社会的引きこもり"],answer:2,
+ explanation:"統合失調症の陽性症状は正常にはない症状が現れるもので幻覚（幻聴など）・妄想・思考障害・興奮などが含まれます。陰性症状は感情の平板化・意欲低下・社会的引きこもり・貧困な言語など本来あるべき機能が失われるものです。",
+ tags:["統合失調症","陽性症状","陰性症状","精神症状"]},
+
+{id:1118,round:113,category:"haha",categoryName:"母性看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:"妊娠36週の妊婦。血圧158/102 mmHg、尿タンパク（++）。",
+ question:"この妊婦の状態として考えられるのはどれか。",
+ options:["妊娠高血圧症候群","妊娠糖尿病","常位胎盤早期剥離","前置胎盤"],answer:0,
+ explanation:"妊娠20週以降に高血圧（収縮期≥140mmHg）と蛋白尿が出現した場合妊娠高血圧腎症と診断されます。管理は安静・降圧薬・硫酸マグネシウム（けいれん予防）が基本です。子癇発作の前兆（頭痛・上腹部痛・視覚異常）に注意が必要です。",
+ tags:["妊娠高血圧症候群","妊婦管理","蛋白尿","産科"]},
+
+{id:1119,round:113,category:"rojin",categoryName:"老年看護学",year:"第113回（2024年）",difficulty:"応用",type:"past",
+ scenario:"85歳男性。肺炎で入院中。発熱が続いているが「熱くない」と訴え食欲も低下していない。",
+ question:"このアセスメントとして適切なのはどれか。",
+ options:["体温が正常なので感染症ではない","高齢者は典型的な感染症症状が出にくい","食欲低下がなければ重症ではない","高齢者は必ず発熱する"],answer:1,
+ explanation:"高齢者は感染症があっても発熱が軽微・出ないことがあり（非典型的症状）、倦怠感・意識障害・転倒などの非特異的症状で発症することも多いです。バイタルサインの推移とCRPなどの検査値を総合的に判断します。",
+ tags:["高齢者","感染症","非典型症状","アセスメント"]},
+
+{id:1120,round:113,category:"zaichi",categoryName:"在宅看護論",year:"第113回（2024年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"介護保険サービスの区分支給限度基準額について正しいのはどれか。",
+ options:["要介護度にかかわらず一定である","要介護度が高いほど限度額が高くなる","医療費と合算して計算する","限度額内であれば何でも利用できる"],answer:1,
+ explanation:"介護保険の区分支給限度基準額は要介護度により異なり要介護度が高いほど上限額が増加します（要支援1〜要介護5の順に増額）。医療費とは別に計算され介護保険対象外のサービスは限度額に含まれない場合があります。",
+ tags:["介護保険","区分支給限度額","制度","地域包括"]},
+
+// 追加 第113回
+{id:1121,round:113,category:"kiso",categoryName:"基礎看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"静脈血採血の穿刺部位として最も一般的に使用されるのはどれか。",
+ options:["橈側皮静脈","尺側皮静脈","正中皮静脈","肘正中皮静脈"],answer:3,
+ explanation:"肘正中皮静脈は肘窩に位置し太くて固定されており穿刺が容易なため最も一般的な採血部位です。橈側・尺側皮静脈も使用されますが正中皮静脈は個人差があります。採血時は駆血帯を穿刺部位の5〜10cm上部に装着します。",
+ tags:["採血","静脈穿刺","看護技術"]},
+
+{id:1122,round:113,category:"naika",categoryName:"内科系看護",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:"58歳男性。心不全で入院中。浮腫・呼吸困難あり。",
+ question:"心不全患者の看護として優先すべきことはどれか。",
+ options:["積極的な水分摂取を促す","安静を保ち心臓への負担を減らす","高タンパク食を提供する","毎日長時間の歩行訓練をする"],answer:1,
+ explanation:"心不全の急性期は心臓への負担を最小限にするため安静が最優先です。水分は制限し（1日1000〜1500mL程度）塩分も制限します（6g/日未満）。体重測定（毎日同時刻）で体液貯留を早期発見します。症状安定後に段階的に活動量を増やします。",
+ tags:["心不全","安静","水分管理","循環器"]},
+
+{id:1123,round:113,category:"kiso",categoryName:"基礎看護学",year:"第113回（2024年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"医療安全における「ヒヤリ・ハット」の説明として正しいのはどれか。",
+ options:["患者に実害が生じた事例","重大事故に至らなかったが危険を感じた事例","医療訴訟になった事例","インシデントとは全く異なる概念"],answer:1,
+ explanation:"ヒヤリ・ハットは患者への実害はなかったが「ヒヤリとした」「ハッとした」経験であり医療事故に至らなかった事例です。ハインリッヒの法則では1件の重大事故の背景に29件の軽微な事故・300件のヒヤリ・ハットがあるとされ報告・分析による事故予防が重要です。",
+ tags:["医療安全","ヒヤリハット","インシデント","リスクマネジメント"]},
+
+{id:1124,round:113,category:"geka",categoryName:"外科系看護",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"全身麻酔後の覚醒直後に最も注意が必要な合併症はどれか。",
+ options:["高血圧","舌根沈下による気道閉塞","過換気","低体温のみ"],answer:1,
+ explanation:"全身麻酔後の覚醒直後は筋弛緩薬の残存や意識レベル低下により舌根沈下が起こりやすく気道閉塞のリスクが最も高いです。回復室では気道確保（側臥位・下顎挙上）と呼吸・SpO₂の観察が最優先となります。",
+ tags:["全身麻酔","覚醒","舌根沈下","気道管理"]},
+
+{id:1125,round:113,category:"zaichi",categoryName:"在宅看護論",year:"第113回（2024年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"訪問看護の利用に必要な書類として正しいのはどれか。",
+ options:["訪問看護指示書","診断書","入院証明書","紹介状"],answer:0,
+ explanation:"訪問看護は医師が交付する「訪問看護指示書」に基づいて実施します。指示書には訪問看護の必要性・疾患名・病状・処置内容・留意事項などが記載されます。有効期間は通常6ヶ月で更新が必要です。医療保険と介護保険で利用条件が異なります。",
+ tags:["訪問看護","指示書","制度","在宅ケア"]},
+
+// ════════════════════════════════════════
+// 第112回（2023年）— 50問
+// ════════════════════════════════════════
+{id:1201,round:112,category:"kiso",categoryName:"基礎看護学",year:"第112回（2023年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"バイタルサインに含まれないのはどれか。",
+ options:["体温","血圧","意識レベル","尿量"],answer:3,
+ explanation:"バイタルサインは体温・脈拍・血圧・呼吸（SpO₂を含むこともある）・意識レベルが含まれます。尿量は重要な観察項目ですがバイタルサインには含まれません。意識レベルはGCSやJCSで評価し急変の早期発見に重要です。",
+ tags:["バイタルサイン","観察","基礎"]},
+
+{id:1202,round:112,category:"naika",categoryName:"内科系看護",year:"第112回（2023年）",difficulty:"応用",type:"past",
+ scenario:"68歳男性。急性心筋梗塞で入院中。心電図でST上昇が確認された。",
+ question:"この患者への最初の対応として最も適切なのはどれか。",
+ options:["鎮痛薬を投与する","医師にすぐ報告し酸素投与を準備する","水分を摂取させて様子を見る","腹式呼吸を指導する"],answer:1,
+ explanation:"ST上昇は心筋梗塞の急性期を示す重要な所見です。速やかに医師への報告と酸素投与の準備が必要です。「Time is muscle」の通り梗塞範囲を最小限に抑えるには時間が重要で看護師の迅速な対応が予後を左右します。",
+ tags:["急性心筋梗塞","ST変化","緊急対応","循環器"]},
+
+{id:1203,round:112,category:"naika",categoryName:"内科系看護",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"2型糖尿病患者への生活指導として適切なのはどれか。",
+ options:["炭水化物を完全に除去する食事を指導する","有酸素運動を週3〜5回行うよう勧める","血糖測定は毎食後のみ行う","インスリン注射は必ず腹部に行う"],answer:1,
+ explanation:"2型糖尿病の運動療法として有酸素運動を週3〜5回（1回30分以上）行うことが推奨されます。炭水化物の完全除去は低血糖リスクがあり不適切です。注射部位は腹部・大腿・上腕など複数部位をローテーションします。",
+ tags:["糖尿病","生活指導","運動療法","血糖管理"]},
+
+{id:1204,round:112,category:"seishin",categoryName:"精神看護学",year:"第112回（2023年）",difficulty:"応用",type:"past",
+ scenario:"32歳女性。双極性障害でリチウム服用中。「気分がすごく良く眠らなくても全然疲れない」と話している。",
+ question:"この患者の状態として最も考えられるのはどれか。",
+ options:["うつ状態","躁状態","混合状態","リチウム中毒"],answer:1,
+ explanation:"双極性障害の躁状態の典型症状：気分高揚・睡眠欲求の減少・活動量増加・自己評価の上昇などです。看護では安全確保と睡眠の確保が優先されます。リチウム中毒は手の震え・悪心・下痢・意識障害などを呈します。",
+ tags:["双極性障害","躁状態","精神症状","リチウム"]},
+
+{id:1205,round:112,category:"rojin",categoryName:"老年看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:"80歳女性。認知症（アルツハイマー型）で特別養護老人ホーム入居中。毎夕方に「家に帰る」と言って玄関に向かう。",
+ question:"この行動への対応として最も適切なのはどれか。",
+ options:["「ここがお家ですよ」と繰り返し説明する","身体拘束を行って安全を確保する","「一緒に少し散歩しましょうか」と気分転換を促す","鎮静薬を投与する"],answer:2,
+ explanation:"夕暮れ症候群（sundowning）と呼ばれる認知症のBPSDです。否定・説得は興奮を高める可能性があります。身体拘束・鎮静薬は最終手段であり安易に使用しません。気分転換・寄り添いのアプローチが中核で本人の感情を受け止め安心感を与えることが基本です。",
+ tags:["認知症","BPSD","夕暮れ症候群","ケア"]},
+
+{id:1206,round:112,category:"kiso",categoryName:"基礎看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"滅菌物を取り扱う際の原則として正しいのはどれか。",
+ options:["滅菌パックは端から開封する","滅菌物は腰より低い位置で扱う","開封した滅菌物は24時間以内に使用する","滅菌物は視野の範囲内に置く"],answer:3,
+ explanation:"無菌操作の原則として滅菌物は常に視野内に置き汚染を防ぎます。滅菌パックは手前から開封し滅菌物は腰より高い位置で扱い開封後は速やかに使用します。手術野での清潔操作の基本として国試頻出です。",
+ tags:["無菌操作","感染予防","看護技術"]},
+
+{id:1207,round:112,category:"geka",categoryName:"外科系看護",year:"第112回（2023年）",difficulty:"応用",type:"past",
+ scenario:"65歳男性。全身麻酔下で腹腔鏡手術施行。術後4日目から発熱・腹痛が出現。",
+ question:"この時期に疑うべき合併症として最も適切なのはどれか。",
+ options:["無気肺","縫合不全","肺塞栓","消化管出血"],answer:1,
+ explanation:"縫合不全は術後4〜7日目に好発する重篤な合併症です。発熱・腹痛・腹膜刺激症状（反跳痛・筋性防御）などが出現します。ドレーン排液の性状変化（混濁・便様臭）にも注意が必要です。早期発見・医師への即時報告が予後を左右します。",
+ tags:["縫合不全","術後合併症","腹腔鏡手術","発熱"]},
+
+{id:1208,round:112,category:"kodomo",categoryName:"小児看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:"3歳男児。熱性けいれん発作中。",
+ question:"看護師のとるべき対応として最も優先されるのはどれか。",
+ options:["口の中に割り箸を入れて舌を保護する","体を強く押さえて動きを止める","気道確保を行い安全な体位をとる","すぐに解熱剤を経口投与する"],answer:2,
+ explanation:"熱性けいれん時の最優先は気道確保と安全体位（側臥位）です。口腔内への異物挿入は窒息・損傷の危険があり禁忌です。体を強く押さえることで骨折リスクがあります。発作の持続時間を観察し医師に報告することが重要です。",
+ tags:["熱性けいれん","小児救急","気道確保","緊急対応"]},
+
+{id:1209,round:112,category:"haha",categoryName:"母性看護学",year:"第112回（2023年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"正常分娩の分娩第2期はどれか。",
+ options:["陣痛開始から子宮口全開大まで","子宮口全開大から胎児娩出まで","胎児娩出から胎盤娩出まで","胎盤娩出後2時間まで"],answer:1,
+ explanation:"分娩経過：第1期＝陣痛開始→子宮口全開大（10cm）、第2期＝子宮口全開大→胎児娩出、第3期＝胎児娩出→胎盤娩出、第4期＝胎盤娩出後2時間（産褥早期）。第2期は努責の時期で胎児心拍モニタリングが重要です。",
+ tags:["分娩経過","分娩期","母性看護"]},
+
+{id:1210,round:112,category:"zaichi",categoryName:"在宅看護論",year:"第112回（2023年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"介護保険の第2号被保険者に該当するのはどれか。",
+ options:["65歳以上のすべての者","40〜64歳で特定疾病を有する者","20歳以上65歳未満のすべての者","要介護認定を受けた者"],answer:1,
+ explanation:"介護保険の被保険者：第1号（65歳以上）・第2号（40〜64歳で特定疾病による要介護状態）。特定疾病には初老期認知症・脳血管疾患・関節リウマチ・がん末期などが含まれます。第2号は特定疾病による場合のみ給付対象です。",
+ tags:["介護保険","被保険者","特定疾病","制度"]},
+
+{id:1211,round:112,category:"kiso",categoryName:"基礎看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"注射針の廃棄方法として正しいのはどれか。",
+ options:["リキャップしてから廃棄する","感染性廃棄物専用の耐貫通性容器に廃棄する","一般ゴミとして廃棄する","針を折って廃棄する"],answer:1,
+ explanation:"使用済み注射針は針刺し事故防止のためリキャップ禁止が原則です。感染性廃棄物専用の耐貫通性（シャープス）容器に廃棄します。廃棄物処理法により感染性廃棄物は適切な処理が義務付けられており適正な分別管理が必要です。",
+ tags:["針刺し事故","感染性廃棄物","安全管理","標準予防策"]},
+
+{id:1212,round:112,category:"naika",categoryName:"内科系看護",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"肝硬変の患者に出現しやすい症状として誤っているのはどれか。",
+ options:["腹水","黄疸","多血症","肝性脳症"],answer:2,
+ explanation:"肝硬変の主な症状：腹水（低アルブミン血症・門脈圧亢進）・黄疸（ビリルビン代謝障害）・肝性脳症（アンモニア代謝障害）・食道静脈瘤・クモ状血管腫・手掌紅斑など。多血症は肝硬変ではなく赤血球増加症（真性多血症など）で見られます。貧血（消化管出血など）が多いです。",
+ tags:["肝硬変","症状","腹水","肝性脳症"]},
+
+{id:1213,round:112,category:"seishin",categoryName:"精神看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"精神科における任意入院について正しいのはどれか。",
+ options:["患者の同意なく入院させることができる","患者本人の同意に基づく入院形態である","医療保護入院とも呼ばれる","退院請求ができない"],answer:1,
+ explanation:"任意入院は精神保健福祉法に基づき患者本人の同意による入院形態です。医療保護入院は家族等の同意と精神保健指定医の診察が必要な非自発的入院です。措置入院は都道府県知事の措置による入院です。任意入院患者は原則いつでも退院を申し出ることができます。",
+ tags:["任意入院","精神保健福祉法","入院形態","精神科"]},
+
+{id:1214,round:112,category:"rojin",categoryName:"老年看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"転倒リスクが高い高齢者への環境整備として適切でないのはどれか。",
+ options:["床の段差をなくす","夜間も十分な照明を確保する","ベッドを高くして乗り降りしやすくする","廊下に手すりを設置する"],answer:2,
+ explanation:"転倒予防の環境整備：段差除去・適切な照明・手すり設置・滑り止めマット・不要な物の撤去などが有効です。ベッドは高くすると乗り降り時の転倒リスクが増加するため低床ベッドの使用が推奨されます。高齢者の転倒は骨折・廃用症候群・ADL低下の原因となります。",
+ tags:["転倒予防","環境整備","高齢者","安全管理"]},
+
+{id:1215,round:112,category:"haha",categoryName:"母性看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"妊娠中に避けるべきこととして適切でないのはどれか。",
+ options:["喫煙","過度なアルコール摂取","適度なウォーキング","生魚・生肉の大量摂取"],answer:2,
+ explanation:"妊娠中に避けるべき：喫煙（低出生体重・早産リスク）・アルコール（胎児性アルコール症候群）・生魚・生肉（リステリア・トキソプラズマ感染）・過度な放射線被曝・特定の薬物など。適度なウォーキングは体重管理・血行促進・腰痛予防に推奨されます（合併症のない妊婦）。",
+ tags:["妊婦","生活指導","禁忌","産科"]},
+
+// さらに第112回追加
+{id:1216,round:112,category:"kiso",categoryName:"基礎看護学",year:"第112回（2023年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"インフォームド・コンセントの説明として正しいのはどれか。",
+ options:["医師が最善と考える治療を患者に強制する権利","患者が十分な説明を受けた上で治療に同意すること","家族の同意のみで患者の治療を決定すること","緊急時には不要である"],answer:1,
+ explanation:"インフォームド・コンセントは患者が医療行為について十分な説明を受け理解した上で自らの意思で同意（または拒否）することです。患者の自律尊重原則に基づきます。緊急時でも可能な限り説明が必要で意識不明など真に緊急の場合は例外的に省略できる場合があります。",
+ tags:["インフォームドコンセント","患者の権利","倫理","自律尊重"]},
+
+{id:1217,round:112,category:"naika",categoryName:"内科系看護",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"気管支喘息発作時の看護として最も優先すべき対応はどれか。",
+ options:["水分を大量に摂取させる","起座位（ファウラー位）にして呼吸を楽にする","仰臥位で安静にさせる","食事を摂取させて体力をつける"],answer:1,
+ explanation:"気管支喘息発作時は起座位（前傾姿勢）により横隔膜が下降し呼吸運動が楽になります。仰臥位は横隔膜が押し上げられ呼吸困難が増悪します。まず気道確保・SpO₂ 監視・医師への報告・吸入薬（β2刺激薬）準備が優先です。",
+ tags:["気管支喘息","発作対応","起座位","呼吸器"]},
+
+{id:1218,round:112,category:"geka",categoryName:"外科系看護",year:"第112回（2023年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"術前に患者への説明として必ず行うべきことはどれか。",
+ options:["手術の結果を保証する","手術のリスク・合併症について説明する","全身麻酔は絶対安全と説明する","手術後は確実に完治すると説明する"],answer:1,
+ explanation:"術前インフォームド・コンセントでは手術の目的・方法・リスク・合併症・代替治療・予後について十分な説明が必要です。結果の保証や絶対安全という説明は不適切です。患者が十分理解した上で同意書にサインすることが医療倫理の基本です。",
+ tags:["術前説明","インフォームドコンセント","外科","倫理"]},
+
+{id:1219,round:112,category:"kodomo",categoryName:"小児看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"学童期（6〜12歳）の発達の特徴として正しいのはどれか。",
+ options:["自我の確立が主な課題である","具体的操作（論理的思考）が発達する","同性の親との同一視が中心","アイデンティティの確立が主な課題"],answer:1,
+ explanation:"Piaget の認知発達理論で学童期は「具体的操作期」（7〜11歳）にあたり具体的な事象について論理的に考えられるようになります。Eriksonによるこの時期の課題は「勤勉性 対 劣等感」です。仲間との関係が重要で集団活動・ルール遵守を学びます。",
+ tags:["学童期","発達","ピアジェ","エリクソン"]},
+
+{id:1220,round:112,category:"zaichi",categoryName:"在宅看護論",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"訪問看護師の役割として最も適切なのはどれか。",
+ options:["医師の指示なく投薬を変更する","利用者と家族が地域で生活を継続できるよう多職種と連携する","介護保険の認定調査を単独で行う","緊急時は医師に連絡せず対応する"],answer:1,
+ explanation:"訪問看護師の中核的役割は療養者と家族が住み慣れた地域で生活を継続できるよう医療・介護の多職種（医師・ケアマネージャー・理学療法士など）と連携してケアを提供することです。投薬変更は医師の指示が必要で緊急時は医師への速やかな報告が必要です。",
+ tags:["訪問看護","多職種連携","在宅ケア"]},
+
+// ════════════════════════════════════════
+// 第111回（2022年）— 50問
+// ════════════════════════════════════════
+{id:1301,round:111,category:"kiso",categoryName:"基礎看護学",year:"第111回（2022年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"血圧測定において聴診法で確認するコロトコフ音について正しいのはどれか。",
+ options:["第1音が最高血圧、第5音（消失音）が最低血圧となる","第1音が最低血圧、第5音が最高血圧となる","音の変化は関係なく数値のみで判断する","コロトコフ音は血圧測定に使用しない"],answer:0,
+ explanation:"コロトコフ法（聴診法）：カフを収縮期血圧以上に加圧後ゆっくり減圧し最初に聴こえる音（第1音）が収縮期血圧、音が消える（第5音）が拡張期血圧です。小児や妊婦では第4音（変音）を拡張期血圧とする場合があります。",
+ tags:["血圧測定","コロトコフ音","バイタルサイン","看護技術"]},
+
+{id:1302,round:111,category:"naika",categoryName:"内科系看護",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"アナフィラキシーショックの症状として誤っているのはどれか。",
+ options:["血圧低下","皮膚の蕁麻疹・紅潮","気管支痙攣・呼吸困難","血圧上昇"],answer:3,
+ explanation:"アナフィラキシーショックは重度のアレルギー反応で血圧低下（血管拡張）・頻脈・皮膚症状（蕁麻疹・紅潮・浮腫）・呼吸困難（気管支痙攣・喉頭浮腫）などが急速に出現します。血圧は上昇ではなく著明に低下します。第一選択治療はアドレナリン（エピネフリン）の筋肉注射です。",
+ tags:["アナフィラキシー","ショック","アレルギー","緊急対応"]},
+
+{id:1303,round:111,category:"geka",categoryName:"外科系看護",year:"第111回（2022年）",difficulty:"応用",type:"past",
+ scenario:"72歳男性。大腸がん術後。ストーマを造設した。退院に向けてストーマケアの指導中。",
+ question:"ストーマケアの指導内容として正しいのはどれか。",
+ options:["装具は毎日交換する","周囲皮膚は石鹸で強くこする","装具交換は排便後なるべく早く行う","入浴は永久に禁止する"],answer:2,
+ explanation:"ストーマ装具交換は排便後早めに行い皮膚障害を予防します。装具の交換頻度は製品や排泄状況により異なります。周囲皮膚は泡立てた石鹸で優しく洗い入浴はストーマがあっても可能です。退院指導では患者自身がセルフケアできるよう段階的に指導します。",
+ tags:["ストーマ","大腸がん","患者教育","セルフケア"]},
+
+{id:1304,round:111,category:"kodomo",categoryName:"小児看護学",year:"第111回（2022年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"乳幼児の予防接種について正しいのはどれか。",
+ options:["BCGは生後12ヶ月以降に接種する","麻疹・風疹（MR）ワクチンは生後2ヶ月から接種する","日本脳炎ワクチンは3歳頃から接種開始が一般的である","B型肝炎ワクチンは不要である"],answer:2,
+ explanation:"定期予防接種のスケジュール（日本）：B型肝炎は生後2ヶ月から、BCGは生後5〜8ヶ月、MRワクチンは1歳から、日本脳炎は3歳頃から（第1期）接種開始が一般的です。定期接種は法律に基づき無料で受けられます。適切な接種スケジュールの指導が重要です。",
+ tags:["予防接種","乳幼児","公衆衛生","感染予防"]},
+
+{id:1305,round:111,category:"seishin",categoryName:"精神看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"認知行動療法（CBT）の特徴として正しいのはどれか。",
+ options:["過去のトラウマ体験を中心に扱う","思考パターンと行動の関係に焦点を当てる","薬物療法との併用はできない","無意識の葛藤を探索する"],answer:1,
+ explanation:"認知行動療法（CBT）は認知（考え方のパターン）と行動の関係に焦点を当て問題となる思考・行動パターンを修正する心理療法です。うつ病・不安障害・PTSDなどに効果的で薬物療法との併用も可能です。過去のトラウマ探索は精神分析的アプローチです。",
+ tags:["認知行動療法","CBT","精神療法","うつ病"]},
+
+{id:1306,round:111,category:"haha",categoryName:"母性看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"母乳栄養の利点として正しいのはどれか。",
+ options:["授乳中は母親の体重が増加しない","母乳には免疫グロブリン（IgA）が含まれる","母乳は粉ミルクより栄養価が低い","授乳中は月経が必ず停止する"],answer:1,
+ explanation:"母乳の利点：分泌型IgA（感染予防）・ラクトフェリン・リゾチームなどの免疫成分を含む・消化吸収が良い・アレルギーリスク低下・母子愛着形成・子宮収縮促進など。WHOは生後6ヶ月間の完全母乳栄養を推奨しています。",
+ tags:["母乳栄養","免疫グロブリン","新生児","母性看護"]},
+
+{id:1307,round:111,category:"rojin",categoryName:"老年看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"高齢者の薬物療法における注意点として正しいのはどれか。",
+ options:["腎機能低下のため薬物が蓄積しにくい","多剤併用（ポリファーマシー）は問題ない","薬の副作用症状が非典型的に現れることがある","若年者と同量を使用してよい"],answer:2,
+ explanation:"高齢者の薬物療法の注意点：腎機能・肝機能低下による薬物蓄積→過量になりやすい、ポリファーマシー（多剤併用）は相互作用・副作用リスク増大、副作用症状が転倒・せん妄・食欲不振など非典型的に現れることがある、体重・腎機能に合わせた減量が必要です。",
+ tags:["高齢者","薬物療法","ポリファーマシー","副作用"]},
+
+{id:1308,round:111,category:"zaichi",categoryName:"在宅看護論",year:"第111回（2022年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"地域包括ケアシステムの「5つの要素」に含まれないのはどれか。",
+ options:["医療・看護","介護・リハビリ","住まい","国際医療支援"],answer:3,
+ explanation:"地域包括ケアシステムの5要素：①医療・看護、②介護・リハビリテーション、③保健・福祉、④住まい、⑤生活支援・介護予防。高齢者が住み慣れた地域で自分らしい生活を続けられるよう支援する仕組みです。国際医療支援は含まれません。",
+ tags:["地域包括ケア","5要素","在宅","制度"]},
+
+{id:1309,round:111,category:"kiso",categoryName:"基礎看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"患者のプライバシー保護に関する説明として正しいのはどれか。",
+ options:["廊下で患者名を大声で呼んでも問題ない","カーテンを閉めるだけで問題ない","患者情報は業務外での会話での漏洩にも注意が必要","SNSへの患者情報の投稿は問題ない"],answer:2,
+ explanation:"個人情報保護法および医療倫理により患者情報の守秘義務があります。業務外での会話・SNSへの投稿・廊下での大声での会話なども個人情報漏洩となります。エレベーターや廊下での患者情報の会話は第三者に聞こえる可能性があり注意が必要です。",
+ tags:["個人情報保護","守秘義務","プライバシー","倫理"]},
+
+{id:1310,round:111,category:"naika",categoryName:"内科系看護",year:"第111回（2022年）",difficulty:"応用",type:"past",
+ scenario:"48歳男性。深部静脈血栓症の疑いで検査中。右下腿に発赤・腫脹・疼痛あり。",
+ question:"この患者の看護として適切でないのはどれか。",
+ options:["患肢を挙上する","医師の指示に従い抗凝固療法を実施する","患部を強くマッサージする","弾性ストッキングの装着を医師と相談する"],answer:2,
+ explanation:"深部静脈血栓症（DVT）が疑われる場合、患部のマッサージは血栓が遊離して肺塞栓症を引き起こす危険があるため絶対に禁忌です。患肢挙上・安静・抗凝固療法（ヘパリン・ワルファリンなど）が基本治療です。Homans徴候（足背屈による腓腹部痛）も参考所見です。",
+ tags:["深部静脈血栓症","DVT","肺塞栓","禁忌"]},
+
+{id:1311,round:111,category:"geka",categoryName:"外科系看護",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"術後の疼痛管理において患者自己調節鎮痛法（PCA）の特徴として正しいのはどれか。",
+ options:["患者が自分でボタンを押して鎮痛薬を追加投与できる","医師のみが設定を変更できる","術後は使用できない","過剰投与の防止機構はない"],answer:0,
+ explanation:"PCA（Patient Controlled Analgesia）は患者自身がボタンを押して鎮痛薬を追加投与できるシステムです。ロックアウト時間（一定時間内に追加投与できない設定）により過剰投与を防止します。患者の疼痛コントロールに対する主体性を高め満足度が向上します。",
+ tags:["PCA","疼痛管理","術後ケア","鎮痛"]},
+
+{id:1312,round:111,category:"seishin",categoryName:"精神看護学",year:"第111回（2022年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"コミュニケーション技法のうち「開かれた質問」の例として正しいのはどれか。",
+ options:["「昨日眠れましたか？」（はい/いいえで答える質問）","「今どのような気持ちですか？」","「薬は飲みましたか？」","「朝食は食べましたか？」"],answer:1,
+ explanation:"開かれた質問（オープンクエスチョン）は「はい/いいえ」では答えられず患者が自由に語れる質問です。例：「どのような気持ちですか？」「最近どのようにお過ごしですか？」。閉じた質問（クローズドクエスチョン）は「はい/いいえ」で答えられる質問です。初期面接では開かれた質問から始めることが多いです。",
+ tags:["コミュニケーション","開かれた質問","面接技法","精神看護"]},
+
+{id:1313,round:111,category:"haha",categoryName:"母性看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"新生児の生理的黄疸について正しいのはどれか。",
+ options:["出生直後から出現する","生後2〜3日から出現し1〜2週間で消失する","治療なしに放置してよい","母乳との関連はない"],answer:1,
+ explanation:"生理的黄疸は生後2〜3日頃から出現し正期産児では通常7〜10日で消失します。原因は胎児ヘモグロビンの分解による間接ビリルビン増加と肝臓の未熟性です。病的黄疸（核黄疸のリスク）との鑑別が重要で必要に応じて光線療法を行います。母乳黄疸は2〜3週間継続することがあります。",
+ tags:["新生児","生理的黄疸","ビリルビン","母性看護"]},
+
+{id:1314,round:111,category:"rojin",categoryName:"老年看護学",year:"第111回（2022年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"誤嚥性肺炎のリスクが高い高齢者への食事介助として適切なのはどれか。",
+ options:["仰臥位で食事を介助する","とろみ剤を使用し食物の凝集性を高める","食後はすぐに横になるよう促す","水分はなるべく避ける"],answer:1,
+ explanation:"誤嚥予防の食事介助：座位または30〜45度以上の体位、食形態の調整（とろみ・ソフト食）、食事中の声かけ・見守り、食後30分は臥位にしない、口腔ケアの徹底などが重要です。仰臥位での食事は誤嚥リスクが高く禁忌です。水分にもとろみをつけます。",
+ tags:["誤嚥性肺炎","食事介助","高齢者","嚥下障害"]},
+
+{id:1315,round:111,category:"zaichi",categoryName:"在宅看護論",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"ターミナルケア（終末期ケア）において看護師が行うべきことして適切でないのはどれか。",
+ options:["患者・家族の意思を尊重する","身体的苦痛の緩和に努める","患者に「諦めないで戦ってください」と励ます","スピリチュアルペインへの対応も行う"],answer:2,
+ explanation:"終末期ケアでは患者の意思決定支援・身体的苦痛の緩和（疼痛管理）・精神的支援・スピリチュアルケア・家族支援が重要です。「諦めないで戦って」という励ましは患者に負担を与え自律尊重に反します。残された時間をどう生きるかを患者自身が決めることを支援します。",
+ tags:["ターミナルケア","緩和ケア","意思決定","倫理"]},
+
+// ════════════════════════════════════════
+// 第110回（2021年）— 50問
+// ════════════════════════════════════════
+{id:1401,round:110,category:"kiso",categoryName:"基礎看護学",year:"第110回（2021年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"感染経路別予防策のうち飛沫感染に該当する疾患として正しいのはどれか。",
+ options:["結核","インフルエンザ","疥癬","ノロウイルス感染症"],answer:1,
+ explanation:"飛沫感染（約5μm以上の飛沫による感染）：インフルエンザ・百日咳・マイコプラズマ・髄膜炎菌など。空気感染（飛沫核：5μm未満）：結核・麻疹・水痘。接触感染：疥癬・MRSA・ノロウイルス（接触・経口）。感染経路に応じた個人防護具（PPE）の選択が重要です。",
+ tags:["感染経路","飛沫感染","インフルエンザ","標準予防策"]},
+
+{id:1402,round:110,category:"naika",categoryName:"内科系看護",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"高カリウム血症の心電図変化として正しいのはどれか。",
+ options:["ST低下","T波の増高（テント状T波）","P波の増大","QRS幅の短縮"],answer:1,
+ explanation:"高カリウム血症の心電図変化：初期にT波増高（テント状）、進行するとP波消失・QRS幅延長・サイン波形・心室細動へ。低カリウム血症ではU波出現・ST低下・T波平坦化がみられます。腎不全・アシドーシス・組織崩壊などが原因です。緊急治療が必要です。",
+ tags:["高カリウム血症","心電図","電解質異常","腎不全"]},
+
+{id:1403,round:110,category:"geka",categoryName:"外科系看護",year:"第110回（2021年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"術前の絶飲食の目的として正しいのはどれか。",
+ options:["麻酔薬の効果を高めるため","全身麻酔中の嘔吐・誤嚥を防ぐため","手術中の出血を減らすため","消化管の働きを活発にするため"],answer:1,
+ explanation:"術前絶飲食の主目的は全身麻酔中の嘔吐・誤嚥（誤嚥性肺炎）予防です。麻酔による嘔吐反射の抑制中に胃内容物を誤嚥するリスクがあります。現在のガイドラインでは固形食は6時間前まで、清澄液体は2時間前まで摂取可能とされています。",
+ tags:["術前絶飲食","誤嚥予防","全身麻酔","外科"]},
+
+{id:1404,round:110,category:"kodomo",categoryName:"小児看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"川崎病の主要症状でないのはどれか。",
+ options:["5日以上続く発熱","眼球結膜の充血","関節の腫れ（関節炎）","手足の硬性浮腫（回復期に膜様落屑）"],answer:2,
+ explanation:"川崎病の主要症状（6項目）：①5日以上の発熱、②両側眼球結膜充血、③口唇・口腔の変化（苺舌・口唇発赤）、④発疹、⑤手足の変化（硬性浮腫・回復期の膜様落屑）、⑥頸部リンパ節腫脹。関節炎は川崎病の主要症状ではありません（合併症として出ることはあります）。冠動脈瘤が最重要合併症です。",
+ tags:["川崎病","主要症状","小児","冠動脈瘤"]},
+
+{id:1405,round:110,category:"seishin",categoryName:"精神看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"摂食障害（神経性やせ症）の特徴として正しいのはどれか。",
+ options:["主に40〜50代の男性に多い","低体重にもかかわらず体重増加を極度に恐れる","過食はみられない","栄養状態が良好である"],answer:1,
+ explanation:"神経性やせ症（AN）の特徴：主に若い女性に多い、低体重にもかかわらず体重増加への強い恐怖・ボディイメージの歪み、食事制限型と過食・排出型がある、著しい低栄養による身体合併症（電解質異常・骨粗鬆症・無月経・不整脈）。長期的な治療と家族支援が必要です。",
+ tags:["摂食障害","神経性やせ症","ボディイメージ","精神看護"]},
+
+{id:1406,round:110,category:"haha",categoryName:"母性看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"帝王切開術後の看護として適切でないのはどれか。",
+ options:["早期離床を促す","後陣痛があっても授乳は可能である","子宮収縮状態（子宮底の硬さ）を確認する","術後24時間は水分も禁止する"],answer:3,
+ explanation:"帝王切開術後は早期離床（血栓予防・腸管機能回復）が重要です。後陣痛があっても授乳可能で授乳自体が子宮収縮を促進します。子宮底の硬さ・高さの確認は子宮収縮不全の早期発見に重要です。術後は点滴で水分補給しつつ状態に応じて経口摂取を開始します（24時間完全禁止は不適切）。",
+ tags:["帝王切開","術後看護","早期離床","母性看護"]},
+
+{id:1407,round:110,category:"rojin",categoryName:"老年看護学",year:"第110回（2021年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"要介護認定の申請先として正しいのはどれか。",
+ options:["厚生労働省","都道府県","市区町村","かかりつけ医"],answer:2,
+ explanation:"要介護認定の申請は住所地の市区町村の介護保険担当窓口（または地域包括支援センター）に行います。申請後は認定調査員による訪問調査とかかりつけ医意見書の作成が行われ介護認定審査会で審査・判定されます。結果は申請から原則30日以内に通知されます。",
+ tags:["要介護認定","介護保険","市区町村","制度"]},
+
+{id:1408,round:110,category:"zaichi",categoryName:"在宅看護論",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"在宅での経管栄養管理について正しいのはどれか。",
+ options:["栄養剤の温度は冷たいまま投与する","投与中は仰臥位（平ら）にする","投与速度は医師の指示に従い適切に管理する","1本のチューブを1ヶ月以上使用してよい"],answer:2,
+ explanation:"在宅経管栄養では投与速度は医師の指示通りとし急速投与は下痢・嘔吐の原因になります。栄養剤は体温程度に温めて投与します。投与中は誤嚥・逆流予防のため30〜45度以上に挙上します。チューブは定期的に交換（チューブの種類により頻度は異なる）します。",
+ tags:["経管栄養","在宅管理","栄養管理","安全管理"]},
+
+{id:1409,round:110,category:"kiso",categoryName:"基礎看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"看護師が守るべき守秘義務について正しいのはどれか。",
+ options:["退職後は守秘義務はない","患者の同意があれば第三者に情報提供できる","患者の情報は看護師の判断で公開できる","家族から要求があれば患者の許可なく全て開示できる"],answer:1,
+ explanation:"保健師助産師看護師法第42条の2により看護師は業務上知り得た人の秘密を漏らしてはなりません（退職後も継続）。患者本人の同意がある場合は第三者に情報提供できます。家族への情報提供も原則として患者本人の同意が必要です（緊急時・患者の最善利益の判断は必要）。",
+ tags:["守秘義務","個人情報","看護師法","倫理"]},
+
+{id:1410,round:110,category:"naika",categoryName:"内科系看護",year:"第110回（2021年）",difficulty:"応用",type:"past",
+ scenario:"65歳女性。脳梗塞で入院。右片麻痺あり。",
+ question:"この患者の安全確保として最も優先される看護は何か。",
+ options:["患側（右側）の筋力強化運動を即時開始する","転倒防止のためベッド柵を適切に設置する","食事はすぐに自力摂取させる","麻痺のある右手で点滴を管理させる"],answer:1,
+ explanation:"脳梗塞による右片麻痺患者では転倒・転落のリスクが高く安全確保が最優先です。ベッド柵の適切な設置・床頭台の患側配置・ナースコールを健側に設置するなどの環境整備が重要です。早期リハビリは重要ですが安全確保が最優先で段階的に進めます。",
+ tags:["脳梗塞","片麻痺","転倒予防","安全管理"]},
+
+{id:1411,round:110,category:"geka",categoryName:"外科系看護",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"ドレーン管理の注意点として正しいのはどれか。",
+ options:["ドレーンは常に体位に関係なく管理する","ドレーン排液の量・性状・色を観察する","ドレーンは強く引っ張って抜けないか確認する","ドレーン刺入部の消毒は不要である"],answer:1,
+ explanation:"ドレーン管理：排液の量（急激な増加は出血の可能性）・性状（血性→漿液性への変化が正常）・色・臭いを定時観察します。ドレーンの屈曲・閉塞・抜去を防ぎ刺入部の観察と清潔管理が必要です。ドレーンが閉塞すると体腔内に液体が貯留し感染の原因となります。",
+ tags:["ドレーン管理","術後観察","外科看護","排液"]},
+
+{id:1412,round:110,category:"kodomo",categoryName:"小児看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"子どもへの採血・処置における説明（プレパレーション）について正しいのはどれか。",
+ options:["説明は親のみに行えばよい","処置前に年齢に応じた説明をして子どもの理解を得る","「全く痛くない」と虚偽の説明をする","処置後のフォローは不要である"],answer:1,
+ explanation:"プレパレーション（心理的準備）は子どもが処置を理解し対処できるよう年齢・発達段階に応じた説明・感情表出の機会・コーピングの練習を行うことです。「痛い」可能性を正直に伝え（誠実な説明）処置後のアセスメントも重要です。子どもの権利擁護の観点から重要です。",
+ tags:["プレパレーション","小児","処置説明","子どもの権利"]},
+
+{id:1413,round:110,category:"seishin",categoryName:"精神看護学",year:"第110回（2021年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"アルコール依存症の離脱症状として誤っているのはどれか。",
+ options:["振戦（手の震え）","発汗","多幸感・euphoria","けいれん発作"],answer:2,
+ explanation:"アルコール依存症の離脱症状（断酒後6〜24時間から出現）：振戦・発汗・不眠・不安・嘔気・頻脈・血圧上昇、重症例では振戦せん妄（幻覚・意識障害・自律神経亢進）・けいれん発作。多幸感は離脱症状ではなく飲酒中の症状です。離脱症候群は生命に関わる場合があり医療管理が必要です。",
+ tags:["アルコール依存症","離脱症状","振戦せん妄","精神看護"]},
+
+{id:1414,round:110,category:"haha",categoryName:"母性看護学",year:"第110回（2021年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"胎児心拍数モニタリングにおいて遅発一過性徐脈（late deceleration）の意義として正しいのはどれか。",
+ options:["一時的なもので問題ない","胎盤機能不全・胎児機能不全を示す所見である","臍帯圧迫を示す","正常な所見である"],answer:1,
+ explanation:"遅発一過性徐脈（late deceleration）：子宮収縮の頂点より遅れて出現する心拍数低下で胎盤機能不全・胎児低酸素状態を示す重要な所見です。体位変換（左側臥位）・酸素投与・オキシトシン投与中止などの対応が必要で持続する場合は緊急帝王切開の適応となることがあります。変動一過性徐脈は臍帯圧迫を示します。",
+ tags:["胎児心拍モニタリング","遅発一過性徐脈","胎盤機能","産科"]},
+
+{id:1415,round:110,category:"rojin",categoryName:"老年看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"高齢者の熱中症予防の指導として適切なのはどれか。",
+ options:["のどが渇いてから水分補給する","室内でもエアコンの使用を勧める","運動は昼間の気温が高い時間帯が効果的","水分補給はお茶のみで十分である"],answer:1,
+ explanation:"高齢者は体内水分量の低下・体温調節機能の低下・口渇感の低下（渇中枢感受性の低下）により熱中症リスクが高いです。のどが渇く前の定期的な水分補給・室内でもエアコン使用（我慢しない）・高温多湿の時間帯の外出を避ける・スポーツドリンクや経口補水液の活用が重要です。",
+ tags:["熱中症","高齢者","水分補給","予防"]},
+
+// ════════════════════════════════════════
+// 第109回（2020年）— 50問
+// ════════════════════════════════════════
+{id:1501,round:109,category:"kiso",categoryName:"基礎看護学",year:"第109回（2020年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"一次救命処置（BLS）における胸骨圧迫の正しい方法はどれか。",
+ options:["圧迫深度は1〜2cmで行う","圧迫回数は1分間に60〜70回で行う","胸骨の下半分を両手で圧迫する","AEDは成人には使用できない"],answer:2,
+ explanation:"成人BLSの胸骨圧迫：胸骨の下半分（乳頭連結部）を両手で重ねて圧迫します。圧迫深度は5〜6cm、圧迫テンポは100〜120回/分、完全な胸郭弛緩を確保します。AEDは成人・小児どちらにも使用可能です。CPRとAEDの早期使用が救命率を高めます。",
+ tags:["一次救命処置","BLS","胸骨圧迫","CPR"]},
+
+{id:1502,round:109,category:"naika",categoryName:"内科系看護",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"敗血症（sepsis）の早期認識に使用するqSOFAスコアの評価項目として正しいのはどれか。",
+ options:["体温・白血球数・CRP","意識変容・呼吸数増加（≥22回/分）・収縮期血圧低下（≤100mmHg）","血糖値・乳酸値・尿量","心拍数・血圧・SpO₂"],answer:1,
+ explanation:"qSOFA（quick SOFA）スコアの3項目：①意識変容（GCS<15）、②呼吸数≥22回/分、③収縮期血圧≤100mmHg。2項目以上該当で敗血症を疑い詳細評価（SOFAスコア）を行います。敗血症は感染症に対する制御不能な宿主反応で生命を脅かす臓器障害が生じます。早期発見・早期治療が予後を改善します。",
+ tags:["敗血症","qSOFA","早期認識","重症管理"]},
+
+{id:1503,round:109,category:"geka",categoryName:"外科系看護",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"消化管出血患者の観察で最も重要なのはどれか。",
+ options:["体温の変化","吐血・下血の量と性状","尿量の増減","皮膚の発疹"],answer:1,
+ explanation:"消化管出血では吐血（上部消化管）・下血・タール便（上部消化管）・鮮血便（下部消化管）の量と性状の観察が最重要です。大量出血ではショック症状（血圧低下・頻脈・冷汗・意識障害）が出現します。バイタルサインの変動と合わせて総合的に評価し緊急内視鏡・輸血の準備が必要となる場合があります。",
+ tags:["消化管出血","吐血","下血","ショック"]},
+
+{id:1504,round:109,category:"kodomo",categoryName:"小児看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"先天性心疾患のうちチアノーゼを呈するのはどれか。",
+ options:["心房中隔欠損症（ASD）","心室中隔欠損症（VSD）","ファロー四徴症","動脈管開存症（PDA）"],answer:2,
+ explanation:"チアノーゼ性心疾患：ファロー四徴症（肺動脈狭窄・心室中隔欠損・大動脈騎乗・右室肥大）・完全大血管転位症・総肺静脈還流異常など。非チアノーゼ性（左右短絡）：ASD・VSD・PDAなど（肺体血流量増加）。ファロー四徴症では右→左短絡によりチアノーゼが出現します。",
+ tags:["先天性心疾患","チアノーゼ","ファロー四徴症","小児"]},
+
+{id:1505,round:109,category:"seishin",categoryName:"精神看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"PTSDの症状として正しいのはどれか。",
+ options:["外傷体験の記憶が全くない","フラッシュバック・回避・過覚醒","症状は出来事直後のみ現れる","主に高齢者に多い"],answer:1,
+ explanation:"PTSD（心的外傷後ストレス障害）の主要症状：①侵入症状（フラッシュバック・悪夢）、②回避（外傷関連の思考・場所の回避）、③認知・気分の陰性変化、④覚醒・反応性の変化（過覚醒・驚愕反応）。症状は出来事から1ヶ月以上持続します。外傷焦点化認知行動療法（TF-CBT）が有効です。",
+ tags:["PTSD","フラッシュバック","外傷","精神看護"]},
+
+{id:1506,round:109,category:"haha",categoryName:"母性看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"子宮頸がんの最も重要な危険因子はどれか。",
+ options:["加齢","ヒトパピローマウイルス（HPV）感染","喫煙のみ","遺伝性のみ"],answer:1,
+ explanation:"子宮頸がんの最重要危険因子はHPV（ヒトパピローマウイルス）の持続感染です。特にHPV16型・18型が高リスク型です。HPVワクチン（定期接種対象）による一次予防と子宮頸がん検診（細胞診）による二次予防が重要です。喫煙・多性交相手なども危険因子です。",
+ tags:["子宮頸がん","HPV","予防接種","がん検診"]},
+
+{id:1507,round:109,category:"rojin",categoryName:"老年看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"せん妄と認知症の違いとして正しいのはどれか。",
+ options:["せん妄は緩徐に発症する","認知症は急激に発症する","せん妄は可逆的で治療可能なことが多い","認知症は薬で完全に治癒する"],answer:2,
+ explanation:"せん妄の特徴：急性発症・変動する意識障害・日内変動あり（夕方〜夜間に悪化）・可逆的（原因治療で改善）。認知症の特徴：緩徐な発症・持続的な認知機能低下・意識清明（初期）・進行性・不可逆的。高齢者入院中のせん妄は予防・早期発見・誘因除去（脱水・疼痛・環境変化）が重要です。",
+ tags:["せん妄","認知症","鑑別","高齢者"]},
+
+{id:1508,round:109,category:"zaichi",categoryName:"在宅看護論",year:"第109回（2020年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"ケアマネージャー（介護支援専門員）の役割として正しいのはどれか。",
+ options:["直接介護サービスを提供する","ケアプランを作成し各種サービスを調整する","訪問診療を行う","医薬品を処方する"],answer:1,
+ explanation:"ケアマネージャーの主な役割：要介護認定後の利用者の状況をアセスメントし、居宅サービス計画（ケアプラン）を作成、関係機関（訪問看護・ヘルパー・デイサービス等）との調整・連絡、給付管理などを行います。直接的な介護サービスの提供は行いません。",
+ tags:["ケアマネージャー","ケアプラン","介護保険","多職種連携"]},
+
+{id:1509,round:109,category:"kiso",categoryName:"基礎看護学",year:"第109回（2020年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"褥瘡の深さの分類（NPUAP/EPUAPステージ分類）でステージIの説明として正しいのはどれか。",
+ options:["皮膚の損傷はなく発赤のみで圧迫を除去しても消退しない","真皮に至る浅い潰瘍","皮下組織まで達する全層皮膚欠損","筋肉・骨・腱にまで達する組織欠損"],answer:0,
+ explanation:"NPUAP褥瘡ステージ：Stage I＝皮膚損傷なし、圧迫除去後30分以上消退しない発赤。Stage II＝真皮に至る浅い潰瘍。Stage III＝皮下組織までの全層皮膚欠損。Stage IV＝骨・腱・筋肉に至る組織欠損。Unstageable＝壊死組織で深さ不明。早期発見と予防が重要です。",
+ tags:["褥瘡","ステージ分類","NPUAP","スキンケア"]},
+
+{id:1510,round:109,category:"naika",categoryName:"内科系看護",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"慢性閉塞性肺疾患（COPD）の原因として最も多いのはどれか。",
+ options:["受動喫煙のみ","能動喫煙（タバコ）","大気汚染のみ","職業性粉塵"],answer:1,
+ explanation:"COPDの原因の約90%は喫煙（能動喫煙）です。タバコの煙による慢性的な気道炎症・肺気腫が主な病態です。禁煙が唯一の疾患進行を止める方法です。肺機能検査（スパイロメトリー）でFEV1/FVC<70%が診断基準です。増悪予防のためのインフルエンザ・肺炎球菌ワクチン接種も重要です。",
+ tags:["COPD","喫煙","禁煙","呼吸器"]},
+
+{id:1511,round:109,category:"geka",categoryName:"外科系看護",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"乳がんのセルフチェック（乳房自己検診）の適切な時期はどれか。",
+ options:["月経前1週間","月経終了後3〜5日","毎朝食後","就寝直前"],answer:1,
+ explanation:"乳房自己検診の最適時期は月経終了後3〜5日（乳腺の緊張が最も緩む時期）です。閉経後は月に1回決まった日（例：毎月1日）に行います。自己検診法：視診（鏡の前で形の変化確認）・触診（仰臥位または立位で指の腹で圧迫）・乳頭分泌物の確認。しこり・皮膚のひきつれ・乳頭陥没に注意します。",
+ tags:["乳がん","自己検診","乳房","がん予防"]},
+
+{id:1512,round:109,category:"kodomo",categoryName:"小児看護学",year:"第109回（2020年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"新生児のアプガースコアで評価する項目として正しいのはどれか。",
+ options:["体重・身長・頭囲","心拍数・呼吸・筋緊張・皮膚色・反射","血糖値・血圧・体温","排尿・排便・哺乳力"],answer:1,
+ explanation:"アプガースコアは生後1分・5分に評価する新生児の状態評価法です。5項目：①心拍数（0/1/2点）、②呼吸（0/1/2点）、③筋緊張（0/1/2点）、④刺激への反応（反射：0/1/2点）、⑤皮膚色（0/1/2点）。合計7〜10点：正常、4〜6点：軽度仮死、0〜3点：重度仮死。",
+ tags:["アプガースコア","新生児","出生直後","母性看護"]},
+
+{id:1513,round:109,category:"seishin",categoryName:"精神看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"強迫性障害（OCD）の特徴として正しいのはどれか。",
+ options:["強迫観念があっても行為は行わない","強迫観念とそれによる強迫行為が特徴","自分でも意味がないとわかっているため苦痛はない","主に小児期のみに発症する"],answer:1,
+ explanation:"強迫性障害（OCD）の特徴：不合理とわかっていながら繰り返し浮かぶ思考（強迫観念）とそれを打ち消すための行為（強迫行為：手洗い・確認など）が特徴です。自分でも意味がないとわかっているが止められず著しい苦痛・生活支障をきたします。SSRIと認知行動療法（暴露反応妨害法）が有効です。",
+ tags:["強迫性障害","OCD","強迫観念","精神看護"]},
+
+{id:1514,round:109,category:"haha",categoryName:"母性看護学",year:"第109回（2020年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"妊娠の確定診断に使用される方法として最も確実なのはどれか。",
+ options:["月経の遅れ","基礎体温の高温相持続","超音波検査で胎嚢・胎児心拍を確認する","つわりの症状"],answer:2,
+ explanation:"妊娠の確定診断は超音波検査による胎嚢（GS）・胎芽・胎児心拍の確認です。妊娠検査薬（HGO検出）は妊娠を示唆しますが確定診断ではありません。月経遅れ・基礎体温高温相・つわりは妊娠の可能性を示す所見ですが異所性妊娠（子宮外妊娠）の除外のためにも超音波検査が必須です。",
+ tags:["妊娠診断","超音波検査","妊娠確定","産科"]},
+
+{id:1515,round:109,category:"rojin",categoryName:"老年看護学",year:"第109回（2020年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"高齢者の尿失禁のうち最も多いタイプはどれか。",
+ options:["切迫性尿失禁","腹圧性尿失禁","溢流性尿失禁","機能性尿失禁"],answer:1,
+ explanation:"高齢女性では腹圧性尿失禁（咳・くしゃみ・運動時に腹圧上昇で漏れる）が最も多く骨盤底筋の弛緩が原因です。骨盤底筋体操（ケーゲル体操）が有効です。切迫性尿失禁は突然の強い尿意で漏れるタイプで過活動膀胱に関連します。機能性は排泄動作の困難によるものです。",
+ tags:["尿失禁","腹圧性","骨盤底筋","高齢者"]},
+
+{id:1516,round:109,category:"zaichi",categoryName:"在宅看護論",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"在宅での褥瘡予防として適切なのはどれか。",
+ options:["同一体位を長時間維持する","体圧分散マットレスを使用する","皮膚を強くマッサージする","水分摂取を制限する"],answer:1,
+ explanation:"在宅での褥瘡予防：体圧分散マットレス・クッションの使用、定期的な体位変換（2時間ごと）、皮膚の清潔・保湿（過度のマッサージは摩擦・ずれの原因）、適切な栄養・水分補給（低栄養は褥瘡リスクを高める）が基本です。家族や介護者への教育も重要です。",
+ tags:["褥瘡予防","体圧分散","在宅","スキンケア"]},
+
+{id:1517,round:109,category:"kiso",categoryName:"基礎看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"フィジカルアセスメントにおける「打診」の目的として正しいのはどれか。",
+ options:["心音・呼吸音を聴取する","臓器の大きさ・境界・液体貯留を確認する","皮膚温・腫瘤の性状を確認する","視覚的に皮膚の変化を観察する"],answer:1,
+ explanation:"フィジカルアセスメントの4技法：①視診（目で観察）、②触診（触って確認：皮膚温・硬さ・腫瘤）、③打診（叩いて音で確認：臓器の大きさ・境界・液体貯留・共鳴音）、④聴診（聴診器で確認：心音・呼吸音・腸蠕動音）。打診音：清音（正常肺）・濁音（肝臓・実質臓器）・鼓音（ガス）。",
+ tags:["フィジカルアセスメント","打診","看護技術","診察技法"]},
+
+{id:1518,round:109,category:"naika",categoryName:"内科系看護",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"脳卒中の「FAST」で正しい組み合わせはどれか。",
+ options:["Face（顔のゆがみ）・Arm（腕の麻痺）・Speech（言語障害）・Time（発症時刻の確認と緊急受診）","Fever・Action・Stroke・Treatment","Face・Abdomen・Shock・Time","Fatigue・Arrhythmia・Seizure・Time"],answer:0,
+ explanation:"脳卒中早期発見の「FAST」：F（Face）顔のゆがみ・A（Arm）腕の麻痺・S（Speech）言葉のもつれ・T（Time）発症時刻確認と即時救急搬送。脳梗塞は発症4.5時間以内のt-PA（血栓溶解療法）・機械的血栓回収術が有効で時間が最重要です。",
+ tags:["脳卒中","FAST","脳梗塞","緊急対応"]},
+
+{id:1519,round:109,category:"geka",categoryName:"外科系看護",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"人工股関節置換術後の脱臼予防として指導すべき禁忌肢位はどれか。",
+ options:["股関節を90度以上屈曲する","股関節を30度外転する","膝をやや曲げた位置で座る","仰臥位で足を肩幅に広げる"],answer:0,
+ explanation:"人工股関節置換術後の脱臼予防禁忌肢位：股関節90度以上の屈曲（深くかがむ・低い椅子・床への座り込み）・内転・内旋の組み合わせ（患肢を内側に向ける）。洋式トイレ・高い椅子・靴べらを使った靴の着脱・入浴時の工夫などの生活指導が重要です。",
+ tags:["人工股関節","脱臼予防","禁忌肢位","リハビリ"]},
+
+{id:1520,round:109,category:"kodomo",categoryName:"小児看護学",year:"第109回（2020年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"1型糖尿病の小児への指導で正しいのはどれか。",
+ options:["インスリン注射は成人になるまで親が行う","低血糖症状（動悸・冷汗・手の震え）とその対処法を指導する","運動は禁忌である","甘いものは一切禁止する"],answer:1,
+ explanation:"1型糖尿病小児への指導：低血糖症状（動悸・冷汗・振戦・意識障害）の認識と対処（ブドウ糖補給）、年齢に応じた自己管理能力の育成（インスリン自己注射・血糖自己測定）、学校生活への対応（担任・養護教諭への説明）、適度な運動は推奨（運動前後の血糖チェックと補食）が重要です。",
+ tags:["1型糖尿病","小児","低血糖","自己管理"]},
+
+
+
+// ════════════════════════════════════════
+// 第113回 追加分
+// ════════════════════════════════════════
+{id:1126,round:113,category:"kiso",categoryName:"基礎看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"看護過程の構成要素を正しい順序で並べたものはどれか。",
+ options:["計画→アセスメント→診断→実施→評価","アセスメント→診断→計画→実施→評価","診断→アセスメント→実施→計画→評価","実施→計画→アセスメント→診断→評価"],answer:1,
+ explanation:"看護過程は①アセスメント（情報収集・分析）②看護診断（問題の明確化）③計画立案④実施⑤評価の5段階で構成されます。科学的・系統的に看護を展開するための思考プロセスです。評価後は必要に応じてアセスメントに戻り循環的に展開します。",
+ tags:["看護過程","アセスメント","看護診断","計画"]},
+
+{id:1127,round:113,category:"naika",categoryName:"内科系看護",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:"56歳男性。高血圧症・脂質異常症で内服治療中。",
+ question:"メタボリックシンドロームの診断基準として正しいのはどれか。",
+ options:["BMI 25以上","ウエスト周囲径（男性85cm以上、女性90cm以上）が必須条件","空腹時血糖 200mg/dL以上","収縮期血圧 160mmHg以上"],answer:1,
+ explanation:"メタボリックシンドロームの診断基準（日本）：必須条件＝ウエスト周囲径（男性85cm以上、女性90cm以上＝内臓脂肪面積100cm²以上に相当）に加え、①血清脂質異常②血圧高値③血糖高値の3項目中2項目以上が該当する場合に診断されます。内臓脂肪型肥満が中核です。",
+ tags:["メタボリックシンドローム","内臓脂肪","診断基準","生活習慣病"]},
+
+{id:1128,round:113,category:"seishin",categoryName:"精神看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"精神科訪問看護の目的として最も適切なのはどれか。",
+ options:["患者を病院に収容する","地域生活の維持・再発予防・社会復帰支援","薬物の強制投与","家族の代わりに患者を管理する"],answer:1,
+ explanation:"精神科訪問看護の目的は服薬管理支援・症状観察・生活技能支援・家族支援・多職種連携を通じて地域生活の維持・再発予防・社会復帰を支援することです。患者の自律を尊重しながら地域での生活を支える重要な役割を担います。精神障害者の地域移行推進の観点からも重要です。",
+ tags:["精神科訪問看護","地域生活","社会復帰","リカバリー"]},
+
+{id:1129,round:113,category:"rojin",categoryName:"老年看護学",year:"第113回（2024年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"ADL（日常生活動作）の評価スケールとして正しいのはどれか。",
+ options:["GCS（グラスゴー・コーマ・スケール）","Barthel Index（バーセルインデックス）","NRS（数値評価スケール）","MMSE（ミニメンタルステート検査）"],answer:1,
+ explanation:"ADL評価スケール：Barthel Index（食事・移動・入浴・歩行・階段・更衣・排便・排尿・トイレ・車椅子の10項目、0〜100点）・FIM（機能的自立度評価法）が代表的です。GCSは意識レベル、NRSは疼痛、MMSEは認知機能の評価スケールです。",
+ tags:["ADL","Barthel Index","評価スケール","リハビリ"]},
+
+{id:1130,round:113,category:"haha",categoryName:"母性看護学",year:"第113回（2024年）",difficulty:"応用",type:"past",
+ scenario:"妊娠28週の妊婦。胎動が急に減少したと訴えて来院した。",
+ question:"最も優先すべき対応はどれか。",
+ options:["「正常です」と安心させて帰宅させる","胎児心拍モニタリング（NST）を実施する","すぐに帝王切開を実施する","水分摂取を促して様子を見る"],answer:1,
+ explanation:"胎動減少は胎児機能不全の重要なサインです。ノンストレステスト（NST）で胎児心拍数の基線・一過性頻脈・一過性徐脈を評価します。胎動は胎児の健康状態の指標であり1時間に10回以上が目安です。異常所見があれば超音波検査・生物物理学的プロフィール（BPP）で精査します。",
+ tags:["胎動減少","NST","胎児機能不全","産科"]},
+
+{id:1131,round:113,category:"zaichi",categoryName:"在宅看護論",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"社会資源の活用において看護師が行うべきことはどれか。",
+ options:["患者のニーズに関わらず全員に同じサービスを提供する","患者・家族のニーズをアセスメントし適切な社会資源につなぐ","社会資源の情報を患者に教えない","ケアマネージャーの役割を全て代行する"],answer:1,
+ explanation:"看護師は患者・家族の身体的・精神的・社会的ニーズをアセスメントし介護保険サービス・障害福祉サービス・医療費助成制度・訪問看護・デイサービスなどの適切な社会資源に結びつけるコーディネーター的役割を担います。多職種と連携しながら包括的な支援を行います。",
+ tags:["社会資源","コーディネーター","多職種連携","地域包括"]},
+
+// ════════════════════════════════════════
+// 第112回 追加分
+// ════════════════════════════════════════
+{id:1221,round:112,category:"kiso",categoryName:"基礎看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"点滴静脈内注射の管理において輸液速度を確認する方法として正しいのはどれか。",
+ options:["滴下数のみで管理し流量計は不要","1分間の滴下数を数えて処方された速度と一致しているか確認する","患者の感覚のみで管理する","1時間ごとの確認は不要"],answer:1,
+ explanation:"輸液管理では処方された投与速度（mL/時）を滴下数（滴/分）に換算して管理します。計算式：滴下数/分＝輸液量mL×（1mLあたりの滴数）÷60分。輸液ポンプ使用時は設定値と実際の滴下を定時確認します。刺入部の腫脹・疼痛・漏れの観察も重要です。",
+ tags:["輸液管理","滴下数","静脈注射","看護技術"]},
+
+{id:1222,round:112,category:"naika",categoryName:"内科系看護",year:"第112回（2023年）",difficulty:"応用",type:"past",
+ scenario:"72歳男性。パーキンソン病で外来通院中。最近転倒が増えてきた。",
+ question:"パーキンソン病患者の転倒予防として適切な指導はどれか。",
+ options:["すり足で歩くよう指導する","床にテープでラインを引いて視覚的手がかりを与える","歩行器・杖の使用を禁止する","運動は禁忌である"],answer:1,
+ explanation:"パーキンソン病の転倒予防：視覚的手がかり（床のライン・タイルの目地を踏む）・聴覚的手がかり（リズムに合わせた歩行）・歩幅を意識的に広げる（大股歩き）・歩行補助具の活用が有効です。すり足は転倒リスクを高めます。薬物療法の最適化と並行してリハビリが重要です。",
+ tags:["パーキンソン病","転倒予防","視覚的手がかり","リハビリ"]},
+
+{id:1223,round:112,category:"geka",categoryName:"外科系看護",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"術後せん妄のリスク因子として正しいのはどれか。",
+ options:["若年者","高齢・認知機能低下・術前不安","術前の十分な睡眠","短時間手術"],answer:1,
+ explanation:"術後せん妄のリスク因子：高齢・認知症・術前不安・痛み・睡眠障害・電解質異常・脱水・低酸素・尿閉・便秘・環境変化・ICU収容など。予防：術前から患者との信頼関係構築・環境整備（日中の覚醒維持・夜間の睡眠確保）・早期離床・疼痛コントロール・脱水予防が重要です。",
+ tags:["術後せん妄","リスク因子","高齢者","予防"]},
+
+{id:1224,round:112,category:"kodomo",categoryName:"小児看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"小児への薬物投与における注意点として正しいのはどれか。",
+ options:["体重に関係なく成人と同量を投与する","体重あたりの用量（mg/kg）で算出し投与する","錠剤をそのまま投与する","副作用の確認は不要である"],answer:1,
+ explanation:"小児への薬物投与は体重・年齢・体表面積を考慮した用量計算が必須です（mg/kg換算）。小児は薬物動態が成人と異なり（腎機能・肝機能・体脂肪率・血漿タンパク結合率の違い）副作用リスクが高い薬剤もあります。錠剤が飲めない場合は散剤・シロップへの変更を検討します。",
+ tags:["小児薬物療法","用量計算","体重換算","安全管理"]},
+
+{id:1225,round:112,category:"seishin",categoryName:"精神看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"治療的コミュニケーションにおける「共感」の説明として正しいのはどれか。",
+ options:["患者と同じ感情を体験すること（同情）","患者の感情・体験を理解しそれを伝えること","患者の言葉を全て肯定すること","沈黙を避けること"],answer:1,
+ explanation:"共感（empathy）は患者の主観的体験・感情を客観的に理解しその理解を患者に伝えることです。同情（sympathy）は患者と同じ感情を体験することで異なります。共感的理解を示すことで患者は「わかってもらえた」と感じ治療的関係が深まります。非言語的コミュニケーション（表情・視線・姿勢）も重要です。",
+ tags:["共感","治療的コミュニケーション","精神看護","傾聴"]},
+
+{id:1226,round:112,category:"haha",categoryName:"母性看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"産後うつの特徴として正しいのはどれか。",
+ options:["産後1〜3日の「マタニティーブルーズ」と同じである","産後2〜8週頃に発症し数週間〜数ヶ月持続する","必ず入院治療が必要である","授乳は禁忌である"],answer:1,
+ explanation:"産後うつは産後2〜8週頃から発症し数週間〜数ヶ月持続します。有病率は約10〜15%。マタニティーブルーズ（産後3〜5日に出現し1〜2週で自然軽快）とは異なります。EPDS（エジンバラ産後うつ病質問票）でスクリーニングします。支持的精神療法・抗うつ薬（授乳への影響を考慮）・社会的支援が治療の柱です。",
+ tags:["産後うつ","マタニティーブルーズ","EPDS","母性看護"]},
+
+{id:1227,round:112,category:"rojin",categoryName:"老年看護学",year:"第112回（2023年）",difficulty:"応用",type:"past",
+ scenario:"82歳女性。大腿骨頸部骨折で手術後2日目。認知症あり。",
+ question:"この患者のリハビリについて適切なのはどれか。",
+ options:["認知症があるためリハビリは不適応である","術後早期（翌日から）の離床・歩行訓練を開始する","完全に痛みがなくなるまでリハビリしない","家族が禁止しているためリハビリしない"],answer:1,
+ explanation:"大腿骨頸部骨折術後は翌日からの早期離床が廃用症候群・深部静脈血栓症・誤嚥性肺炎・褥瘡予防のため推奨されます。認知症があっても程度に応じてリハビリは実施します。疼痛コントロールを行いながら理学療法士と連携して段階的に進めます。骨折後の寝たきりは予後不良因子です。",
+ tags:["大腿骨頸部骨折","早期離床","リハビリ","高齢者"]},
+
+{id:1228,round:112,category:"zaichi",categoryName:"在宅看護論",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"在宅緩和ケアにおいて疼痛管理の基本原則（WHO方式）として正しいのはどれか。",
+ options:["注射のみで疼痛管理する","経口投与を基本とし時刻を決めて規則正しく投与する","痛みが強い時だけ頓服で投与する","オピオイドは在宅では使用できない"],answer:1,
+ explanation:"WHO方式がん疼痛治療の5原則：①経口的に（可能な限り経口）②時刻を決めて規則正しく（PRNではなく定時投与）③除痛ラダーに沿って（非オピオイド→弱オピオイド→強オピオイド）④患者ごとの個別的な量で⑤その上で細かい配慮を。在宅でもオピオイド（モルヒネ等）は医師の管理下で使用可能です。",
+ tags:["緩和ケア","疼痛管理","WHO方式","オピオイド"]},
+
+{id:1229,round:112,category:"kiso",categoryName:"基礎看護学",year:"第112回（2023年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"経口薬の種類と特徴について正しいのはどれか。",
+ options:["腸溶錠は空腹時に服用してはいけない","舌下錠は飲み込んで服用する","徐放錠は噛み砕いて服用してよい","口腔内崩壊錠（OD錠）は水なしで服用できる"],answer:3,
+ explanation:"口腔内崩壊錠（OD錠）は唾液で溶解するため水なしで服用可能です。腸溶錠は胃酸から保護するためコーティングされており噛み砕き禁忌。徐放錠は薬物の徐々の放出を目的としており噛み砕くと過量投与になる危険があります。舌下錠は舌下に置いて溶解させます（飲み込み禁忌）。",
+ tags:["経口薬","剤形","服薬指導","薬物療法"]},
+
+{id:1230,round:112,category:"naika",categoryName:"内科系看護",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"胃潰瘍の治療に使用されるピロリ菌（Helicobacter pylori）除菌療法について正しいのはどれか。",
+ options:["抗菌薬1種類のみで治療する","プロトンポンプ阻害薬＋抗菌薬2種類の3剤併用が標準治療","除菌成功後は再発しない","内視鏡検査は不要である"],answer:1,
+ explanation:"ピロリ菌除菌の標準治療（一次除菌）：PPI（プロトンポンプ阻害薬）＋アモキシシリン＋クラリスロマイシンの3剤を7日間内服します。一次除菌成功率は約70〜80%で失敗時は二次除菌（メトロニダゾール変更）を行います。除菌成功により胃潰瘍の再発率は著しく低下しますが胃がんリスクの完全消失ではありません。",
+ tags:["胃潰瘍","ピロリ菌","除菌療法","消化器"]},
+
+// ════════════════════════════════════════
+// 第111回 追加分
+// ════════════════════════════════════════
+{id:1316,round:111,category:"kiso",categoryName:"基礎看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"患者の体位変換（側臥位への移動）における看護師の正しい姿勢はどれか。",
+ options:["背中を丸めて行う","膝を伸ばしたまま行う","重心を低くし膝を曲げて行う","患者から離れた位置で行う"],answer:2,
+ explanation:"ボディメカニクスの原則：①重心を低くする（膝を曲げる）②支持基底面を広くする（足を肩幅に広げる）③患者の重心に近づく④大きな筋群を使う⑤ねじり動作を避ける⑥移動方向に体を向ける。正しいボディメカニクスにより看護師の腰痛予防と安全な患者移動が可能になります。",
+ tags:["ボディメカニクス","体位変換","腰痛予防","看護技術"]},
+
+{id:1317,round:111,category:"naika",categoryName:"内科系看護",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:"42歳女性。全身性エリテマトーデス（SLE）で治療中。",
+ question:"SLEの患者への日常生活指導として適切なのはどれか。",
+ options:["日光浴を積極的に行う","直射日光を避け紫外線対策を行う","激しい運動を毎日行う","免疫抑制剤は自己判断で中止してよい"],answer:1,
+ explanation:"SLEは紫外線により症状が増悪するため日光回避・日傘・サンスクリーン使用が重要です。疲労・ストレス・感染症も増悪因子です。ステロイドや免疫抑制剤は自己中断禁忌で定期受診が必須です。寛解期でも急性増悪（フレア）に備えた自己管理指導が重要です。",
+ tags:["SLE","全身性エリテマトーデス","紫外線","自己免疫疾患"]},
+
+{id:1318,round:111,category:"geka",categoryName:"外科系看護",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"胃がん術後の食事指導として正しいのはどれか。",
+ options:["術後すぐに通常食に戻す","少量ずつ頻回に食事をとるよう指導する","食後は右側臥位をとる","水分は食事とともに大量に摂取する"],answer:1,
+ explanation:"胃切除術後はダンピング症候群（食後30分以内に出現する早期ダンピング：動悸・発汗・腹痛、食後2〜3時間後の後期ダンピング：低血糖症状）予防のため少量頻回食・食後20〜30分の臥位・食事中の水分摂取制限（食前・食後に摂取）が指導の基本です。",
+ tags:["胃がん","術後食事指導","ダンピング症候群","外科"]},
+
+{id:1319,round:111,category:"kodomo",categoryName:"小児看護学",year:"第111回（2022年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"気管支喘息の小児に対する長期管理薬として最も一般的なのはどれか。",
+ options:["短時間作用型β2刺激薬（SABA）","吸入ステロイド薬（ICS）","システイン製剤","抗ヒスタミン薬"],answer:1,
+ explanation:"小児気管支喘息の長期管理の基本薬は吸入ステロイド薬（ICS：フルチカゾン・ブデソニドなど）です。気道炎症を抑制し発作を予防します。短時間作用型β2刺激薬（SABA）は発作時の救急薬です。ICSの正しい吸入手技と口腔カンジダ症予防のための吸入後うがいの指導が重要です。",
+ tags:["気管支喘息","吸入ステロイド","長期管理","小児"]},
+
+{id:1320,round:111,category:"seishin",categoryName:"精神看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"抗精神病薬の副作用として錐体外路症状（EPS）に含まれないのはどれか。",
+ options:["振戦（手の震え）","筋強剛（固縮）","アカシジア（静坐不能）","高血糖"],answer:3,
+ explanation:"錐体外路症状（EPS）：振戦・筋強剛・アカシジア（静坐不能）・ジストニア（筋の異常収縮）・遅発性ジスキネジア。抗コリン薬（ビペリデンなど）で対処します。高血糖は抗精神病薬（特に非定型）の代謝系副作用です。その他の重要な副作用：悪性症候群・高プロラクチン血症・QT延長。",
+ tags:["抗精神病薬","錐体外路症状","副作用","精神看護"]},
+
+{id:1321,round:111,category:"haha",categoryName:"母性看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"妊娠初期に葉酸の摂取が推奨される理由はどれか。",
+ options:["妊娠悪阻（つわり）の予防","胎児の神経管閉鎖障害のリスクを低減する","妊娠高血圧症候群の予防","胎盤の形成を助ける"],answer:1,
+ explanation:"葉酸は細胞分裂・DNA合成に必要なビタミンB群の一種です。妊娠前〜妊娠初期（妊娠12週まで）の葉酸摂取（400μg/日）により胎児の神経管閉鎖障害（二分脊椎・無脳症）のリスクが約50〜70%低減されます。厚生労働省でもサプリメントによる追加摂取を推奨しています。",
+ tags:["葉酸","神経管閉鎖障害","妊娠初期","栄養"]},
+
+{id:1322,round:111,category:"rojin",categoryName:"老年看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"フレイル（虚弱）の評価基準（Friedの定義）に含まれないのはどれか。",
+ options:["体重減少","筋力低下","歩行速度低下","高血圧"],answer:3,
+ explanation:"フレイルの診断基準（Fried ら）：①体重減少②疲労感③筋力低下（握力低下）④歩行速度低下⑤身体活動量低下の5項目中3項目以上＝フレイル、1〜2項目＝プレフレイル。高血圧はフレイルの評価基準ではありません。フレイルは適切な介入で改善可能（可逆的）な段階であり早期発見・運動・栄養介入が重要です。",
+ tags:["フレイル","虚弱","評価基準","高齢者"]},
+
+{id:1323,round:111,category:"zaichi",categoryName:"在宅看護論",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"障害者総合支援法において「相談支援専門員」が作成するものはどれか。",
+ options:["ケアプラン（居宅サービス計画）","サービス等利用計画","訪問看護指示書","在宅医療計画"],answer:1,
+ explanation:"障害者総合支援法では相談支援専門員がサービス等利用計画を作成します。介護保険のケアプランはケアマネージャーが作成します。サービス等利用計画には障害者のニーズ・目標・利用するサービスの種類・量が記載され障害福祉サービスの利用に必要な計画書です。",
+ tags:["障害者総合支援法","相談支援専門員","サービス等利用計画","制度"]},
+
+// ════════════════════════════════════════
+// 第110回 追加分
+// ════════════════════════════════════════
+{id:1416,round:110,category:"kiso",categoryName:"基礎看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"腰椎穿刺（腰椎穿刺）後の看護として正しいのはどれか。",
+ options:["穿刺後すぐに歩行させる","頭痛予防のため1〜2時間の安静臥床を保つ","大量の水分摂取は禁忌である","体位は腹臥位のみとする"],answer:1,
+ explanation:"腰椎穿刺後は脳脊髄液の漏出による低髄圧頭痛（起立性頭痛）予防のため1〜4時間の安静臥床が必要です。水分摂取は推奨（髄液の補充促進）されます。穿刺後頭痛が出現した場合は臥位保持・鎮痛薬・カフェイン投与などで対処します。バイタルサインと神経学的症状の観察が重要です。",
+ tags:["腰椎穿刺","髄液検査","術後管理","低髄圧頭痛"]},
+
+{id:1417,round:110,category:"naika",categoryName:"内科系看護",year:"第110回（2021年）",difficulty:"応用",type:"past",
+ scenario:"68歳女性。骨粗鬆症と診断された。",
+ question:"骨粗鬆症の予防・治療として正しいのはどれか。",
+ options:["カルシウム摂取を減らす","適度な運動と十分なカルシウム・ビタミンDの摂取","安静を保ち運動は禁忌","日光浴は不要"],answer:1,
+ explanation:"骨粗鬆症の予防・治療：①カルシウム充足（乳製品・小魚・緑黄色野菜）②ビタミンD（日光浴・魚類・卵黄）③適度な荷重運動（ウォーキング・スクワット）④アルコール・喫煙制限。薬物療法：ビスホスホネート製剤・デノスマブ・テリパラチドなど。転倒予防も重要です。",
+ tags:["骨粗鬆症","カルシウム","ビタミンD","骨折予防"]},
+
+{id:1418,round:110,category:"geka",categoryName:"外科系看護",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"食道がんの症状として最も多いのはどれか。",
+ options:["腹痛","嚥下困難（嚥下障害）","下痢","血尿"],answer:1,
+ explanation:"食道がんの主症状は進行性の嚥下困難（固形食→軟食→液体の順に困難になる）です。他に嚥下時痛・体重減少・胸部不快感なども見られます。食道がんの大部分は扁平上皮がん（喫煙・飲酒がリスク因子）です。早期食道がんは無症状のことが多く内視鏡検査での発見が重要です。",
+ tags:["食道がん","嚥下困難","消化器がん","外科"]},
+
+{id:1419,round:110,category:"kodomo",categoryName:"小児看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"ネフローゼ症候群の小児にみられる典型的な症状はどれか。",
+ options:["高血糖","大量の蛋白尿・低アルブミン血症・浮腫","血尿のみ","高カリウム血症"],answer:1,
+ explanation:"ネフローゼ症候群の診断基準：①大量蛋白尿（3.5g/日以上）②低アルブミン血症（3.0g/dL以下）③浮腫（眼瞼・下肢）④高脂血症。小児では微小変化型ネフローゼ症候群が最多でステロイド療法に反応が良好です。感染症・血栓症が重要な合併症です。塩分・水分制限と安静が治療の基本です。",
+ tags:["ネフローゼ症候群","蛋白尿","浮腫","小児腎疾患"]},
+
+{id:1420,round:110,category:"seishin",categoryName:"精神看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"依存症（物質使用障害）の回復において有効なアプローチはどれか。",
+ options:["意志の力だけで克服するよう指導する","自助グループ（AA・NAなど）への参加を勧める","家族が代わりに問題を解決する","入院治療のみが唯一の治療法",""],answer:1,
+ explanation:"依存症の回復には自助グループ（アルコール依存症：AA、薬物依存症：NA、ギャンブル依存症：GAなど）が重要な役割を担います。同じ体験を持つ仲間との分かち合い（12ステップなど）が回復を支えます。「意志の問題」ではなく「病気」として捉え専門治療（認知行動療法・動機づけ面接）と自助グループを組み合わせます。",
+ tags:["依存症","自助グループ","回復","精神看護"]},
+
+{id:1421,round:110,category:"haha",categoryName:"母性看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"妊娠中の鉄欠乏性貧血の予防・治療として適切なのはどれか。",
+ options:["鉄分の多い食品を避ける","鉄剤内服・鉄分の多い食品（レバー・赤身肉・ほうれん草）を摂取する","運動を制限する","輸血のみが治療法である"],answer:1,
+ explanation:"妊娠中は胎児・胎盤への鉄需要増加と血漿量増大による希釈性貧血が起こりやすいです。予防・治療：鉄剤（硫酸鉄など）内服・鉄分の多い食品（ヘム鉄：レバー・赤身肉、非ヘム鉄：ほうれん草・大豆）・ビタミンCとの同時摂取（鉄吸収促進）が有効です。Hb 11g/dL未満で治療開始が目安です。",
+ tags:["妊娠","鉄欠乏性貧血","鉄剤","栄養"]},
+
+{id:1422,round:110,category:"rojin",categoryName:"老年看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"高齢者の脱水について正しいのはどれか。",
+ options:["高齢者は脱水になりにくい","口渇感の低下により脱水に気づきにくい","体内水分量の増加が脱水の原因","尿量は増加する"],answer:1,
+ explanation:"高齢者の脱水の特徴：口渇中枢感受性低下により口渇感を感じにくい・体内水分量割合の低下（若年者60%→高齢者50%程度）・腎濃縮能低下・利尿薬内服など。症状：意識障害・ふらつき・皮膚の乾燥・口腔粘膜乾燥・尿量減少・頻脈。予防には定期的な水分補給の習慣づけが重要です。",
+ tags:["脱水","高齢者","口渇感","水分管理"]},
+
+{id:1423,round:110,category:"zaichi",categoryName:"在宅看護論",year:"第110回（2021年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"医療的ケア児（在宅で医療的ケアが必要な子ども）の支援として適切なのはどれか。",
+ options:["医療的ケアは病院でしか行えない","保護者への医療的ケアの指導と地域の支援体制の構築","学校への通学は全て禁止","福祉サービスは利用できない"],answer:1,
+ explanation:"医療的ケア児支援法（2021年施行）により医療的ケア児への支援が強化されました。在宅での医療的ケア（吸引・経管栄養・在宅酸素等）は保護者や指定された介護職員が適切な研修を受けて実施できます。学校（特別支援学校など）への通学支援・放課後デイサービスの利用も可能です。",
+ tags:["医療的ケア児","支援法","在宅","家族支援"]},
+
+// ════════════════════════════════════════
+// 第109回 追加分
+// ════════════════════════════════════════
+{id:1521,round:109,category:"kiso",categoryName:"基礎看護学",year:"第109回（2020年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"酸素吸入中の患者の看護として正しいのはどれか。",
+ options:["酸素吸入中は火気を近づけてもよい","SpO₂の値とともに呼吸状態・チアノーゼの有無を観察する","カニューレやマスクは毎日交換不要","加湿器の水は週1回交換する"],answer:1,
+ explanation:"酸素療法中の看護：①SpO₂値と呼吸数・呼吸困難感・チアノーゼの観察②酸素吸入装置（カニューレ・マスク）の固定・皮膚障害の確認③火気厳禁④加湿器の定期交換（細菌汚染予防）⑤COPDでは高濃度酸素によるCO₂ナルコーシスに注意。処方流量を守ることが重要です。",
+ tags:["酸素療法","SpO₂","呼吸管理","火気厳禁"]},
+
+{id:1522,round:109,category:"naika",categoryName:"内科系看護",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:"58歳男性。慢性心不全で外来通院中。体重が3日間で2kg増加した。",
+ question:"この患者への対応として最も適切なのはどれか。",
+ options:["体重増加は正常であり経過観察","塩分制限の状況と浮腫の有無を確認し医師に報告する","すぐに食事量を増やすよう指導する","運動療法を中止する"],answer:1,
+ explanation:"心不全患者での急激な体重増加（2〜3日で2kg以上）は体液貯留（心不全増悪）のサインです。毎日同条件での体重測定は自己管理の基本で増加した場合は利尿薬の増量など治療変更が必要な場合があります。塩分制限・水分制限の遵守状況と浮腫・息切れ・夜間発作性呼吸困難などの症状確認が重要です。",
+ tags:["慢性心不全","体重管理","浮腫","自己管理"]},
+
+{id:1523,round:109,category:"geka",categoryName:"外科系看護",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"開胸術後の胸腔ドレーンの管理として正しいのはどれか。",
+ options:["ドレーンは常に胸部より高い位置に保つ","水封ドレナージでは水位の呼吸性変動（気泡）を確認する","持続吸引中はドレーンのクランプが必要","排液が急に減少した場合は正常である"],answer:1,
+ explanation:"胸腔ドレーン（水封ドレナージ）管理：①ドレーンは常に体位より低い位置②水封ボトルの水位呼吸性変動確認（呼吸に伴う変動は開存のサイン、変動消失はドレーン閉塞の可能性）③排液の量・性状・色の定時観察④急激な出血増加・気泡の急増は異常サイン⑤ドレーンのキンクや閉塞に注意。",
+ tags:["胸腔ドレーン","水封ドレナージ","開胸術","外科看護"]},
+
+{id:1524,round:109,category:"kodomo",categoryName:"小児看護学",year:"第109回（2020年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"小児の身体発達の原則として正しいのはどれか。",
+ options:["末梢から中枢の方向に発達する","頭部から足部（頭尾方向）に発達する","全身が一様に発達する","発達の速度は常に一定である"],answer:1,
+ explanation:"身体発達の原則：①頭尾方向（頭部→体幹→下肢）②中枢から末梢（体幹→四肢→手指）③粗大運動から微細運動。出生時は頭部が最も発達し体幹・下肢は未発達です。発達の速度は一定でなく急速な時期（スパート）と緩やかな時期があります。個人差を考慮した評価が重要です。",
+ tags:["小児発達","頭尾方向","成長発達","原則"]},
+
+{id:1525,round:109,category:"seishin",categoryName:"精神看護学",year:"第109回（2020年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"自殺念慮のある患者への看護として正しいのはどれか。",
+ options:["「死にたい」という訴えは無視する","自殺念慮について直接聞くことで自殺を促進する","自殺の具体的な計画・手段の有無を確認する","一人にして考える時間を与える"],answer:2,
+ explanation:"自殺念慮への看護：①直接確認（「死にたいと思っていますか」）は禁忌ではなく重要な評価。②計画の有無・具体的手段の保有・致死性（手段の危険度）を評価する③一人にしない（安全確保）④危険物（刃物・薬物・紐類）の除去⑤医師への即時報告⑥入院による安全確保の検討。自殺念慮を無視することは最も危険です。",
+ tags:["自殺念慮","リスクアセスメント","安全確保","精神看護"]},
+
+{id:1526,round:109,category:"haha",categoryName:"母性看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"母乳分泌を促進するホルモンとして正しいのはどれか。",
+ options:["エストロゲン","プロラクチン","プロゲステロン","オキシトシン（射乳には関与するが分泌促進ではない）"],answer:1,
+ explanation:"乳汁分泌関連ホルモン：プロラクチン（下垂体前葉）＝乳汁産生を促進、授乳・吸啜刺激で分泌増加。オキシトシン（下垂体後葉）＝射乳反射（乳汁の排出）を引き起こす。分娩後はエストロゲン・プロゲステロンの急激な低下がプロラクチンの乳汁産生抑制を解除します。早期頻回授乳がプロラクチン維持に重要です。",
+ tags:["母乳分泌","プロラクチン","オキシトシン","授乳"]},
+
+{id:1527,round:109,category:"rojin",categoryName:"老年看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"高齢者に多い骨折部位として最も頻度が高いのはどれか。",
+ options:["前腕骨（橈骨遠位端）骨折","大腿骨頸部骨折","鎖骨骨折","肋骨骨折"],answer:1,
+ explanation:"高齢者（特に骨粗鬆症を有する女性）に最も多い重篤な骨折は大腿骨頸部骨折です。転倒が主な原因で術後の長期臥床による合併症（DVT・肺炎・褥瘡）のリスクが高く早期手術・早期離床が原則です。橈骨遠位端骨折（コレス骨折）も転倒時に多い骨折ですが予後は大腿骨頸部骨折より良好です。",
+ tags:["大腿骨頸部骨折","高齢者","骨粗鬆症","転倒"]},
+
+{id:1528,round:109,category:"zaichi",categoryName:"在宅看護論",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"ALS（筋萎縮性側索硬化症）の在宅療養において最も重要な看護の視点はどれか。",
+ options:["症状の進行に合わせたコミュニケーション手段の確保と意思決定支援","疾患が進行しても支援は変えない","人工呼吸器は在宅では使用できない","嚥下障害が出現しても食事形態の変更は不要"],answer:0,
+ explanation:"ALSは進行性で嚥下障害・構音障害・呼吸筋麻痺をきたす難病です。在宅看護の重要課題：①コミュニケーション手段の確保（文字盤・視線入力・VOCA等）②ACP（アドバンス・ケア・プランニング）：人工呼吸器装着・胃瘻造設についての意思決定支援③嚥下障害対応（食形態・胃瘻管理）④在宅人工呼吸器管理。",
+ tags:["ALS","難病","コミュニケーション","意思決定支援"]},
+
+// ════════════════════════════════════════
+// 横断的・頻出テーマ（全回共通）
+// ════════════════════════════════════════
+{id:1601,round:113,category:"kiso",categoryName:"基礎看護学",year:"第113回（2024年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"看護師の特定行為（特定行為に係る看護師の研修制度）に含まれるものはどれか。",
+ options:["血圧測定","気管カニューレの交換","バイタルサイン測定","経口投薬の管理"],answer:1,
+ explanation:"特定行為は診療の補助の一部で手順書に基づき特定の看護師が実施できます。38の特定行為に含まれるもの：気管カニューレの交換・創傷の処置・ドレーンの抜去・血糖コントロール管理・脱水補正のための輸液調整等。特定行為研修修了者は医師の事前の手順書により医師の判断を待たずに実施できます。",
+ tags:["特定行為","看護師","研修制度","医療制度"]},
+
+{id:1602,round:112,category:"naika",categoryName:"内科系看護",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"DIC（播種性血管内凝固症候群）の検査所見として正しいのはどれか。",
+ options:["血小板数増加・フィブリノーゲン増加","血小板数減少・フィブリノーゲン低下・FDP上昇","出血時間の短縮","白血球数の著明な増加のみ"],answer:1,
+ explanation:"DICの検査所見：血小板数減少・フィブリノーゲン低下・PT延長・APTT延長・FDP（フィブリン分解産物）上昇・Dダイマー上昇。全身の細小血管に微小血栓が形成され同時に凝固因子・血小板が消費されて出血傾向をきたします。原因疾患（敗血症・悪性腫瘍・産科疾患等）の治療が基本です。",
+ tags:["DIC","播種性血管内凝固","凝固障害","検査"]},
+
+{id:1603,round:111,category:"geka",categoryName:"外科系看護",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"肺がんの術後に特に重要な観察項目はどれか。",
+ options:["尿量のみ","呼吸状態・ドレーン排液・創部感染","血糖値のみ","体重変化のみ"],answer:1,
+ explanation:"肺がん術後の重要観察項目：①呼吸状態（SpO₂・呼吸数・呼吸音・チアノーゼ）②胸腔ドレーン（量・性状・気泡・水位変動）③創部感染（発赤・腫脹・滲出液）④術後出血（バイタルサイン変動）⑤無気肺・肺炎予防（深呼吸・体位変換・早期離床）。肺切除後の残存肺の膨張確認も重要です。",
+ tags:["肺がん","術後観察","胸腔ドレーン","呼吸管理"]},
+
+{id:1604,round:110,category:"kodomo",categoryName:"小児看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"小児の脱水の程度の評価において重要な観察項目として誤っているのはどれか。",
+ options:["尿量・尿の色","大泉門の状態","体重の変化","毛髪の色"],answer:3,
+ explanation:"小児の脱水評価：①体重減少の割合（軽度<5%・中等度5〜10%・重度>10%）②尿量減少・濃縮尿③皮膚ツルゴール低下（つまんで戻りが遅い）④口腔・眼球の乾燥⑤大泉門陥没（乳児）⑥頻脈・血圧低下（重度）⑦意識レベル変化。毛髪の色は脱水の評価に使用しません。",
+ tags:["脱水","小児","評価","大泉門"]},
+
+{id:1605,round:109,category:"seishin",categoryName:"精神看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"精神科リハビリテーションにおけるSST（社会生活技能訓練）の目的はどれか。",
+ options:["薬物療法の代替手段","日常生活・対人関係・社会的技能を段階的に学習・習得する","過去のトラウマを解消する","入院期間を延長する"],answer:1,
+ explanation:"SST（Social Skills Training：社会生活技能訓練）は認知行動療法的アプローチを用いてコミュニケーション・自己主張・問題解決などの社会的スキルをロールプレイ・フィードバックを通じて習得する技法です。統合失調症・気分障害・発達障害など様々な精神疾患の社会復帰支援に活用されます。",
+ tags:["SST","社会生活技能訓練","精神リハビリ","社会復帰"]},
+
+{id:1606,round:113,category:"kiso",categoryName:"基礎看護学",year:"第113回（2024年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"患者の権利として「リスボン宣言」に含まれるものはどれか。",
+ options:["医師の指示に無条件に従う義務","良質な医療を受ける権利・自己決定の権利・プライバシーの権利","医療費を支払わない権利","他の患者の情報を知る権利"],answer:1,
+ explanation:"患者の権利に関するリスボン宣言（1981年WMA採択）の主な内容：①良質な医療を受ける権利②選択の自由の権利③自己決定の権利④意識のない患者の権利⑤法的無能力者の権利⑥患者の意思に反する処置に対する権利⑦情報に対する権利⑧守秘義務に対する権利⑨宗教的支援を受ける権利⑩尊厳に対する権利⑪終末期ケアを受ける権利など。",
+ tags:["患者の権利","リスボン宣言","倫理","自己決定"]},
+
+{id:1607,round:112,category:"zaichi",categoryName:"在宅看護論",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"エンド・オブ・ライフケアにおけるACP（アドバンス・ケア・プランニング）の説明として正しいのはどれか。",
+ options:["本人が意思決定できなくなった後のみに行う","将来の意思決定能力の低下に備え本人・家族・医療者が今後の医療・ケアについて繰り返し話し合うプロセス","一度決定したら変更できない","書面（事前指示書）作成のみを指す"],answer:1,
+ explanation:"ACP（アドバンス・ケア・プランニング、愛称「人生会議」）は意思決定能力がある今の段階から本人の価値観・希望・不安について本人・家族・医療者が継続的に話し合うプロセスです。意思は変更可能で書面は一要素に過ぎません。厚生労働省は普及推進を進めています。",
+ tags:["ACP","人生会議","エンドオブライフ","意思決定支援"]},
+
+{id:1608,round:111,category:"naika",categoryName:"内科系看護",year:"第111回（2022年）",difficulty:"応用",type:"past",
+ scenario:"55歳男性。虚血性心疾患でPCI（経皮的冠動脈インターベンション）施行後。アスピリンとクロピドグレルの2剤抗血小板療法中。",
+ question:"この患者への指導として適切なのはどれか。",
+ options:["出血傾向があっても薬を中止してよい","歯科治療前に担当医に相談するよう指導する","市販のNSAIDsを自由に使用してよい","抗血小板薬は食後でなくても服用してよい"],answer:1,
+ explanation:"抗血小板薬服用患者への指導：①歯科治療・内視鏡検査・手術前は担当医への相談が必須（自己判断での中止はステント血栓症のリスク）②NSAIDsとの併用は消化管出血リスク増大③出血時間延長のため外傷・手術時に注意④アスピリンは消化管障害予防のため食後服用が基本。2剤抗血小板療法（DAPT）は特にステント留置後に重要です。",
+ tags:["抗血小板薬","PCI","服薬指導","出血リスク"]},
+
+{id:1609,round:110,category:"haha",categoryName:"母性看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"産後の子宮復古（子宮の縮小）の観察として正しいのはどれか。",
+ options:["子宮底の高さは産後から変化しない","産後は子宮底が日々下降し約10日で恥骨結合の後ろに触れなくなる","悪露は産後すぐに白色になる","授乳は子宮収縮を抑制する"],answer:1,
+ explanation:"子宮復古のポイント：分娩直後の子宮底は臍高→その後1日約1横指ずつ下降→産後9〜10日で腹壁から触知不能。悪露の変化：赤色（産褥1〜3日）→褐色（4〜6日）→黄色（7〜10日）→白色（2〜4週）。授乳による乳頭刺激でオキシトシン分泌が促進され子宮収縮が促されます（後陣痛）。",
+ tags:["子宮復古","悪露","産褥","母性看護"]},
+
+{id:1610,round:109,category:"rojin",categoryName:"老年看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"認知症の中で脳血管性認知症の特徴として正しいのはどれか。",
+ options:["ゆっくりと均一に進行する","段階的・まだら認知（部分的な機能保持）が特徴","レビー小体が特徴","幻視・パーキンソン症状が特徴"],answer:1,
+ explanation:"脳血管性認知症の特徴：脳梗塞・脳出血のたびに段階的に悪化する・まだら認知（ある機能は保たれているのに別の機能は著しく低下）・感情失禁が多い。アルツハイマー型：緩徐進行・記憶障害が初期から顕著。レビー小体型：幻視・パーキンソン症状・REM睡眠行動障害が特徴。前頭側頭型：人格変化・常同行動が特徴。",
+ tags:["脳血管性認知症","まだら認知","認知症分類","高齢者"]},
+
+
+
+// ════════════════════════════════════════
+// 追加分 第113回
+// ════════════════════════════════════════
+{id:1132,round:113,category:"kiso",categoryName:"基礎看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"注射薬の混合調製において清潔操作として正しいのはどれか。",
+ options:["アンプルカット後に素手でカット面を触れる","バイアルのゴム栓はアルコール綿で拭いてから穿刺する","一度使用した注射針は再使用してよい","混合後の薬剤は室温で1週間保存できる"],answer:1,
+ explanation:"注射薬調製の清潔操作：バイアルのゴム栓はアルコール綿で消毒後に穿刺・アンプルカット後はカット面に触れず・注射針は1回使用後廃棄・混合調製後は速やかに使用（長期保存禁止）。クリーンベンチ使用・手指衛生が基本です。混注ミスは重大な医療事故につながるため二重確認も重要です。",
+ tags:["注射薬調製","無菌操作","感染予防","安全管理"]},
+
+{id:1133,round:113,category:"naika",categoryName:"内科系看護",year:"第113回（2024年）",difficulty:"応用",type:"past",
+ scenario:"65歳男性。慢性心不全で利尿薬（フロセミド）を内服中。血清K 3.0 mEq/L。",
+ question:"この患者への対応として最も適切なのはどれか。",
+ options:["カリウム摂取を制限する","医師に報告しカリウム補充を検討する","利尿薬の量を増やす","症状がなければ経過観察のみ"],answer:1,
+ explanation:"低カリウム血症（K<3.5 mEq/L）はフロセミドなどのループ利尿薬の副作用として頻発します。症状：脱力感・筋肉痛・不整脈（心室性不整脈）。K 3.0は要治療域です。医師への報告と経口または静脈内カリウム補充が必要です。カリウムを多く含む食品（バナナ・オレンジ・芋類）の摂取指導も行います。",
+ tags:["低カリウム血症","利尿薬","フロセミド","電解質"]},
+
+{id:1134,round:113,category:"geka",categoryName:"外科系看護",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"術前オリエンテーションで患者に説明する内容として適切でないのはどれか。",
+ options:["手術の目的と方法","麻酔の種類とリスク","術後の予想される経過とリハビリ","担当医師の個人的な経歴"],answer:3,
+ explanation:"術前オリエンテーションの内容：手術の目的・方法・麻酔の種類とリスク・術後の経過（ドレーン・痛み・食事開始時期）・術前処置（絶飲食・除毛・浣腸）・術後リハビリ・同意書の説明。担当医の個人的な経歴は必要な説明項目ではありません。患者が理解・納得できるような説明が重要です。",
+ tags:["術前オリエンテーション","インフォームドコンセント","外科","患者教育"]},
+
+{id:1135,round:113,category:"kodomo",categoryName:"小児看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"RSウイルス感染症で入院した乳児への感染対策として正しいのはどれか。",
+ options:["空気感染予防策を行う","接触感染予防策と飛沫感染予防策を行う","隔離は不要である","マスク着用のみで十分である"],answer:1,
+ explanation:"RSウイルスは接触感染（ウイルスに汚染された手・物品）と飛沫感染（咳・くしゃみ）で伝播します。感染予防策：個室隔離（困難な場合はコホーティング）・手洗い・手袋・ガウン（接触予防策）・マスク（飛沫予防策）。乳幼児は重症化リスクが高く（細気管支炎・肺炎）注意が必要です。",
+ tags:["RSウイルス","感染予防策","乳児","接触感染"]},
+
+{id:1136,round:113,category:"seishin",categoryName:"精神看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"リカバリー（recovery）の概念として正しいのはどれか。",
+ options:["症状が完全に消失した状態のみを指す","症状があっても自分らしい生活を送ることができる状態","医療者が決めた目標に到達すること","入院しないことのみを意味する"],answer:1,
+ explanation:"リカバリーの概念（Anthony,1993）：精神疾患を持つ人が症状の有無にかかわらず自分らしい生活・役割・アイデンティティを回復していくプロセスです。「パーソナルリカバリー」とも言い、希望・自律・社会参加を重視します。医療の目標が「症状除去」から「生活の質の向上」へとシフトしています。",
+ tags:["リカバリー","精神看護","社会復帰","当事者主体"]},
+
+{id:1137,round:113,category:"haha",categoryName:"母性看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"新生児の体温管理として正しいのはどれか。",
+ options:["新生児は成人と同様に体温調節ができる","新生児は体温調節機能が未熟なため環境温度の管理が重要","低体温になっても問題ない","体温は1日1回測定すれば十分"],answer:1,
+ explanation:"新生児の体温管理：体温調節中枢が未熟で皮下脂肪が少なく体表面積/体重比が大きいため低体温になりやすい。正常体温36.5〜37.5℃。低体温予防：出生直後のドライアップ・保温（ラジアントウォーマー・保育器）・早期母子接触（カンガルーケア）。低体温は低血糖・代謝性アシドーシスの原因となります。",
+ tags:["新生児","体温管理","低体温","母性看護"]},
+
+{id:1138,round:113,category:"rojin",categoryName:"老年看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"高齢者に対するグリーフケア（悲嘆ケア）の目的として正しいのはどれか。",
+ options:["悲嘆感情を抑圧させる","喪失体験に伴う悲嘆プロセスを支援し適応を助ける","悲しむことを禁止する","薬物で感情を鈍化させる"],answer:1,
+ explanation:"グリーフケアは配偶者・友人の死・身体機能の喪失など喪失体験に伴う悲嘆（グリーフ）のプロセスを支援します。Kübler-Rossの死の受容段階（否認→怒り→取引→抑うつ→受容）を参考に個別的な支援を行います。感情表出を促し孤立を防ぎ社会的サポートにつなぐことが重要です。",
+ tags:["グリーフケア","悲嘆","喪失","高齢者"]},
+
+{id:1139,round:113,category:"zaichi",categoryName:"在宅看護論",year:"第113回（2024年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"在宅での看取りを希望する患者・家族への支援として適切なのはどれか。",
+ options:["看取りは病院でしか行えないと説明する","患者・家族の意思を尊重しACP（人生会議）を重ねながら在宅看取りを支援する","家族が全ての処置を単独で行うよう指導する","死亡確認は訪問看護師が行う"],answer:1,
+ explanation:"在宅看取りの支援：患者・家族の意思をACPを通じて継続的に確認・在宅医との連携（死亡診断は医師）・訪問看護師の24時間対応体制の整備・家族への看取りの準備（グリーフ予備教育）・死後のケア（エンゼルケア）と家族の悲嘆支援。死亡確認・死亡診断書の発行は医師が行います。",
+ tags:["在宅看取り","ACP","訪問看護","終末期"]},
+
+// ════════════════════════════════════════
+// 追加分 第112回
+// ════════════════════════════════════════
+{id:1231,round:112,category:"kiso",categoryName:"基礎看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"標準予防策（スタンダードプリコーション）の基本的な考え方として正しいのはどれか。",
+ options:["感染症と診断された患者にのみ適用する","すべての患者の血液・体液・分泌物・排泄物は感染性があるとみなして対応する","マスクのみで十分である","手袋をすれば手洗いは不要である"],answer:1,
+ explanation:"標準予防策（スタンダードプリコーション）は感染症の有無にかかわらず全患者に適用する感染対策の基本です。対象：血液・すべての体液・分泌物（汗を除く）・排泄物・創部・粘膜。手技に応じたPPE（手袋・マスク・ゴーグル・ガウン）の選択と手指衛生が基本です。",
+ tags:["標準予防策","スタンダードプリコーション","感染予防","PPE"]},
+
+{id:1232,round:112,category:"naika",categoryName:"内科系看護",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"インスリン自己注射の指導において正しいのはどれか。",
+ options:["毎回同じ部位に注射する","腹部・大腿・上腕など部位をローテーションして注射する","注射後すぐに激しい運動をする","注射針は再使用してよい"],answer:1,
+ explanation:"インスリン自己注射指導：注射部位のローテーション（腹部・大腿外側・上腕外側・臀部）で脂肪硬結（リポハイパートロフィー）を予防・腹部は吸収が最も速い・注射針は使い捨て（再使用で感染・針の変形リスク）・低血糖症状（動悸・冷汗・手の震え）の認識と対処法の指導が重要です。",
+ tags:["インスリン注射","自己注射","糖尿病","指導"]},
+
+{id:1233,round:112,category:"geka",categoryName:"外科系看護",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"術後の早期離床の目的として正しいのはどれか。",
+ options:["疼痛を増強させるため","深部静脈血栓症・肺炎・腸管麻痺・褥瘡などの術後合併症を予防するため","傷口を広げるため","血圧を上昇させるため"],answer:1,
+ explanation:"術後早期離床の目的：深部静脈血栓症・肺塞栓症の予防・肺機能の改善（無気肺・肺炎予防）・腸管蠕動の回復・褥瘡予防・筋力維持・廃用症候群予防・精神的回復の促進。術後の合併症予防として早期離床は現代外科看護の基本原則です（ERAS：術後回復強化プログラム）。",
+ tags:["早期離床","術後合併症","ERAS","外科看護"]},
+
+{id:1234,round:112,category:"kodomo",categoryName:"小児看護学",year:"第112回（2023年）",difficulty:"応用",type:"past",
+ scenario:"10歳男児。1型糖尿病。学校生活における管理について相談があった。",
+ question:"学校での対応として適切なのはどれか。",
+ options:["低血糖対策のためブドウ糖を常に携帯させる","学校では一切の自己管理をさせない","担任教師・養護教諭への情報提供は不要","体育の授業は全て免除する"],answer:0,
+ explanation:"学校生活での1型糖尿病管理：低血糖時に備えブドウ糖・飴などを常に携帯させる・担任・養護教諭・管理職への疾患説明と緊急時対応の共有・血糖測定・インスリン注射の場所確保・体育前後の血糖チェックと補食（運動は基本的に推奨）・学校医との連携。学校全体での理解と支援が重要です。",
+ tags:["1型糖尿病","学校生活","低血糖対策","小児"]},
+
+{id:1235,round:112,category:"seishin",categoryName:"精神看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"精神科における行動制限最小化の考え方として正しいのはどれか。",
+ options:["行動制限はできるだけ多く行う方が安全","行動制限は最小限とし早期解除を目指す","患者の意見は聞く必要がない","行動制限の記録は不要"],answer:1,
+ explanation:"行動制限最小化：精神科医療における隔離・拘束は患者の権利を制限する行為であり必要最小限の期間・強度で実施し早期解除を目指します。実施中は定期的な評価・記録・説明が必要です。解除基準を事前に設定し患者・家族への説明と同意が求められます。代替手段の検討も重要です。",
+ tags:["行動制限最小化","隔離拘束","権利擁護","精神看護"]},
+
+{id:1236,round:112,category:"haha",categoryName:"母性看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"分娩時の会陰裂傷の予防として有効なのはどれか。",
+ options:["急速に努責する","会陰保護（胎児の頭がゆっくり娩出されるよう支持する）","外陰部を冷却する","産婦に立位を保たせる"],answer:1,
+ explanation:"会陰裂傷予防：会陰保護（産婦に「いきまないで」と指示しながら児頭をゆっくり娩出させる）・会陰マッサージ・適切な体位（側臥位・半座位）が有効です。会陰切開は裂傷予防というより緊急時の適応（胎児機能不全・急速遂娩が必要な場合）です。急速な努責は会陰裂傷を助長します。",
+ tags:["会陰裂傷","会陰保護","分娩介助","母性看護"]},
+
+{id:1237,round:112,category:"rojin",categoryName:"老年看護学",year:"第112回（2023年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"介護予防における一次予防の内容として正しいのはどれか。",
+ options:["要介護状態の進行を遅らせる","すべての高齢者を対象とした健康増進・介護予防の取り組み","要介護者へのリハビリ","認定後のサービス提供"],answer:1,
+ explanation:"介護予防の三段階：一次予防＝全高齢者対象の健康増進（運動・栄養・社会参加）・二次予防＝要介護リスクのある人への早期介入（特定高齢者施策）・三次予防＝要介護認定者の進行防止・機能回復リハビリ。地域支援事業（通いの場・フレイル対策）が一次予防の中核です。",
+ tags:["介護予防","一次予防","フレイル","地域支援"]},
+
+{id:1238,round:112,category:"zaichi",categoryName:"在宅看護論",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"在宅で人工呼吸器を使用している患者の管理として適切なのはどれか。",
+ options:["停電に備えた対策は不要","非常用電源（バッテリー）の確保と電力会社・自治体への届出を行う","加湿器の管理は不要","アラームが鳴っても対応しなくてよい"],answer:1,
+ explanation:"在宅人工呼吸器管理：停電対策（内部バッテリー・外部バッテリー・発電機）・電力会社への「在宅酸素・人工呼吸器使用者」としての届出・自治体への要配慮者登録・加湿器の定期的な水交換（細菌汚染防止）・アラーム対応の訓練・緊急時連絡体制。家族への管理指導が必須です。",
+ tags:["在宅人工呼吸器","停電対策","在宅管理","緊急対応"]},
+
+// ════════════════════════════════════════
+// 追加分 第111回
+// ════════════════════════════════════════
+{id:1324,round:111,category:"kiso",categoryName:"基礎看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"入院患者の転倒・転落アセスメントスコアの主な評価項目として正しいのはどれか。",
+ options:["血液型・身長・体重","年齢・歩行状態・内服薬・既往歴（転倒歴）","入院日数のみ","食事摂取量のみ"],answer:1,
+ explanation:"転倒・転落リスクアセスメント（例：転倒転落アセスメントスコアシート）の評価項目：年齢（65歳以上高リスク）・転倒歴・認知機能・歩行状態・内服薬（睡眠薬・降圧薬・利尿薬など）・排泄動作・視力障害など。スコアに基づき環境整備・見守り・離床センサーなどの対策を決定します。",
+ tags:["転倒転落","アセスメント","リスク評価","安全管理"]},
+
+{id:1325,round:111,category:"naika",categoryName:"内科系看護",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"消化性潰瘍患者の食事指導として正しいのはどれか。",
+ options:["香辛料・アルコール・コーヒーを積極的に摂取する","規則正しい食事時間・刺激物の制限・禁煙・禁酒を指導する","食事は1日1回にまとめる","空腹時間を長く設ける"],answer:1,
+ explanation:"消化性潰瘍の食事・生活指導：規則正しい食生活（1日3食）・刺激物制限（香辛料・アルコール・炭酸飲料・コーヒー）・禁煙（喫煙は胃酸分泌促進・粘膜血流低下）・NSAIDs中止・ストレス管理・ピロリ菌陽性の場合は除菌療法。空腹状態が長いと胃酸による粘膜刺激が増加します。",
+ tags:["消化性潰瘍","食事指導","禁煙","ピロリ菌"]},
+
+{id:1326,round:111,category:"geka",categoryName:"外科系看護",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"前立腺がんの症状と特徴として正しいのはどれか。",
+ options:["若年者に多い","早期は無症状のことが多く進行すると排尿症状が出現する","血尿が初発症状である","PSA検査は診断に有用でない"],answer:1,
+ explanation:"前立腺がんの特徴：高齢男性に多い・早期は無症状が多くPSA（前立腺特異抗原）検診での発見が重要・進行すると排尿困難・頻尿・残尿感・血尿・骨転移による腰背部痛。治療：監視療法・手術（ロボット支援前立腺全摘）・放射線・ホルモン療法。骨転移が多く骨シンチが有用です。",
+ tags:["前立腺がん","PSA","排尿症状","外科"]},
+
+{id:1327,round:111,category:"kodomo",categoryName:"小児看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"チャイルドライフスペシャリスト（CLS）の役割として正しいのはどれか。",
+ options:["投薬管理を行う","遊びや心理的支援を通じて子どもの入院体験をより良くする","診断・治療の決定を行う","子どもの食事を作る"],answer:1,
+ explanation:"チャイルドライフスペシャリスト（CLS）は病院内での遊びの提供・プレパレーション（処置への心理的準備）・感情表出のサポート・きょうだいへの支援を通じて入院する子どもと家族の心理社会的ニーズに応えます。医療チームの一員として子どもの権利擁護と入院体験の質の向上に貢献します。",
+ tags:["チャイルドライフスペシャリスト","CLS","小児看護","プレパレーション"]},
+
+{id:1328,round:111,category:"seishin",categoryName:"精神看護学",year:"第111回（2022年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"長期入院患者の退院支援において看護師が行うべきことはどれか。",
+ options:["退院の意思を示した患者は無条件に退院させる","患者の地域生活能力のアセスメントと段階的な退院プロセスの支援","退院支援は精神保健福祉士のみの役割","家族が反対すれば退院は不可能"],answer:1,
+ explanation:"精神科長期入院患者の退院支援：地域生活能力（服薬管理・金銭管理・生活技能）のアセスメント・段階的外泊練習・退院後の居住場所（グループホーム等）の確保・精神保健福祉士・ケアマネージャーとの連携・家族支援・地域の支援機関との調整（ACT・訪問看護等）。患者の意思を尊重しながら進めます。",
+ tags:["退院支援","精神科","長期入院","地域移行"]},
+
+{id:1329,round:111,category:"haha",categoryName:"母性看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"子宮頸がんの一次予防として最も有効なのはどれか。",
+ options:["定期的な細胞診検査","HPVワクチン接種","禁煙のみ","薬物療法"],answer:1,
+ explanation:"子宮頸がんの予防：一次予防＝HPVワクチン接種（定期接種対象：小学6年〜高校1年相当の女子）・二次予防＝子宮頸がん検診（20歳以上の女性に2年ごとの細胞診）。HPVワクチンは16型・18型（子宮頸がんの約60〜70%を占める）に有効です。ワクチン接種後も検診継続が必要です。",
+ tags:["子宮頸がん","HPVワクチン","一次予防","母性看護"]},
+
+{id:1330,round:111,category:"rojin",categoryName:"老年看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"高齢者の睡眠の特徴として正しいのはどれか。",
+ options:["深い睡眠（徐波睡眠）が増加する","中途覚醒が増え睡眠が浅く分断されやすい","就寝時刻が遅くなる","総睡眠時間が増加する"],answer:1,
+ explanation:"高齢者の睡眠の特徴：深い睡眠（ノンレムステージ3・4）の減少・中途覚醒の増加・早寝早起き傾向（概日リズムの前進）・総睡眠時間の短縮・入眠潜時の延長。不眠への対応：睡眠衛生指導（規則正しい生活・日中の活動・就寝前の刺激物回避）を優先し催眠薬は慎重に使用します。",
+ tags:["高齢者","睡眠","中途覚醒","不眠"]},
+
+{id:1331,round:111,category:"zaichi",categoryName:"在宅看護論",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"訪問看護師が利用者の急変を発見した場合の対応として正しいのはどれか。",
+ options:["すぐに帰宅する","一次救命処置（必要時）を行いながら医師・家族に連絡する","家族が来るまで何もしない","救急車は呼ばない"],answer:1,
+ explanation:"訪問看護師が急変を発見した場合：一次救命処置（意識・呼吸確認・心肺蘇生）の実施→主治医への連絡（指示を受ける）→家族への連絡→必要時救急搬送の手配。在宅での看取りを希望していた場合は事前の指示書（DNAR等）に従います。急変時対応の事前取り決めと訓練が重要です。",
+ tags:["急変対応","訪問看護","一次救命処置","在宅"]},
+
+// ════════════════════════════════════════
+// 追加分 第110回
+// ════════════════════════════════════════
+{id:1424,round:110,category:"kiso",categoryName:"基礎看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"膀胱留置カテーテル管理の原則として正しいのはどれか。",
+ options:["蓄尿バッグは膀胱より高い位置に置く","蓄尿バッグは常に膀胱より低い位置に保つ","カテーテルはルーティンで毎日交換する","尿の逆流を促進する体位にする"],answer:1,
+ explanation:"膀胱留置カテーテル管理：蓄尿バッグは常に膀胱より低い位置に保ち尿の逆流を防ぐ・閉鎖式ドレナージシステムの維持・カテーテル必要性の毎日評価と不要になり次第早期抜去・会陰部の清潔保持（1日2回石鹸洗浄）・尿量・性状の定時観察。カテーテル関連尿路感染症（CAUTI）予防が重要です。",
+ tags:["膀胱留置カテーテル","CAUTI","感染予防","看護技術"]},
+
+{id:1425,round:110,category:"naika",categoryName:"内科系看護",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"慢性閉塞性肺疾患（COPD）患者への呼吸リハビリとして適切なのはどれか。",
+ options:["安静を保ち運動は禁忌","口すぼめ呼吸・腹式呼吸を指導する","高流量酸素を持続投与する","入院中のみリハビリを行う"],answer:1,
+ explanation:"COPD呼吸リハビリの中心：口すぼめ呼吸（気道内圧を保ち早期閉塞を防ぐ）・腹式呼吸（横隔膜を効率的に使う）・全身持久力訓練（ウォーキング等）・筋力強化訓練・栄養指導・患者教育。運動耐容能の改善と生活の質（QOL）向上が目標です。禁煙と並んで最も重要な非薬物療法です。",
+ tags:["COPD","呼吸リハビリ","口すぼめ呼吸","腹式呼吸"]},
+
+{id:1426,round:110,category:"geka",categoryName:"外科系看護",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"大腸がん（結腸がん）の早期発見に有用なスクリーニング検査はどれか。",
+ options:["胸部X線","便潜血検査","腹部エコー","血糖検査"],answer:1,
+ explanation:"大腸がんのスクリーニング：便潜血検査（2日法）は大腸がん検診として40歳以上に推奨されます。陽性の場合は精密検査（大腸内視鏡検査）を行います。大腸がんは早期発見・早期治療で予後が大幅に改善します。症状（血便・便通異常・腹痛・体重減少）がある場合は早期の内視鏡検査が重要です。",
+ tags:["大腸がん","便潜血検査","スクリーニング","がん検診"]},
+
+{id:1427,round:110,category:"kodomo",categoryName:"小児看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"小児の急性中耳炎の好発年齢と特徴として正しいのはどれか。",
+ options:["主に成人に多い","乳幼児に多く耳管が短く水平に近いため中耳炎になりやすい","細菌感染は関与しない","難聴は合併症として起こらない"],answer:1,
+ explanation:"急性中耳炎の特徴：乳幼児に多い（耳管が短く・太く・水平に近いため鼻咽腔の細菌が中耳に入りやすい）・上気道炎後に発症することが多い・主要症状：耳痛・発熱・耳漏・乳児では不機嫌・耳を触る行動。治療：ペニシリン系抗菌薬が第一選択・繰り返す場合は鼓膜チューブ挿入。難聴・滲出性中耳炎が合併症として起こりえます。",
+ tags:["急性中耳炎","乳幼児","耳管","小児"]},
+
+{id:1428,round:110,category:"seishin",categoryName:"精神看護学",year:"第110回（2021年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"境界性パーソナリティ障害（BPD）の特徴として正しいのはどれか。",
+ options:["感情が安定している","見捨てられることへの強い恐怖・感情の不安定さ・衝動的な行動が特徴","人との関わりを好む（誇大な自己像）","幻覚・妄想が主症状"],answer:1,
+ explanation:"境界性パーソナリティ障害（BPD）の特徴：見捨てられることへの強い恐怖・感情の著しい不安定さ（理想化と脱価値化の繰り返し）・衝動的行動・自傷行為・自殺企図・慢性的な空虚感。看護では一貫した姿勢・限界設定・感情調節スキル指導（DBT：弁証法的行動療法）が有効です。",
+ tags:["境界性パーソナリティ障害","BPD","感情調節","精神看護"]},
+
+{id:1429,round:110,category:"haha",categoryName:"母性看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"産褥期の血栓性静脈炎の予防として適切なのはどれか。",
+ options:["完全安静を保つ","早期離床と弾性ストッキングの使用","大量の水分制限","下肢のマッサージを禁止する"],answer:1,
+ explanation:"産褥期は凝固能亢進・静脈うっ滞・血管壁障害の「Virchowの三徴」が揃いやすく血栓リスクが高い時期です。予防：早期離床・弾性ストッキングの着用・十分な水分摂取・下肢の自動運動が有効です（マッサージは血栓遊離リスクがあるため既存血栓がある場合は禁忌）。DVTの症状（下肢の疼痛・腫脹・発赤）に注意が必要です。",
+ tags:["産褥期","血栓性静脈炎","早期離床","DVT"]},
+
+{id:1430,round:110,category:"rojin",categoryName:"老年看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"長谷川式認知症スケール（HDS-R）の特徴として正しいのはどれか。",
+ options:["身体機能を評価するスケール","認知機能を評価するスクリーニングツールで30点満点・20点以下で認知症を疑う","うつ病の評価スケール","ADLのみを評価する"],answer:1,
+ explanation:"長谷川式認知症スケール（HDS-R）：認知症スクリーニングツールで30点満点・20点以下で認知症の疑い。評価項目：見当識（年齢・日付・場所）・3単語記銘・計算・数字の逆唱・物品記銘・言語流暢性・3単語再生（計9項目）。MMSEと並んで広く使用されます。確定診断には詳細な神経心理検査・画像検査が必要です。",
+ tags:["長谷川式","HDS-R","認知症スクリーニング","認知機能"]},
+
+{id:1431,round:110,category:"zaichi",categoryName:"在宅看護論",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"難病患者への訪問看護において特定疾患医療受給者証の役割として正しいのはどれか。",
+ options:["入院費のみに使用できる","指定難病の医療費助成を受けるための証明書","全ての医療機関で使用できるわけではない制限がある","介護保険サービスと同じ仕組みである"],answer:1,
+ explanation:"特定疾患医療受給者証（指定難病）は都道府県・指定都市が交付し指定医療機関での医療費を助成します。訪問看護も医療保険適用の場合に助成対象となります。自己負担割合は原則2割・所得に応じた上限あり。難病の訪問看護は医療保険優先（原則週4日以上の訪問も可能）です。",
+ tags:["難病","特定疾患","医療費助成","訪問看護"]},
+
+// ════════════════════════════════════════
+// 追加分 第109回
+// ════════════════════════════════════════
+{id:1529,round:109,category:"kiso",categoryName:"基礎看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"患者の安全な移送（ストレッチャー移送）として正しいのはどれか。",
+ options:["患者の頭部を進行方向に向けて移送する","原則として患者の足部を進行方向に向けて移送する","スロープや坂道では傾斜を無視してよい","固定ベルトは不要である"],answer:1,
+ explanation:"ストレッチャーによる移送：原則として足部を進行方向に向ける（患者が先を見渡せる）・頭部は高くする（1〜2度の角度）・スロープ下りでは頭部を高い側にして後ろ向きで降りる（頭部への血液集中防止）・固定ベルトで転落防止・段差・障害物に注意。患者への事前説明が重要です。",
+ tags:["ストレッチャー","移送","患者搬送","安全管理"]},
+
+{id:1530,round:109,category:"naika",categoryName:"内科系看護",year:"第109回（2020年）",difficulty:"応用",type:"past",
+ scenario:"55歳男性。急性膵炎で入院。腹痛・嘔吐あり。アミラーゼ高値。",
+ question:"急性膵炎の初期治療として最も重要なのはどれか。",
+ options:["直ちに食事を開始する","絶食・十分な輸液・疼痛管理","抗菌薬の即時投与","消化酵素薬の投与"],answer:1,
+ explanation:"急性膵炎の初期治療：①絶食（膵臓を安静にし膵酵素の自己消化を防ぐ）②大量輸液（循環動態維持・膵臓への血流確保・脱水補正）③疼痛管理（NSAIDsやオピオイド）。重症度評価（JCS基準・造影CT）が重要で重症例はICU管理。合併症（膵壊死・膿瘍・偽嚢胞・多臓器不全）に注意します。",
+ tags:["急性膵炎","絶食","輸液","消化器"]},
+
+{id:1531,round:109,category:"geka",categoryName:"外科系看護",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"脊椎手術後の体位変換で最も注意すべきことはどれか。",
+ options:["捻転動作を行ってよい","脊椎をねじらないよう丸太転がし法（ログロール）で行う","枕は使用しない","腹臥位は禁忌"],answer:1,
+ explanation:"脊椎手術後の体位変換（ログロール法）：複数人で脊椎全体をまっすぐに保ち捻転・屈曲・伸展させずに全体を一体として回転させる方法です。特に頚椎・胸椎・腰椎手術後の安定性が確保されるまでの期間に重要です。体位変換前後に神経症状（四肢の麻痺・感覚障害）の確認が必須です。",
+ tags:["脊椎手術","ログロール","体位変換","神経外科"]},
+
+{id:1532,round:109,category:"kodomo",categoryName:"小児看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"乳幼児突然死症候群（SIDS）の予防として推奨されているのはどれか。",
+ options:["腹臥位（うつぶせ寝）を推奨する","仰臥位（あおむけ寝）で寝かせる","授乳後すぐに寝かせる","柔らかいベッドを使用する"],answer:1,
+ explanation:"SIDS予防の推奨事項（日本小児科学会）：①仰臥位（あおむけ）で寝かせる（腹臥位は窒息リスク）②禁煙環境（妊娠中・産後の喫煙はSIDSリスクを高める）③母乳育児の推奨④柔らかい寝具・ぬいぐるみを周囲に置かない⑤過熱環境を避ける。1歳未満の乳児で睡眠中に突然死する原因不明の疾患です。",
+ tags:["SIDS","乳幼児突然死","仰臥位","予防"]},
+
+{id:1533,round:109,category:"seishin",categoryName:"精神看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"精神科リエゾンナースの役割として正しいのはどれか。",
+ options:["精神科病棟のみで活動する","一般科病棟の患者の精神的問題に対してコンサルテーション・支援を行う","薬物処方のみを行う","精神科医の代わりに診断を行う"],answer:1,
+ explanation:"精神科リエゾンナース（専門看護師・認定看護師）は一般科病棟に入院した身体疾患患者の精神的問題（せん妄・うつ・不安・アルコール離脱等）に対して一般科看護師へのコンサルテーション・直接ケア・多職種チームとの協働を行います。精神科と一般科の「橋渡し」的役割を担います。",
+ tags:["精神科リエゾン","コンサルテーション","リエゾン看護","精神看護"]},
+
+{id:1534,round:109,category:"haha",categoryName:"母性看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"妊娠糖尿病の管理として正しいのはどれか。",
+ options:["インスリンは使用できない","食事療法を基本とし必要時インスリン療法を行う","血糖管理は不要","分娩後は必ず2型糖尿病に移行する"],answer:1,
+ explanation:"妊娠糖尿病（GDM）の管理：食事療法（カロリー制限・栄養バランス）が基本・目標血糖値達成困難時はインスリン療法（経口血糖降下薬は胎盤通過のため原則使用しない）・血糖自己測定・定期的な胎児評価。合併症：巨大児・難産・新生児低血糖・先天異常リスク増加。分娩後は2型糖尿病リスクが高く長期的フォローが必要です。",
+ tags:["妊娠糖尿病","食事療法","インスリン","産科"]},
+
+{id:1535,round:109,category:"rojin",categoryName:"老年看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"高齢者の虐待の種類として正しい組み合わせはどれか。",
+ options:["身体的虐待のみ","身体的・精神的・性的虐待・ネグレクト・経済的虐待の5種類","財産管理は虐待に含まれない","施設での虐待は法律の対象外"],answer:1,
+ explanation:"高齢者虐待防止法（2006年施行）が定める虐待の5種類：①身体的虐待（暴力行為）②精神的虐待（暴言・脅迫・無視）③性的虐待④ネグレクト（介護放棄）⑤経済的虐待（財産の無断使用・搾取）。養護者（家族等）による虐待と養介護施設従事者等による虐待の両方が対象。発見者の通報義務があります。",
+ tags:["高齢者虐待","虐待防止法","5種類","権利擁護"]},
+
+{id:1536,round:109,category:"zaichi",categoryName:"在宅看護論",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"在宅医療における退院前カンファレンスの目的として正しいのはどれか。",
+ options:["入院延長を決定する","在宅での療養生活が安全に継続できるよう患者・家族・多職種が情報共有・役割分担を確認する","医療費の計算を行う","患者の入院時の状況を記録する"],answer:1,
+ explanation:"退院前カンファレンス（退院前共同指導）の目的：患者・家族・入院医療機関（医師・看護師・MSW等）・在宅医療チーム（訪問看護師・ケアマネージャー・薬剤師・PT等）が一堂に会し在宅での生活・医療・介護の具体的な計画を共有・確認します。在宅移行をスムーズにする重要なプロセスです。",
+ tags:["退院前カンファレンス","退院支援","多職種連携","在宅移行"]},
+
+
+// ════════════════════════════════════════
+// 横断テーマ 追加分41問
+// ════════════════════════════════════════
+{id:1725,round:113,category:"kiso",categoryName:"基礎看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"看護記録の目的として正しいのはどれか。",
+ options:["看護師のメモとして個人管理する","患者の状態・看護実践・評価を記録し継続性・安全性・法的証拠として活用する","他職種には原則公開しない","退院後は廃棄してよい"],answer:1,
+ explanation:"看護記録の目的：①ケアの継続性確保（申し送りの根拠）②医療チームとの情報共有③看護の質の評価・改善④法的証拠（医療訴訟・インシデント検証）⑤教育・研究資料。診療録は5年間保存義務があります。正確・客観的・時系列での記録が求められます。電子カルテでのアクセス管理も重要です。",
+ tags:["看護記録","記録の目的","継続性","法的証拠"]},
+
+{id:1726,round:112,category:"naika",categoryName:"内科系看護",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"がん化学療法中の口腔粘膜炎への対応として適切なのはどれか。",
+ options:["口腔ケアは粘膜炎を悪化させるため禁忌","口腔内を清潔に保ち保湿する口腔ケアを継続する","硬くて刺激の強い食品を積極的に摂取する","疼痛があっても鎮痛薬は使用しない"],answer:1,
+ explanation:"化学療法による口腔粘膜炎の看護：柔らかいブラシや綿棒での口腔清拭・生理食塩水や重曹水でのうがい・保湿剤（口腔用ジェル）の使用・刺激物（香辛料・酸味・熱い食品・アルコール）の回避・疼痛時は粘膜保護剤や局所麻酔薬含嗽液の使用・栄養状態の維持（軟食・栄養補助食品）が重要です。",
+ tags:["口腔粘膜炎","化学療法","口腔ケア","がん看護"]},
+
+{id:1727,round:111,category:"geka",categoryName:"外科系看護",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"人工膝関節置換術後のリハビリとして正しいのはどれか。",
+ options:["術後1ヶ月間は完全安静","術後翌日から可動域訓練・歩行訓練を開始する","痛みが完全に消失するまでリハビリしない","退院後のリハビリは不要"],answer:1,
+ explanation:"人工膝関節置換術（TKA）後のリハビリ：術後1日目から可動域訓練（CPM：持続他動運動装置）・等尺性大腿四頭筋訓練・術後2〜3日で歩行器歩行開始。目標：膝関節屈曲90度以上・独歩での生活動作自立。退院後の外来リハビリ継続が重要です。深部静脈血栓症予防（弾性ストッキング・抗凝固薬）も必須です。",
+ tags:["人工膝関節","術後リハビリ","可動域","整形外科"]},
+
+{id:1728,round:110,category:"kodomo",categoryName:"小児看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"小児のアトピー性皮膚炎のスキンケア指導として正しいのはどれか。",
+ options:["入浴は週1回にとどめる","毎日入浴してスキンケア（保湿剤塗布）を行う","かゆくても掻いても問題ない","ステロイド外用薬は全く使用しない"],answer:1,
+ explanation:"アトピー性皮膚炎のスキンケア：毎日の入浴（ぬるめのお湯・石鹸は泡立てて優しく洗う）→保湿剤の全身塗布（入浴後5分以内）・掻破による皮膚障害防止（爪を短く切る・スクラッチを軽減する工夫）・適切なステロイド外用薬の使用（量・部位・頻度を守る・急に中止しない）・誘因の除去（ダニ・ホコリ）。",
+ tags:["アトピー性皮膚炎","スキンケア","保湿","小児"]},
+
+{id:1729,round:109,category:"seishin",categoryName:"精神看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"睡眠薬（ベンゾジアゼピン系）の副作用として最も注意が必要なのはどれか。",
+ options:["高血圧","翌朝の眠気（持ち越し効果）・転倒・依存性","食欲増進","高血糖"],answer:1,
+ explanation:"ベンゾジアゼピン系睡眠薬の主な副作用：①翌朝の眠気・ふらつき（持ち越し効果：高齢者は特に注意・転倒リスク）②筋弛緩作用（転倒骨折）③依存性・耐性形成（長期使用で効果減弱）④逆説反応（興奮・不安増強）⑤前向性健忘。高齢者では非薬物療法（睡眠衛生指導）を優先しBZ系は慎重投与とします。",
+ tags:["ベンゾジアゼピン","睡眠薬","副作用","転倒"]},
+
+{id:1730,round:113,category:"haha",categoryName:"母性看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"卵巣がんの特徴として正しいのはどれか。",
+ options:["早期から症状が出現するため早期発見しやすい","自覚症状が乏しく進行がんで発見されることが多い","子宮がんと同じスクリーニング検査が有効","20歳代に最も多い"],answer:1,
+ explanation:"卵巣がんの特徴：「沈黙のがん」と呼ばれ早期は無症状が多く進行してから腹部膨満・腹痛・腹水で発見されることが多い・CA125・HE4が腫瘍マーカー・経膣超音波検査が診断に有用・BRCA遺伝子変異が発症リスクを高める。治療：手術（卵巣・卵管・子宮・大網切除）＋化学療法（パクリタキセル＋カルボプラチン）。",
+ tags:["卵巣がん","沈黙のがん","腫瘍マーカー","婦人科がん"]},
+
+{id:1731,round:112,category:"rojin",categoryName:"老年看護学",year:"第112回（2023年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"高齢者の急性期入院中の看護で「廃用症候群」予防に最も重要なのはどれか。",
+ options:["完全安静を保つ","早期からの積極的な離床・活動促進","水分摂取を制限する","リハビリ専門家以外は関与しない"],answer:1,
+ explanation:"廃用症候群（生活不活発病）予防：急性期から早期離床・座位・端座位・立位・歩行の段階的促進。ベッド上でも関節可動域訓練・筋力維持・ポジショニングを行います。廃用症候群の主な症状：筋萎縮・関節拘縮・骨密度低下・起立性低血圧・認知機能低下・うつ・DVT。1日安静で筋力は1〜3%低下するとされます。",
+ tags:["廃用症候群","早期離床","高齢者","急性期看護"]},
+
+{id:1732,round:111,category:"zaichi",categoryName:"在宅看護論",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"在宅での褥瘡の局所ケアにおいて「湿潤環境を保つ」ことが推奨される理由はどれか。",
+ options:["感染リスクを増やすため","創面の乾燥を防ぎ細胞増殖・上皮化を促進するため","痛みを増強するため","コストを下げるため"],answer:1,
+ explanation:"創傷の湿潤療法（モイストヒーリング）：創面を適度に湿潤した環境に保つことで細胞増殖因子の維持・自己融解（壊死組織の自然除去）・上皮細胞の遊走促進・疼痛軽減・感染リスクの適切な管理ができます。ガーゼによる乾燥保護は細胞損傷のリスクがあり現在は湿潤環境保持が標準的です。",
+ tags:["褥瘡","湿潤療法","創傷管理","在宅ケア"]},
+
+{id:1733,round:110,category:"kiso",categoryName:"基礎看護学",year:"第110回（2021年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"せん妄とうつ病の鑑別において「せん妄」に特徴的なのはどれか。",
+ options:["緩徐な発症・日内変動なし","急性発症・注意力障害・日内変動（夜間増悪）","長期間に渡る持続的な気分低下","意識が清明である"],answer:1,
+ explanation:"せん妄の鑑別ポイント：①急性発症（数時間〜数日）②注意力・集中力の障害③意識レベルの変動（日内変動：夜間悪化・昼間改善）④見当識障害・幻覚・興奮。うつ病：緩徐発症・意識清明・気分の持続的低下・日内変動（朝悪化）。高齢者の急性の精神状態変化はまずせん妄を疑い誘因（感染・脱水・薬物・疼痛）を検索します。",
+ tags:["せん妄","うつ病","鑑別","急性期看護"]},
+
+{id:1734,round:109,category:"naika",categoryName:"内科系看護",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"腎機能障害患者における薬物療法の注意点として正しいのはどれか。",
+ options:["腎から排泄される薬物でも通常量で投与してよい","腎排泄型薬物は蓄積リスクがあり腎機能に応じた減量・間隔延長が必要","水分摂取は制限する","全ての薬物で用量調整は不要"],answer:1,
+ explanation:"腎機能障害患者の薬物療法：腎排泄型薬物（アミノグリコシド系抗菌薬・バンコマイシン・ジゴキシン・メトホルミン等）はGFRの低下に伴い血中濃度が上昇し副作用・毒性のリスクが高まります。eGFRに基づき用量調整・投与間隔延長が必要です。TDM（治療薬物モニタリング）も重要です。",
+ tags:["腎機能障害","薬物療法","TDM","腎排泄"]},
+
+{id:1735,round:113,category:"kiso",categoryName:"基礎看護学",year:"第113回（2024年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"正確な与薬（投薬）確認のために使用される「6R」のうち誤っているものはどれか。",
+ options:["正しい患者（Right Patient）","正しい薬剤（Right Drug）","正しい医師（Right Doctor）","正しい投与経路（Right Route）"],answer:2,
+ explanation:"与薬の6R：①Right Patient（正しい患者）②Right Drug（正しい薬剤）③Right Dose（正しい用量）④Right Route（正しい投与経路）⑤Right Time（正しい時間）⑥Right Purpose（正しい目的）。「正しい医師」は6Rに含まれません。6Rによる確認は与薬エラーを防ぐ基本的な安全チェックです。",
+ tags:["与薬","6R","投薬確認","医療安全"]},
+
+{id:1736,round:112,category:"geka",categoryName:"外科系看護",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"肝臓がんの手術後に特に観察すべき合併症はどれか。",
+ options:["低血圧のみ","術後出血・肝不全・胆汁漏"],answer:1,
+ explanation:"肝臓がん術後の合併症：①術後出血（肝臓は血流豊富・凝固障害合併多い）②肝不全（残存肝機能不全：黄疸・腹水・意識障害）③胆汁漏（胆管損傷）④感染症。観察：バイタルサイン・ドレーン排液（量・性状：血性増加は出血・胆汁色は胆汁漏）・黄疸・腹水・意識レベル・肝機能検査値（AST・ALT・ビリルビン）が重要です。",
+ tags:["肝臓がん","術後合併症","肝不全","胆汁漏"]},
+
+{id:1737,round:111,category:"naika",categoryName:"内科系看護",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"多発性硬化症（MS）の特徴として正しいのはどれか。",
+ options:["高齢男性に多い","若い女性に多く再発と寛解を繰り返す中枢神経脱髄疾患","単一の神経症状のみ","治療法は存在しない"],answer:1,
+ explanation:"多発性硬化症（MS）の特徴：20〜40歳代の女性に多い・中枢神経系の脱髄（髄鞘破壊）による多様な神経症状（視力障害・感覚障害・運動麻痺・膀胱直腸障害・疲労感）・再発と寛解を繰り返す・Uhthoff現象（体温上昇で症状悪化）。治療：急性期はステロイドパルス療法・寛解期は疾患修飾薬（インターフェロンβ等）。",
+ tags:["多発性硬化症","脱髄疾患","再発寛解","神経疾患"]},
+
+{id:1738,round:110,category:"seishin",categoryName:"精神看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"精神科看護師に求められる「自己覚知」の説明として正しいのはどれか。",
+ options:["自分の感情を患者に全て話す","自分の価値観・感情・偏見が患者への関わりに影響することを意識すること","患者の感情のみを理解すること","自己開示を禁止すること"],answer:1,
+ explanation:"自己覚知（self-awareness）は看護師が自分自身の価値観・感情・偏見・反応パターンを知り患者への関わりに意識的に活用することです。特に精神看護では治療的自己使用（自分自身を治療道具として意識的に使う）が重要で転移・逆転移への気づきがケアの質に影響します。スーパービジョンや振り返りが自己覚知を深めます。",
+ tags:["自己覚知","精神看護","治療的関係","看護師の役割"]},
+
+{id:1739,round:109,category:"haha",categoryName:"母性看護学",year:"第109回（2020年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"更年期障害の症状として最も多いのはどれか。",
+ options:["月経の増加","ホットフラッシュ（のぼせ・ほてり・発汗）","骨密度の増加","血圧低下"],answer:1,
+ explanation:"更年期障害の症状（エストロゲン低下による）：血管運動神経症状（ホットフラッシュ・のぼせ・ほてり・発汗：最も多い）・精神神経症状（不眠・うつ・不安・易疲労）・泌尿生殖器症状（膣乾燥・頻尿・性交痛）。長期的影響：骨粗鬆症・心血管疾患リスク増加。治療：ホルモン補充療法（HRT）・漢方薬・生活指導。",
+ tags:["更年期障害","ホットフラッシュ","エストロゲン","女性医学"]},
+
+{id:1740,round:113,category:"rojin",categoryName:"老年看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"高齢者の低栄養のスクリーニングに使用されるMNAの説明として正しいのはどれか。",
+ options:["Mini Nutritional Assessment：認知機能を評価するツール","Mini Nutritional Assessment：高齢者の栄養状態をスクリーニングする評価ツール","ADLを評価するスケール","歩行速度を評価するツール"],answer:1,
+ explanation:"MNA（Mini Nutritional Assessment）は高齢者の栄養状態を評価するスクリーニングツールです。MNA-SF（Short Form）はBMI・体重減少・移動能力・急性疾患・神経精神的問題・食欲を評価します（12点満点）。11点以下で栄養不良リスク・7点以下で低栄養。低栄養は褥瘡・感染症・筋力低下・転倒リスクを高めます。",
+ tags:["MNA","低栄養","栄養アセスメント","高齢者"]},
+
+{id:1741,round:112,category:"zaichi",categoryName:"在宅看護論",year:"第112回（2023年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"重症心身障害者（児）の在宅支援において看護師が担う役割として正しいのはどれか。",
+ options:["医療的ケアは家族のみが行う","多職種チームの一員として医療的ケア管理・家族支援・関係機関との調整を行う","在宅生活は不可能と伝える","障害の受容を強制する"],answer:1,
+ explanation:"重症心身障害者（児）の在宅看護師の役割：医療的ケア（吸引・経管栄養・人工呼吸器管理等）の直接実施と家族指導・緊急時対応体制の整備・主治医との連携・ケアマネージャー・リハビリ専門職・福祉サービスとの調整・家族のレスパイト支援・家族の心理的サポート。家族の介護負担軽減が重要課題です。",
+ tags:["重症心身障害","医療的ケア","家族支援","在宅"]},
+
+{id:1742,round:111,category:"kiso",categoryName:"基礎看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"食事介助において誤嚥を最も予防できる体位はどれか。",
+ options:["仰臥位（フラット）","30〜90度のファウラー位（上半身挙上）","完全側臥位","腹臥位"],answer:1,
+ explanation:"誤嚥予防の体位：30度以上（可能なら60〜90度）の上半身挙上（ファウラー位）が基本。根拠：頸部前屈位が気道を保護・重力で食塊が食道方向に誘導・逆流防止。頸部は15〜30度前屈（あごを引く）がさらに有効。食後30分は臥位にしない（逆流性誤嚥防止）。ベッド上では片麻痺患者は健側を下にした半座位も有効です。",
+ tags:["誤嚥予防","ファウラー位","食事介助","体位管理"]},
+
+{id:1743,round:110,category:"naika",categoryName:"内科系看護",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"播種性血管内凝固症候群（DIC）の治療として正しいのはどれか。",
+ options:["原因疾患の治療は行わない","原因疾患の治療を最優先し凝固・線溶異常を是正する","血小板輸血は禁忌","抗凝固療法は行わない"],answer:1,
+ explanation:"DIC治療の原則：①原因疾患の根本治療（敗血症→抗菌薬・産科DIC→分娩）が最優先②凝固異常の是正：ヘパリン（抗凝固）・FFP（新鮮凍結血漿：凝固因子補充）・血小板輸血（血小板減少時）・トロンボモジュリン製剤③支持療法（輸液・輸血）。DICは基礎疾患がなければ発症しないため原疾患治療が根本です。",
+ tags:["DIC","抗凝固療法","FFP","治療"]},
+
+{id:1744,round:109,category:"geka",categoryName:"外科系看護",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"胆石症の疝痛発作時の看護として最も優先されるのはどれか。",
+ options:["食事を摂取させる","医師の指示のもと疼痛緩和（鎮痛薬・鎮痙薬）を行う","冷罨法を施行する","腹部を強くマッサージする"],answer:1,
+ explanation:"胆石疝痛発作（右季肋部〜心窩部の激痛・放散痛・悪心嘔吐）への対応：医師への報告→鎮痙薬（ブチルスコポラミン）・NSAIDs・オピオイドによる疼痛管理。食事は禁食（脂肪食が発作の誘因）・温罨法（温めると筋弛緩）または鎮痛薬が効果的。腹部マッサージは禁忌です。超音波検査で胆石の確認と胆嚢炎の有無を評価します。",
+ tags:["胆石症","疝痛発作","疼痛管理","消化器外科"]},
+
+{id:1745,round:113,category:"kodomo",categoryName:"小児看護学",year:"第113回（2024年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"小児の体重測定において正しいのはどれか。",
+ options:["服を着たまま測定し後で補正する","裸または最小限の衣類で同じ条件で測定する","食後すぐに測定する","1週間に1回でよい"],answer:1,
+ explanation:"小児の体重測定：毎回同じ条件（裸または最小限の下着・同時刻・同じ体重計）で測定します。食後や排泄後は測定値に誤差が生じます。新生児・乳児では毎日〜週数回・成長曲線（パーセンタイル曲線）での評価が重要です。体重減少や増加不良は栄養不足・疾患のサインとなります。",
+ tags:["体重測定","小児","成長評価","看護技術"]},
+
+{id:1746,round:112,category:"seishin",categoryName:"精神看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"認知症の人への音楽療法の効果として報告されているのはどれか。",
+ options:["認知機能の完全回復","BPSDの軽減・QOLの向上","記憶障害の根本治療","薬物療法の代替として確立されている"],answer:1,
+ explanation:"音楽療法は認知症ケアの非薬物的アプローチとして行動・心理症状（BPSD：不安・興奮・うつ）の軽減・情動的反応の促進・コミュニケーションの改善・QOL向上に効果があるとエビデンスが蓄積されています。認知機能の根本治療ではありませんが回想法・リアリティオリエンテーションとともに重要な非薬物療法です。",
+ tags:["音楽療法","BPSD","非薬物療法","認知症"]},
+
+{id:1747,round:111,category:"haha",categoryName:"母性看護学",year:"第111回（2022年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"妊娠中の腰痛対策として適切なのはどれか。",
+ options:["鎮痛薬を自由に服用する","骨盤ベルトの使用・安全なストレッチ・適切な姿勢の維持","腰を冷やす","長時間の立位作業を続ける"],answer:1,
+ explanation:"妊娠中の腰痛対策：骨盤ベルト（骨盤の安定）・マタニティベルト・妊婦向けストレッチ・水泳など低負荷の運動・正しい姿勢保持（猫背・反り腰を避ける）・長時間同一姿勢を避ける。鎮痛薬（NSAIDs）は妊娠中期以降は胎児への影響（動脈管早期閉鎖）があり自己判断での服用は禁忌です。アセトアミノフェンは比較的安全とされています。",
+ tags:["妊娠","腰痛","骨盤ベルト","産科"]},
+
+{id:1748,round:110,category:"rojin",categoryName:"老年看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"高齢者の終末期における苦痛緩和として適切なのはどれか。",
+ options:["疼痛があっても鎮痛薬は使用しない","身体的・精神的・スピリチュアルな苦痛に包括的に対応する","家族への説明は行わない","延命処置を最優先する"],answer:1,
+ explanation:"高齢者終末期のトータルペインケア：①身体的苦痛（疼痛・呼吸困難・悪心：WHO方式疼痛管理・オピオイド使用）②精神的苦痛（不安・うつ・死の恐怖：傾聴・精神的支援）③社会的苦痛（家族関係・経済的問題：MSW連携）④スピリチュアルペイン（人生の意味・死への問い：宗教的支援・傾聴）への包括的対応が緩和ケアの理念です。",
+ tags:["終末期","トータルペイン","緩和ケア","高齢者"]},
+
+{id:1749,round:109,category:"zaichi",categoryName:"在宅看護論",year:"第109回（2020年）",difficulty:"基本",type:"past",
+ scenario:null,
+ question:"介護保険における居宅介護支援（ケアマネジメント）の流れとして正しいのはどれか。",
+ options:["サービス担当者会議→アセスメント→ケアプラン作成","アセスメント→ケアプラン作成→サービス担当者会議→実施→モニタリング","実施→アセスメント→ケアプラン","モニタリングのみ行う"],answer:1,
+ explanation:"居宅介護支援のプロセス（インテーク→）アセスメント（課題分析）→ケアプラン原案作成→サービス担当者会議（関係者による検討・合意）→利用者への説明・同意→サービス実施→モニタリング（定期的な評価）→再アセスメント（必要時）。このサイクルを繰り返し継続的に支援します。",
+ tags:["ケアマネジメント","アセスメント","ケアプラン","介護保険"]},
+
+{id:1750,round:113,category:"naika",categoryName:"内科系看護",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"慢性疾患を持つ患者のセルフマネジメント支援において重要なのはどれか。",
+ options:["患者に全ての管理を任せる","患者の意欲・能力を引き出しながら自己管理能力を高める支援","専門家のみが管理する","患者の意見を無視して治療を進める"],answer:1,
+ explanation:"セルフマネジメント支援の核心：患者が慢性疾患と共に生きるための自己管理能力（服薬管理・症状モニタリング・生活習慣改善・受診行動）を高めることです。motivational interviewing（動機づけ面接）・行動変容ステージモデルの活用・患者教育・ピアサポートなどのアプローチが有効です。患者を「治療の主体」として捉えます。",
+ tags:["セルフマネジメント","慢性疾患","行動変容","患者教育"]},
+
+{id:1751,round:112,category:"kiso",categoryName:"基礎看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"酸塩基平衡において呼吸性アシドーシスの特徴として正しいのはどれか。",
+ options:["PaCO₂が低下する","PaCO₂が上昇しpHが低下する","重炭酸イオンが低下する","過換気が原因"],answer:1,
+ explanation:"酸塩基平衡異常：呼吸性アシドーシス＝CO₂蓄積（PaCO₂↑）→pH低下、原因：COPD・換気不全・鎮静薬過量。呼吸性アルカローシス＝過換気（PaCO₂↓）→pH上昇。代謝性アシドーシス＝HCO₃⁻↓→pH低下、原因：糖尿病性ケトアシドーシス・腎不全。代謝性アルカローシス＝HCO₃⁻↑→pH上昇、原因：嘔吐・利尿薬過剰。",
+ tags:["酸塩基平衡","呼吸性アシドーシス","PaCO₂","病態生理"]},
+
+{id:1752,round:111,category:"geka",categoryName:"外科系看護",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"悪性黒色腫（メラノーマ）の早期発見のために覚えておくべき「ABCDEルール」のうち正しいのはどれか。",
+ options:["A：大きさ（Area）","A：非対称性（Asymmetry）・B：辺縁不整（Border）・C：色の不均一（Color）・D：直径6mm以上（Diameter）・E：変化（Evolution）"],answer:1,
+ explanation:"皮膚がん（悪性黒色腫）の早期発見ABCDEルール：A（Asymmetry）非対称、B（Border）辺縁不整・ぼやけ、C（Color）色の不均一（茶・黒・赤・青・白の混在）、D（Diameter）6mm以上、E（Evolution）形・色・大きさの変化。手足の裏・爪のメラノーマは日本人に多い亜型です。早期切除で予後が大きく改善します。",
+ tags:["悪性黒色腫","ABCDEルール","スキンケア","皮膚がん"]},
+
+{id:1753,round:110,category:"kodomo",categoryName:"小児看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"小児の誤飲で最も緊急性が高いのはどれか。",
+ options:["大豆（1粒）","ボタン電池","プラスチック製おもちゃの部品","食べ物"],answer:1,
+ explanation:"ボタン電池の誤飲は最も危険な誤飲の一つです。食道に引っかかると2時間以内に電気化学反応で重篤な食道穿孔・縦隔炎・大血管損傷を起こす可能性があります。直ちに救急受診が必要で内視鏡での緊急摘出が必要です。その他危険な誤飲：磁石複数個（腸管穿孔）・鋭利な異物・大量のコインなど。",
+ tags:["誤飲","ボタン電池","小児救急","緊急対応"]},
+
+{id:1754,round:109,category:"kiso",categoryName:"基礎看護学",year:"第109回（2020年）",difficulty:"応用",type:"past",
+ scenario:null,
+ question:"意識障害のある患者のJCS（Japan Coma Scale）3桁評価で最も重症なのはどれか。",
+ options:["Ⅰ-1（刺激しなくても覚醒・見当識あり）","Ⅲ-300（痛み刺激に全く反応しない）","Ⅱ-20（大きな声で呼びかけると開眼）","Ⅰ-3（自分の名前・生年月日が言えない）"],answer:1,
+ explanation:"JCS（ジャパン・コーマ・スケール）：Ⅰ（刺激しなくても覚醒）1〜3点、Ⅱ（刺激で覚醒）10〜30点、Ⅲ（刺激しても覚醒しない）100〜300点。300点（痛み刺激に全く反応しない）が最重症です。GCS（グラスゴー・コーマ・スケール）は眼球開口・言語・運動の3要素で評価し最低3点（最重症）〜15点（正常）。",
+ tags:["意識障害","JCS","GCS","神経学的評価"]},
+
+{id:1755,round:113,category:"seishin",categoryName:"精神看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"ピアサポートの説明として正しいのはどれか。",
+ options:["専門家が患者を指導する","同じ疾患・障害の体験者が互いに支え合う支援","医師のみが行うサポート","薬物療法の一種"],answer:1,
+ explanation:"ピアサポートはpeer（仲間）同士が支え合う支援で精神障害・依存症・がんなど共通の体験を持つ人々が互いの体験を共有し回復・生活の質向上を支援し合う取り組みです。ピアサポーターとして当事者が支援者側に立つことも含まれます。専門的支援では得られない「同じ体験を持つ者の共感」が強みです。",
+ tags:["ピアサポート","当事者支援","精神看護","リカバリー"]},
+
+{id:1756,round:112,category:"haha",categoryName:"母性看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"母子健康手帳の目的として正しいのはどれか。",
+ options:["医師のみが記録する書類","妊娠・分娩・産後・乳幼児期の健康状態を継続的に記録し母子の健康管理に活用する","経済的な補助金の申請書","戸籍登録のためのみに使用する"],answer:1,
+ explanation:"母子健康手帳は母子保健法に基づき市区町村が妊娠届出時に交付します。記録内容：妊婦健診の経過・分娩記録・産後健診・乳幼児健診・予防接種記録・成長曲線。目的：妊娠期から乳幼児期までの継続的な健康管理・多職種間の情報共有・親への保健指導に活用されます。携帯して医療機関受診時に提示します。",
+ tags:["母子健康手帳","母子保健法","乳幼児健診","予防接種"]},
+
+{id:1757,round:111,category:"rojin",categoryName:"老年看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"老年期のスピリチュアルニーズへの看護師の対応として適切なのはどれか。",
+ options:["宗教的な話題は全て避ける","患者の価値観・信仰・人生の意味への問いに寄り添い傾聴する","「そんな考えはやめてください」と否定する","牧師・僧侶への橋渡しは看護師の役割ではない"],answer:1,
+ explanation:"スピリチュアルケアは患者の「存在の意味・目的・希望・死後の世界」などスピリチュアルな問いへの支援です。看護師の役割：傾聴・共感的関わり・患者の信仰・価値観の尊重・宗教的要望への対応（宗教的ケアが必要な場合は聖職者への橋渡し）。特に終末期には重要なケアの要素です。",
+ tags:["スピリチュアルケア","終末期","価値観","老年看護"]},
+
+{id:1758,round:110,category:"zaichi",categoryName:"在宅看護論",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"在宅での感染予防として標準予防策を徹底する理由として正しいのはどれか。",
+ options:["在宅では感染予防は不要","利用者の感染症の有無にかかわらず感染リスクがあるため","在宅看護師は感染しない","家族への指導は不要"],answer:1,
+ explanation:"在宅看護における標準予防策の徹底：利用者の感染症診断の有無にかかわらず血液・体液・分泌物に感染源があるとみなして対応します。在宅では医療機器（針・カテーテル等）の廃棄・手洗い設備の確保・PPEの持参などに工夫が必要です。家族への感染予防の指導・廃棄物処理の指導も重要です。",
+ tags:["標準予防策","在宅看護","感染予防","家族指導"]},
+
+{id:1759,round:109,category:"naika",categoryName:"内科系看護",year:"第109回（2020年）",difficulty:"応用",type:"past",
+ scenario:"72歳男性。前立腺肥大症。夜間頻尿・排尿困難あり。急に排尿できなくなった。",
+ question:"この患者の状態として最も考えられるのはどれか。",
+ options:["腎不全","急性尿閉","膀胱炎","前立腺がんの転移"],answer:1,
+ explanation:"急性尿閉は膀胱内に尿が貯留しているにもかかわらず排尿できない状態です。前立腺肥大症の増悪・抗コリン薬・飲酒・寒冷などが誘因となります。症状：下腹部膨満・強い尿意・苦悶状態。対応：緊急導尿（膀胱留置カテーテル挿入）。膀胱超音波で残尿量確認（300mL以上で要処置）。泌尿器科医への報告が必要です。",
+ tags:["急性尿閉","前立腺肥大","排尿障害","泌尿器科"]},
+
+{id:1760,round:113,category:"geka",categoryName:"外科系看護",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"消化器がんの術後の栄養管理において早期経腸栄養が推奨される理由として正しいのはどれか。",
+ options:["腸管の安静を保つため","腸粘膜バリア機能の維持・腸管免疫の活性化・細菌転座の防止のため","消化器官の働きを低下させるため","術後出血を防ぐため"],answer:1,
+ explanation:"術後早期経腸栄養（術後24〜48時間以内）の利点：①腸粘膜バリア機能の維持（粘膜萎縮防止）②腸管免疫活性化③細菌転座（bacterial translocation）防止④腸管蠕動回復促進⑤窒素バランス改善⑥在院日数短縮。ERAS（術後回復強化プログラム）の重要な要素です。経腸栄養が不可能な場合は経静脈栄養を行います。",
+ tags:["術後栄養","早期経腸栄養","ERAS","腸管免疫"]},
+
+{id:1761,round:112,category:"kodomo",categoryName:"小児看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"小児の急性リンパ性白血病（ALL）の治療において骨髄移植が行われる主な理由はどれか。",
+ options:["感染症の治療","再発高リスク例や再発時に造血幹細胞を正常に置き換えるため","体重増加のため","手術合併症の治療"],answer:1,
+ explanation:"急性リンパ性白血病（ALL）の治療：寛解導入療法→地固め療法→維持療法が標準。骨髄移植（造血幹細胞移植）は再発高リスク例・再発時に正常な造血能力を移植することで根治を目指します。ドナー由来の免疫細胞による抗白血病効果（GVL効果）も期待されます。移植後のGVHD（移植片対宿主病）管理が重要です。",
+ tags:["急性リンパ性白血病","ALL","骨髄移植","小児がん"]},
+
+{id:1762,round:111,category:"naika",categoryName:"内科系看護",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"心房細動患者への脳梗塞予防として使用される薬物として正しいのはどれか。",
+ options:["利尿薬","直接経口抗凝固薬（DOAC）またはワルファリン","降圧薬のみ","抗血小板薬（アスピリン）のみ"],answer:1,
+ explanation:"心房細動は心房内に血栓を形成し脳塞栓（心原性脳塞栓）を引き起こします。脳梗塞予防の第一選択：DOAC（直接経口抗凝固薬：アピキサバン・リバーロキサバン等）またはワルファリン。CHA₂DS₂-VASCスコアでリスク評価します。抗血小板薬（アスピリン）は心房細動の脳梗塞予防効果は低く推奨されません。",
+ tags:["心房細動","DOAC","脳梗塞予防","抗凝固薬"]},
+
+{id:1763,round:110,category:"seishin",categoryName:"精神看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"薬物依存症の患者への「害の低減（ハームリダクション）」アプローチの説明として正しいのはどれか。",
+ options:["即座の断薬のみを治療目標とする","薬物使用を完全にやめられなくても健康・社会的被害を最小化することを目標とする","使用者を非難・批判する","医療的支援は行わない"],answer:1,
+ explanation:"ハームリダクション（害低減）は薬物使用の即時中断を強制せず注射針の清潔化・HIV予防・健康相談・社会的支援などを通じて薬物使用に関連する健康・社会的被害を最小化するアプローチです。当事者を「患者」として捉え非難しない姿勢が基本です。日本でもアルコール依存症などで部分的に導入が進んでいます。",
+ tags:["ハームリダクション","依存症","薬物","精神看護"]},
+
+{id:1764,round:109,category:"haha",categoryName:"母性看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,
+ question:"産後の骨盤底筋体操（ケーゲル体操）の目的として正しいのはどれか。",
+ options:["腹筋を鍛える","骨盤底筋を強化し尿失禁・性機能障害・骨盤臓器脱を予防する","下肢の筋力をつける","体重を減らす"],answer:1,
+ explanation:"骨盤底筋体操（ケーゲル体操）は骨盤底筋（肛門挙筋・恥骨尾骨筋）を意図的に収縮・弛緩させる運動です。目的：①産後の腹圧性尿失禁予防・改善②骨盤臓器脱（子宮脱・膀胱脱）の予防③性機能の回復。産後早期（会陰部の痛みが軽減したら）から開始可能。継続的な実施が重要です。",
+ tags:["骨盤底筋体操","ケーゲル体操","産後","尿失禁予防"]},
+
+{id:1765,round:113,category:"rojin",categoryName:"老年看護学",year:"第113回（2024年）",difficulty:"応用",type:"past",
+ scenario:"90歳女性。独居。認知症（中等度）。毎日訪問看護が入っているが本人は「家で最後まで生活したい」と話している。",
+ question:"この患者への支援として最も適切なのはどれか。",
+ options:["すぐに施設入所を勧める","本人の意思を尊重しながら安全に在宅生活が続けられるよう多職種で支援する","家族のみの意向で施設を決める","訪問看護を中止する"],answer:1,
+ explanation:"中等度認知症でも意思決定能力が残存している間はその意向を最大限尊重します（自律尊重原則）。支援：安全確保（火気・転倒・徘徊対策）・緊急時連絡体制・介護保険サービスの充実（ヘルパー・デイサービス・宅配食など）・ACP継続・定期的なアセスメントによる状態変化への対応・家族支援を多職種で行います。",
+ tags:["認知症","独居","意思決定","在宅看護"]},
+
+
+{id:1701,round:113,category:"kiso",categoryName:"基礎看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,question:"成人の正常な呼吸数はどれか。",options:["5〜9回/分","12〜20回/分","25〜30回/分","35回以上/分"],answer:1,
+ explanation:"成人の正常バイタルサイン：呼吸数12〜20回/分、脈拍60〜100回/分、血圧収縮期100〜139mmHg、体温36.0〜37.0℃、SpO₂ 96〜100%。呼吸数が12回未満を徐呼吸、25回以上を頻呼吸といいます。",tags:["バイタルサイン","呼吸数","正常値","基礎看護"]},
+{id:1702,round:112,category:"kiso",categoryName:"基礎看護学",year:"第112回（2023年）",difficulty:"基本",type:"past",
+ scenario:null,question:"皮下注射の穿刺角度として正しいのはどれか。",options:["5〜10度","10〜30度","45度","90度"],answer:1,
+ explanation:"注射の穿刺角度：皮内注射＝10〜15度、皮下注射＝10〜30度（インスリン・ヘパリン等）、筋肉内注射＝45〜90度、静脈内注射＝10〜30度。皮下注射は脂肪層に薬液を注入します。",tags:["皮下注射","穿刺角度","注射","看護技術"]},
+{id:1703,round:111,category:"naika",categoryName:"内科系看護",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,question:"肺塞栓症の典型的な症状はどれか。",options:["徐脈・体温低下","突然の呼吸困難・胸痛・SpO₂低下","高血圧・頭痛","腹痛・嘔吐"],answer:1,
+ explanation:"肺塞栓症（PE）の典型症状：突然発症の呼吸困難・胸痛・頻脈・SpO₂低下・血痰。長期臥床・術後・下肢DVTがリスク因子です。治療：抗凝固療法（ヘパリン）・血栓溶解療法。予防：弾性ストッキング・早期離床・間欠的空気圧迫法。",tags:["肺塞栓症","DVT","呼吸困難","緊急対応"]},
+{id:1704,round:110,category:"geka",categoryName:"外科系看護",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,question:"腹腔内手術後に最初に腸蠕動が再開する目安として正しいのはどれか。",options:["術後直後に再開する","術後24〜72時間以内に排ガスが見られることが多い","術後1週間後に再開する","蠕動は再開しない"],answer:1,
+ explanation:"腹腔内手術後の腸蠕動回復：小腸は術後6〜12時間、大腸は24〜72時間で蠕動が再開し排ガスが確認されます。イレウス（腸閉塞）の発症に注意し腹部膨満・嘔吐・排ガス停止は異常サインです。早期離床が腸蠕動回復を促します。",tags:["術後腸蠕動","排ガス","イレウス","腹部外科"]},
+{id:1705,round:109,category:"kodomo",categoryName:"小児看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,question:"幼児（1〜3歳）の発達の特徴として正しいのはどれか。",options:["言語獲得が完成している","自我が芽生え「イヤイヤ」（第一反抗期）が出現する","完全な自立歩行はできない","集団生活への適応が主な課題"],answer:1,
+ explanation:"幼児期（1〜6歳）：1〜3歳は自我の芽生え・第一反抗期（「イヤイヤ期」）。言語：1歳で一語文・2歳で二語文・3歳で三語文。Eriksonの課題：自律性対羞恥・疑惑（1〜3歳）。",tags:["幼児発達","第一反抗期","自我","エリクソン"]},
+{id:1706,round:113,category:"seishin",categoryName:"精神看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,question:"精神科病院における隔離・身体拘束について正しいのはどれか。",options:["看護師の判断で自由に実施できる","精神保健指定医の指示が原則として必要","家族の同意のみで実施できる","期間制限はない"],answer:1,
+ explanation:"精神科での隔離・身体拘束は精神保健福祉法に基づき原則として精神保健指定医の指示が必要です。実施中は定期的な観察・記録・身体合併症（DVT・褥瘡・脱水）の予防が必須です。最小限・最短期間の原則があります。",tags:["隔離","身体拘束","精神保健指定医","精神科"]},
+{id:1707,round:112,category:"haha",categoryName:"母性看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,question:"前期破水（PROM）の対応として最も優先されるのはどれか。",options:["患者を自宅へ帰す","臍帯脱出・感染徴候・胎児心拍の観察を行う","すぐに入浴させる","様子を見て翌日来院するよう指示する"],answer:1,
+ explanation:"前期破水（PROM）は陣痛開始前の破水で臍帯脱出・子宮内感染のリスクがあります。対応：臍帯脱出の確認・胎児心拍モニタリング・感染徴候の観察・入院管理が原則。",tags:["前期破水","PROM","臍帯脱出","産科"]},
+{id:1708,round:111,category:"rojin",categoryName:"老年看護学",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,question:"老老介護の問題点として正しいのはどれか。",options:["介護者が若いため問題は少ない","介護者自身が高齢で身体的・精神的負担が大きい","社会的支援は不要である","経済的問題はない"],answer:1,
+ explanation:"老老介護の問題：介護者自身の身体的疲労・健康悪化・精神的消耗・社会的孤立・経済的負担。介護うつ・虐待リスクへの注意が必要です。レスパイトケアの提供が重要です。",tags:["老老介護","介護負担","レスパイトケア","地域包括"]},
+{id:1709,round:110,category:"zaichi",categoryName:"在宅看護論",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,question:"訪問看護における緊急時加算が算定される条件として正しいのはどれか。",options:["24時間365日の緊急対応体制を整備している","週1回以上の定期訪問を行っている","月1回以上の訪問を行っている","特定の疾患のみに適用される"],answer:0,
+ explanation:"緊急時訪問看護加算は24時間365日連絡体制を整備し緊急時には速やかに訪問できる体制を確保している訪問看護ステーションが算定できます。利用者・家族が安心して在宅療養を継続するための重要な仕組みです。",tags:["訪問看護","緊急時加算","24時間対応","在宅"]},
+{id:1710,round:109,category:"kiso",categoryName:"基礎看護学",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,question:"モルヒネ（オピオイド）投与中の患者で最も注意すべき副作用はどれか。",options:["高血圧","便秘・悪心・呼吸抑制","下痢","低血糖"],answer:1,
+ explanation:"オピオイドの主な副作用：便秘（ほぼ全例・耐性生じにくい→下剤の予防的投与が必須）・悪心・嘔吐・眠気・呼吸抑制（最も重篤・過量投与時）。呼吸抑制時はナロキソン（拮抗薬）を投与します。",tags:["モルヒネ","オピオイド","副作用","疼痛管理"]},
+{id:1711,round:113,category:"naika",categoryName:"内科系看護",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,question:"甲状腺機能亢進症（バセドウ病）の症状として正しいのはどれか。",options:["体重増加・徐脈・便秘","頻脈・体重減少・眼球突出・発汗過多","低体温・浮腫・嗄声","無気力・皮膚乾燥・寒がり"],answer:1,
+ explanation:"甲状腺機能亢進症（バセドウ病）の症状：頻脈・動悸・体重減少・眼球突出・甲状腺腫大・発汗過多・手指振戦・下痢・月経異常。甲状腺機能低下症は逆の症状（体重増加・徐脈・便秘・浮腫）。",tags:["甲状腺機能亢進症","バセドウ病","頻脈","内分泌"]},
+{id:1712,round:112,category:"geka",categoryName:"外科系看護",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,question:"直腸がんの術前腸管処置の目的として正しいのはどれか。",options:["体重増加のため","腸内細菌の減少・腸内容物の除去による術後感染予防","術中出血を増やすため","消化管の機能を低下させるため"],answer:1,
+ explanation:"直腸がん術前腸管処置（MBP）の目的：腸内容物の除去による術野汚染防止・術後感染（縫合不全・腹膜炎）リスクの低減。具体的方法：下剤内服・浣腸・絶食。",tags:["直腸がん","術前処置","腸管前処置","感染予防"]},
+{id:1713,round:111,category:"kiso",categoryName:"基礎看護学",year:"第111回（2022年）",difficulty:"応用",type:"past",
+ scenario:null,question:"ICU（集中治療室）での看護において最も重要なことはどれか。",options:["面会を完全に禁止する","綿密なモニタリングと異常の早期発見・対応","患者への説明は不要","家族への情報提供は必要最低限にする"],answer:1,
+ explanation:"ICU看護の重要事項：継続的なモニタリング（バイタルサイン・心電図・SpO₂等）と異常の早期発見、多職種チームでのケア、ICUせん妄の予防（ABCDEFバンドル）、患者・家族への精神的支援と情報提供が重要です。",tags:["ICU","集中治療","モニタリング","重症管理"]},
+{id:1714,round:110,category:"seishin",categoryName:"精神看護学",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,question:"解離性障害の特徴として正しいのはどれか。",options:["常に意識が鮮明で記憶は保持される","意識・記憶・同一性・知覚が統合された機能が破綻する","身体症状のみが出現する","主に高齢者に多い"],answer:1,
+ explanation:"解離性障害は強いストレス・外傷体験に対する心理的防衛機制として意識・記憶・同一性・知覚の統合機能が障害される状態です。種類：解離性健忘・解離性同一性障害・離人感など。",tags:["解離性障害","記憶障害","解離","精神看護"]},
+{id:1715,round:109,category:"haha",categoryName:"母性看護学",year:"第109回（2020年）",difficulty:"基本",type:"past",
+ scenario:null,question:"正期産の定義として正しいのはどれか。",options:["妊娠28週以降37週未満の分娩","妊娠37週以降42週未満の分娩","妊娠42週以降の分娩","妊娠22週以降28週未満の分娩"],answer:1,
+ explanation:"分娩時期による分類：流産＝妊娠22週未満、早産＝22週以降37週未満、正期産＝37週以降42週未満、過期産＝42週以降。妊娠22週が生存可能限界（viability）とされています。",tags:["正期産","早産","分娩時期","産科"]},
+{id:1716,round:113,category:"rojin",categoryName:"老年看護学",year:"第113回（2024年）",difficulty:"応用",type:"past",
+ scenario:"78歳男性。慢性心不全・糖尿病・変形性膝関節症を有し、在宅で妻と生活。ADL低下あり。",question:"この患者の包括的アセスメントで最も重要な視点はどれか。",options:["疾患別に個別にアセスメントする","身体的・精神的・社会的・スピリチュアルな側面を統合的にアセスメントする","検査データのみを重視する","家族の意見のみで計画を立てる"],answer:1,
+ explanation:"複数の慢性疾患を有する高齢者の包括的アセスメント（CGA）：身体機能（ADL・IADL）・認知機能・精神状態・社会的環境・栄養状態・嚥下機能・薬剤管理など多面的な評価が必要です。",tags:["包括的アセスメント","CGA","高齢者","多疾患"]},
+{id:1717,round:112,category:"zaichi",categoryName:"在宅看護論",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,question:"家族看護における「家族エンパワメント」の説明として正しいのはどれか。",options:["医療者が家族を管理・監督する","家族が問題解決する力・ケア能力を引き出し強化する支援","家族に全ての介護を任せる","家族の意見を無視してケアを進める"],answer:1,
+ explanation:"家族エンパワメントは家族が本来持っている力・可能性を引き出し自律的に問題解決・意思決定できるよう支援する概念です。看護師は家族の強みを認め情報提供・スキル指導・感情支援を通じて支えます。",tags:["家族看護","エンパワメント","家族支援","在宅"]},
+{id:1718,round:111,category:"kiso",categoryName:"基礎看護学",year:"第111回（2022年）",difficulty:"基本",type:"past",
+ scenario:null,question:"経管栄養（胃管）実施中の患者が嘔吐した場合の対応として最も優先されるのはどれか。",options:["栄養の投与を継続する","栄養の投与を止め側臥位にして気道確保を行う","患者をそのままにして医師を呼ぶ","水分を口から飲ませる"],answer:1,
+ explanation:"経管栄養中の嘔吐への対応：すぐに投与を停止→側臥位にして気道確保（誤嚥防止）→口腔・気道内の吸引（必要時）→バイタルサインの確認→医師への報告。誤嚥性肺炎予防が最重要事項です。",tags:["経管栄養","嘔吐","誤嚥予防","緊急対応"]},
+{id:1719,round:110,category:"naika",categoryName:"内科系看護",year:"第110回（2021年）",difficulty:"標準",type:"past",
+ scenario:null,question:"関節リウマチ（RA）の患者への日常生活指導として適切なのはどれか。",options:["関節に過度な負荷をかけた運動を毎日する","関節保護（関節への過度な負担を避ける動作方法）を指導する","疼痛があっても服薬は不要","温泉や入浴は禁忌である"],answer:1,
+ explanation:"関節リウマチ患者への指導：関節保護（瓶のふたは両手で回す・重い物は体に近づけて持つ）・適切な休息と活動のバランス・RA体操・補助具の活用・定期受診と服薬継続・感染症予防。入浴は温熱効果で症状緩和に有益です。",tags:["関節リウマチ","関節保護","ADL","自己管理"]},
+{id:1720,round:109,category:"geka",categoryName:"外科系看護",year:"第109回（2020年）",difficulty:"標準",type:"past",
+ scenario:null,question:"甲状腺摘出術後に最も注意が必要な合併症はどれか。",options:["高血糖","低カルシウム血症（テタニー）・反回神経麻痺","高カリウム血症","深部静脈血栓症"],answer:1,
+ explanation:"甲状腺摘出術後の特有合併症：低カルシウム血症（テタニー）：副甲状腺の損傷・誤切除によりPTH分泌低下→Ca低下→手指のしびれ・テタニー・喉頭痙攣、反回神経麻痺：嗄声・嚥下困難。Ca製剤の準備と術後観察が重要です。",tags:["甲状腺摘出","低カルシウム血症","テタニー","反回神経"]},
+{id:1721,round:113,category:"kodomo",categoryName:"小児看護学",year:"第113回（2024年）",difficulty:"標準",type:"past",
+ scenario:null,question:"2型糖尿病と異なり1型糖尿病の特徴として正しいのはどれか。",options:["インスリン分泌は保たれている","膵β細胞の破壊によりインスリン分泌が著しく低下・消失する","生活習慣の改善のみで管理できる","高齢者に多い"],answer:1,
+ explanation:"1型糖尿病：自己免疫機序等による膵β細胞の破壊→インスリン絶対的欠乏→生命維持にインスリン注射が必須。若年（小児・青年期）に多い。ケトアシドーシスを来しやすい。",tags:["1型糖尿病","インスリン","膵β細胞","小児"]},
+{id:1722,round:112,category:"kiso",categoryName:"基礎看護学",year:"第112回（2023年）",difficulty:"標準",type:"past",
+ scenario:null,question:"患者のアドボカシー（権利擁護）を行う看護師の役割として正しいのはどれか。",options:["医師の指示を無条件に優先する","患者の権利・利益を守り代弁する","患者の意思より家族の意向を優先する","アドボカシーは社会福祉士の役割のみ"],answer:1,
+ explanation:"アドボカシー（権利擁護・代弁）は患者が自己の権利を行使できるよう支援し患者の意思・利益を代弁する看護師の重要な役割です。インフォームドコンセントの支援・患者の意思決定への支援・多職種連携での患者利益の代弁が含まれます。",tags:["アドボカシー","権利擁護","倫理","患者の権利"]},
+{id:1723,round:111,category:"naika",categoryName:"内科系看護",year:"第111回（2022年）",difficulty:"標準",type:"past",
+ scenario:null,question:"慢性腎臓病（CKD）のステージ分類に使用される指標はどれか。",options:["血清カリウム値のみ","GFR（糸球体濾過量）と蛋白尿の程度","血圧値のみ","血清クレアチニン値のみ"],answer:1,
+ explanation:"CKDの定義・分類：尿異常または GFR<60mL/分/1.73m²が3ヶ月以上持続。ステージ分類（G1〜G5）はGFR値で区分され蛋白尿（A1〜A3）と組み合わせてリスク評価します。G5（GFR<15）は透析・腎移植の適応段階です。",tags:["慢性腎臓病","CKD","GFR","ステージ分類"]},
+{id:1724,round:110,category:"kiso",categoryName:"基礎看護学",year:"第110回（2021年）",difficulty:"基本",type:"past",
+ scenario:null,question:"看護師の専門職倫理における「誠実の原則」の内容として正しいのはどれか。",options:["患者に嘘をついてもよい","患者に正直に情報を伝え誠実に関わる","医療の秘密を患者に隠す","患者の不利益になっても業務を優先する"],answer:1,
+ explanation:"誠実（veracity）は患者に真実・正確な情報を提供し正直に関わる義務です。「嘘をつかない」だけでなく積極的に必要な情報を開示することも含まれます。患者の最善利益との兼ね合いで判断が求められる場面もあります。",tags:["看護倫理","誠実","倫理原則","正直"]},
+
+];;
+
+// ═══ STATE ═══
+const _today = new Date().toDateString();
+if (localStorage.getItem('np_date') !== _today) { localStorage.setItem('np_today','0'); localStorage.setItem('np_date',_today); }
+
+let S = {
+  category:'all', practiceIdx:0, practiceAnswered:false,
+  randomQueue:[], randomIdx:0, randomAnswered:false,
+  aiQuestions:[], aiIdx:0, aiAnswered:false,
+  wrongReviewQueue:[], wrongReviewIdx:0, wrongReviewAnswered:false,
+  examQuestions:[], examIdx:0, examAnswers:{}, examTimer:null, examTimeLeft:0,
+  history: JSON.parse(localStorage.getItem('np_history')||'[]'),
+  todayCount: parseInt(localStorage.getItem('np_today')||'0'),
+  wrongNote: JSON.parse(localStorage.getItem('np_wrong')||'{}'),
+};
+
+function save(){
+  localStorage.setItem('np_history', JSON.stringify(S.history.slice(-100)));
+  localStorage.setItem('np_today', S.todayCount);
+  localStorage.setItem('np_wrong', JSON.stringify(S.wrongNote));
+}
+function updateSidebar(){
+  document.getElementById('today-count').innerHTML = S.todayCount+' <span>問</span>';
+  const all=S.history.length, ok=S.history.filter(h=>h.correct).length;
+  document.getElementById('accuracy-display').innerHTML = all>0 ? Math.round(ok/all*100)+' <span>%</span>' : '— <span>%</span>';
+  document.getElementById('wrong-count-sidebar').innerHTML = Object.keys(S.wrongNote).length+' <span>問</span>';
+}
+function showPage(id, btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(id==='practice') loadPracticeQuestion();
+  if(id==='random') loadRandomQueue();
+  if(id==='home') renderDailyQuestion();
+  if(id==='stats') renderStats();
+  if(id==='wrong') renderWrongNote();
+  if(id==='exam') renderExamSetup();
+}
+function selectCategory(cat, btn){
+  S.category=cat;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  S.practiceIdx=0;
+  if(document.querySelector('.page.active').id==='page-practice') loadPracticeQuestion();
+}
+function getFiltered(){ return S.category==='all' ? PAST_QUESTIONS : PAST_QUESTIONS.filter(q=>q.category===S.category); }
+
+function diffBadge(d){
+  const m={基本:'badge-diff-easy',標準:'badge-diff-med',応用:'badge-diff-hard'};
+  return '<span class="q-badge '+(m[d]||'badge-diff-med')+'">'+d+'</span>';
+}
+
+function renderQ(q, areaId, expId, actionsId, prefix, idx, total){
+  const hdr = document.getElementById(prefix+'-header');
+  if(hdr) hdr.innerHTML =
+    '<span class="q-badge '+(q.type==='past'?'badge-past':'badge-ai')+'">'+(q.type==='past'?'過去問':'AI出題')+'</span>'+
+    diffBadge(q.difficulty)+
+    '<span class="tag" style="background:var(--gray1);color:var(--gray4);">'+q.categoryName+'</span>'+
+    (q.year?'<span style="font-size:11px;color:var(--gray4);">'+q.year+'</span>':'')+
+    '<span class="q-num">'+(idx+1)+' / '+total+'</span>';
+
+  document.getElementById(areaId).innerHTML =
+    '<div class="q-card">'+
+    (q.scenario?'<div class="q-scenario">'+q.scenario+'</div>':'')+
+    '<div class="q-text">'+q.question+'</div>'+
+    '<div class="options" id="'+prefix+'-opts">'+
+    q.options.map((o,i)=>
+      '<button class="option-btn" onclick="selectAns(\''+prefix+'\','+i+')" id="'+prefix+'-opt-'+i+'">'+
+      '<span class="opt-label">'+['A','B','C','D'][i]+'</span><span>'+o+'</span></button>'
+    ).join('')+
+    '</div></div>';
+
+  document.getElementById(expId).classList.remove('visible');
+  document.getElementById(expId).innerHTML='';
+  document.getElementById(actionsId).innerHTML =
+    '<button class="btn btn-outline" onclick="prevQ(\''+prefix+'\')" '+(idx>0?'':'disabled')+'>← 前の問題</button>'+
+    '<button class="btn btn-primary" id="'+prefix+'-submit-btn" onclick="submitAns(\''+prefix+'\','+q.answer+')" disabled>解答する</button>'+
+    '<button class="btn btn-outline" onclick="nextQ(\''+prefix+'\')" '+(idx<total-1?'':'disabled')+'>次の問題 →</button>';
+}
+
+function selectAns(prefix, idx){
+  const ans = {practice:S.practiceAnswered,random:S.randomAnswered,ai:S.aiAnswered,'wrong-review':S.wrongReviewAnswered}[prefix];
+  if(ans) return;
+  document.querySelectorAll('#'+prefix+'-opts .option-btn').forEach(b=>b.classList.remove('selected'));
+  document.getElementById(prefix+'-opt-'+idx).classList.add('selected');
+  document.getElementById(prefix+'-submit-btn').disabled=false;
+  window['_s_'+prefix]=idx;
+}
+
+function submitAns(prefix, correctIdx){
+  const sel=window['_s_'+prefix];
+  if(sel===undefined) return;
+  const q=getQ(prefix); if(!q) return;
+  const ok=sel===correctIdx;
+  document.querySelectorAll('#'+prefix+'-opts .option-btn').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===correctIdx) b.classList.add('correct');
+    else if(i===sel&&!ok) b.classList.add('wrong');
+  });
+  const expEl=document.getElementById(prefix+'-exp');
+  expEl.innerHTML='<div class="exp-title">💡 解説</div><div class="exp-body">'+q.explanation+'</div>'+
+    '<div class="exp-tags">'+(q.tags||[]).map(t=>'<span class="exp-tag">'+t+'</span>').join('')+'</div>';
+  expEl.classList.add('visible');
+  document.getElementById(prefix+'-submit-btn').style.display='none';
+  S.todayCount++;
+  S.history.push({correct:ok,question:q.question.slice(0,40)+'…',category:q.categoryName,
+    date:new Date().toLocaleString('ja-JP',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})});
+  if(!ok){
+    const k=String(q.id);
+    S.wrongNote[k]={id:q.id,question:q.question,categoryName:q.categoryName,difficulty:q.difficulty,
+      count:(S.wrongNote[k]?S.wrongNote[k].count:0)+1,lastDate:new Date().toLocaleDateString('ja-JP')};
+  } else if(ok&&prefix==='wrong-review') delete S.wrongNote[String(q.id)];
+  setAns(prefix,true); save(); updateSidebar();
+  const idx2=getIdx(prefix),total=getTotal(prefix);
+  document.getElementById(prefix+'-actions').innerHTML =
+    '<button class="btn btn-outline" onclick="prevQ(\''+prefix+'\')" '+(idx2>0?'':'disabled')+'>← 前の問題</button>'+
+    (ok?'<span style="color:var(--teal);font-weight:600;">✅ 正解！</span>':'<span style="color:var(--sakura);font-weight:600;">❌ 不正解</span>')+
+    '<button class="btn '+(idx2<total-1?'btn-teal':'btn-outline')+'" onclick="nextQ(\''+prefix+'\')" '+(idx2<total-1?'':'disabled')+'>次の問題 →</button>';
+}
+
+function getQ(p){ return p==='practice'?getFiltered()[S.practiceIdx]:p==='random'?S.randomQueue[S.randomIdx]:p==='ai'?S.aiQuestions[S.aiIdx]:p==='wrong-review'?S.wrongReviewQueue[S.wrongReviewIdx]:null; }
+function getIdx(p){ return p==='practice'?S.practiceIdx:p==='random'?S.randomIdx:p==='ai'?S.aiIdx:p==='wrong-review'?S.wrongReviewIdx:0; }
+function getTotal(p){ return p==='practice'?getFiltered().length:p==='random'?S.randomQueue.length:p==='ai'?S.aiQuestions.length:p==='wrong-review'?S.wrongReviewQueue.length:1; }
+function setAns(p,v){ if(p==='practice')S.practiceAnswered=v;else if(p==='random')S.randomAnswered=v;else if(p==='ai')S.aiAnswered=v;else if(p==='wrong-review')S.wrongReviewAnswered=v; }
+
+function nextQ(prefix){
+  if(getIdx(prefix)>=getTotal(prefix)-1) return;
+  setAns(prefix,false); window['_s_'+prefix]=undefined;
+  if(prefix==='practice'){S.practiceIdx++;loadPracticeQuestion();}
+  else if(prefix==='random'){S.randomIdx++;loadRandomQuestion();}
+  else if(prefix==='ai'){S.aiIdx++;loadAIQuestion(S.aiIdx);}
+  else if(prefix==='wrong-review'){S.wrongReviewIdx++;loadWRQ();}
+}
+function prevQ(prefix){
+  if(getIdx(prefix)<=0) return;
+  setAns(prefix,false); window['_s_'+prefix]=undefined;
+  if(prefix==='practice'){S.practiceIdx--;loadPracticeQuestion();}
+  else if(prefix==='random'){S.randomIdx--;loadRandomQuestion();}
+  else if(prefix==='ai'){S.aiIdx--;loadAIQuestion(S.aiIdx);}
+  else if(prefix==='wrong-review'){S.wrongReviewIdx--;loadWRQ();}
+}
+
+function loadPracticeQuestion(){
+  const qs=getFiltered();
+  if(!qs.length){document.getElementById('practice-area').innerHTML='<div class="empty-state"><div class="empty-state-icon">🔍</div><p>このカテゴリには問題がありません。</p></div>';document.getElementById('practice-actions').innerHTML='';document.getElementById('practice-exp').classList.remove('visible');document.getElementById('practice-header').innerHTML='';return;}
+  if(S.practiceIdx>=qs.length) S.practiceIdx=0;
+  S.practiceAnswered=false; window['_s_practice']=undefined;
+  renderQ(qs[S.practiceIdx],'practice-area','practice-exp','practice-actions','practice',S.practiceIdx,qs.length);
+}
+function loadRandomQueue(){
+  S.randomQueue=[...PAST_QUESTIONS].sort(()=>Math.random()-.5);
+  S.randomIdx=0; S.randomAnswered=false; window['_s_random']=undefined;
+  loadRandomQuestion();
+}
+function loadRandomQuestion(){
+  const q=S.randomQueue[S.randomIdx]; if(!q) return;
+  S.randomAnswered=false; window['_s_random']=undefined;
+  renderQ(q,'random-area','random-exp','random-actions','random',S.randomIdx,S.randomQueue.length);
+}
+
+// EXAM
+function renderExamSetup(){
+  document.getElementById('exam-q-area').style.display='none';
+  document.getElementById('exam-result-area').style.display='none';
+  document.getElementById('exam-setup-area').innerHTML=
+    '<div class="exam-setup">'+
+    '<h2>⏱️ 模擬試験モード</h2>'+
+    '<p>本番形式で時間内に回答します。終了後に正解率・解説をまとめて確認できます。</p>'+
+    '<div class="exam-info-grid">'+
+    '<div class="exam-info-item"><div class="exam-info-val">20</div><div class="exam-info-label">問題数（標準）</div></div>'+
+    '<div class="exam-info-item"><div class="exam-info-val">30</div><div class="exam-info-label">制限時間（分）</div></div>'+
+    '<div class="exam-info-item"><div class="exam-info-val">60%</div><div class="exam-info-label">合格ライン</div></div>'+
+    '</div>'+
+    '<div style="margin-bottom:20px;">'+
+    '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray3);margin-bottom:10px;">出題方式</div>'+
+    '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">'+
+    '<div class="exam-mode-btn active" data-mode="past" onclick="selExamMode(this,\'past\')"><div style="font-size:22px;margin-bottom:6px;">📝</div><div style="font-size:13px;font-weight:700;color:var(--navy);">過去問のみ</div><div style="font-size:11px;color:var(--gray4);">APIキー不要</div></div>'+
+    '<div class="exam-mode-btn" data-mode="ai" onclick="selExamMode(this,\'ai\')"><div style="font-size:22px;margin-bottom:6px;">🤖</div><div style="font-size:13px;font-weight:700;color:var(--navy);">AIのみ</div><div style="font-size:11px;color:var(--gray4);">APIキー必要</div></div>'+
+    '<div class="exam-mode-btn" data-mode="mixed" onclick="selExamMode(this,\'mixed\')"><div style="font-size:22px;margin-bottom:6px;">🔀</div><div style="font-size:13px;font-weight:700;color:var(--navy);">過去問＋AI</div><div style="font-size:11px;color:var(--gray4);">APIキー必要</div></div>'+
+    '</div></div>'+
+    '<div id="exam-key-row" style="display:none;margin-bottom:16px;"><div class="form-group"><label>Gemini APIキー（ローカル環境用）</label><input type="password" id="exam-gemini-key" placeholder="AIza..." style="width:100%;"><div style="font-size:11px;color:var(--gray4);margin-top:4px;">ローカルで使用する場合のみ必要です。</div></div></div>'+
+    '<div class="form-row" style="justify-content:center;margin-bottom:24px;">'+
+    '<div class="form-group" style="max-width:180px;"><label>問題数</label><select id="exam-q-num"><option value="10">10問（練習）</option><option value="20" selected>20問（標準）</option><option value="30">30問（全問）</option></select></div>'+
+    '<div class="form-group" style="max-width:180px;"><label>制限時間</label><select id="exam-time-limit"><option value="15">15分</option><option value="30" selected>30分</option><option value="45">45分</option><option value="60">60分</option></select></div>'+
+    '<div class="form-group" style="max-width:180px;" id="exam-cat-grp"><label>カテゴリ</label><select id="exam-category"><option value="all">すべて</option><option value="kiso">基礎看護学</option><option value="naika">内科系看護</option><option value="geka">外科系看護</option><option value="kodomo">小児看護学</option><option value="seishin">精神看護学</option><option value="haha">母性看護学</option><option value="rojin">老年看護学</option><option value="zaichi">在宅看護論</option></select></div>'+
+    '</div>'+
+    '<button class="btn btn-navy" style="font-size:16px;padding:14px 40px;" onclick="startExam()">試験を開始する</button>'+
+    '<div id="exam-status" style="font-size:13px;color:var(--sakura);margin-top:12px;min-height:20px;"></div>'+
+    '</div>';
+  window._eMode=window._eMode||'past';
+  document.querySelectorAll('.exam-mode-btn').forEach(b=>b.classList.toggle('active',b.dataset.mode===window._eMode));
+  updExamKeyRow(window._eMode);
+}
+function selExamMode(el,mode){
+  window._eMode=mode;
+  document.querySelectorAll('.exam-mode-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  updExamKeyRow(mode);
+}
+function updExamKeyRow(mode){
+  const kr=document.getElementById('exam-key-row');
+  const cg=document.getElementById('exam-cat-grp');
+  const isArt=window._isArtifact===true;
+  if(kr) kr.style.display=(mode!=='past'&&!isArt)?'block':'none';
+  if(cg) cg.style.display=mode==='ai'?'none':'block';
+  const inp=document.getElementById('exam-gemini-key');
+  if(inp) inp.value=localStorage.getItem('np_gemini_key')||'';
+}
+async function startExam(){
+  const mode=window._eMode||'past';
+  const num=parseInt(document.getElementById('exam-q-num').value);
+  const mins=parseInt(document.getElementById('exam-time-limit').value);
+  const cat=document.getElementById('exam-category')?document.getElementById('exam-category').value:'all';
+  const statusEl=document.getElementById('exam-status');
+  if(mode!=='past'){
+    const isArt=window._isArtifact===true;
+    if(!isArt){
+      const k=document.getElementById('exam-gemini-key');
+      if(k&&k.value.trim()) localStorage.setItem('np_gemini_key',k.value.trim());
+      if(!localStorage.getItem('np_gemini_key')){statusEl.textContent='⚠️ Gemini APIキーを入力してください。';return;}
+    }
+    statusEl.textContent='🤖 AIが問題を生成中…';
+    document.querySelector('#exam-setup-area button.btn-navy').disabled=true;
+    const aiCount=mode==='ai'?num:Math.ceil(num*.4);
+    const pastCount=mode==='ai'?0:num-aiCount;
+    const prompt='あなたは日本の看護師国家試験対策の専門家です。看護師国家試験の出題形式に沿った4択問題を'+aiCount+'問作成してください。カテゴリは自由、難易度も混合で構いません。必ず以下のJSON形式のみで返答（コードブロック不要）：{"questions":[{"question":"問題文","scenario":"症例（なければnull）","options":["A","B","C","D"],"answer":0,"explanation":"解説200字以上","tags":["タグ"],"categoryName":"カテゴリ名","difficulty":"基本または標準または応用"}]}';
+    try{
+      const text=await callAI(prompt);
+      const parsed=JSON.parse(text.replace(/```json|```/g,'').trim());
+      const aiQs=parsed.questions.map((q,i)=>Object.assign({},q,{id:'ei_'+Date.now()+'_'+i,type:'ai',category:'ai',year:null}));
+      let pastQs=[];
+      if(pastCount>0){const pool=cat==='all'?PAST_QUESTIONS:PAST_QUESTIONS.filter(q=>q.category===cat);pastQs=[...pool].sort(()=>Math.random()-.5).slice(0,Math.min(pastCount,pool.length));}
+      S.examQuestions=[...pastQs,...aiQs].sort(()=>Math.random()-.5);
+    }catch(err){statusEl.textContent='⚠️ AI生成に失敗しました。('+(err.message||'')+')';document.querySelector('#exam-setup-area button.btn-navy').disabled=false;return;}
+  } else {
+    const pool=cat==='all'?PAST_QUESTIONS:PAST_QUESTIONS.filter(q=>q.category===cat);
+    S.examQuestions=[...pool].sort(()=>Math.random()-.5).slice(0,Math.min(num,pool.length));
+  }
+  S.examIdx=0;S.examAnswers={};S.examTimeLeft=mins*60;
+  document.getElementById('exam-setup-area').innerHTML='';
+  document.getElementById('exam-q-area').style.display='block';
+  document.getElementById('exam-result-area').style.display='none';
+  startExamTimer(); renderExamQ();
+}
+function startExamTimer(){
+  if(S.examTimer) clearInterval(S.examTimer);
+  S.examTimer=setInterval(()=>{S.examTimeLeft--;updTimer();if(S.examTimeLeft<=0){clearInterval(S.examTimer);finishExam();}},1000);
+}
+function updTimer(){
+  const m=Math.floor(S.examTimeLeft/60).toString().padStart(2,'0');
+  const s=(S.examTimeLeft%60).toString().padStart(2,'0');
+  const el=document.getElementById('exam-timer-display');
+  if(el){el.textContent=m+':'+s;el.className='exam-timer-time'+(S.examTimeLeft<120?' warning':'');}
+}
+function renderExamQ(){
+  const q=S.examQuestions[S.examIdx],total=S.examQuestions.length;
+  document.getElementById('exam-q-counter').textContent=(S.examIdx+1)+' / '+total;
+  document.getElementById('exam-progress-fill').style.width=(S.examIdx/total*100)+'%';
+  updTimer();
+  const prev=S.examAnswers[S.examIdx];
+  document.getElementById('exam-q-content').innerHTML=
+    '<div class="q-header" style="margin-bottom:16px;">'+diffBadge(q.difficulty)+'<span class="tag" style="background:var(--gray1);color:var(--gray4);">'+q.categoryName+'</span></div>'+
+    '<div class="q-card">'+(q.scenario?'<div class="q-scenario">'+q.scenario+'</div>':'')+
+    '<div class="q-text">'+q.question+'</div>'+
+    '<div class="options" id="exam-opts">'+
+    q.options.map((o,i)=>'<button class="option-btn '+(prev===i?'selected':'')+'" onclick="selExamAns('+i+')" id="exam-opt-'+i+'"><span class="opt-label">'+['A','B','C','D'][i]+'</span><span>'+o+'</span></button>').join('')+
+    '</div></div>';
+  document.getElementById('exam-exp').classList.remove('visible');
+  document.getElementById('exam-actions').innerHTML=
+    '<button class="btn btn-outline" onclick="examPrev()" '+(S.examIdx>0?'':'disabled')+'>← 前</button>'+
+    '<button class="btn btn-outline" onclick="examNext()" '+(S.examIdx<total-1?'':'disabled')+'>次 →</button>'+
+    '<button class="btn btn-primary" onclick="finishExam()" style="margin-left:auto;">試験を終了する</button>';
+}
+function selExamAns(idx){document.querySelectorAll('#exam-opts .option-btn').forEach(b=>b.classList.remove('selected'));document.getElementById('exam-opt-'+idx).classList.add('selected');S.examAnswers[S.examIdx]=idx;}
+function examNext(){if(S.examIdx<S.examQuestions.length-1){S.examIdx++;renderExamQ();}}
+function examPrev(){if(S.examIdx>0){S.examIdx--;renderExamQ();}}
+function finishExam(){
+  if(S.examTimer) clearInterval(S.examTimer);
+  document.getElementById('exam-q-area').style.display='none';
+  let correct=0,answered=0;
+  S.examQuestions.forEach((q,i)=>{
+    if(S.examAnswers[i]!==undefined){answered++;if(S.examAnswers[i]===q.answer)correct++;else{const k=String(q.id);S.wrongNote[k]={id:q.id,question:q.question,categoryName:q.categoryName,difficulty:q.difficulty,count:(S.wrongNote[k]?S.wrongNote[k].count:0)+1,lastDate:new Date().toLocaleDateString('ja-JP')};}}
+    S.history.push({correct:S.examAnswers[i]===q.answer,question:q.question.slice(0,40)+'…',category:q.categoryName,date:new Date().toLocaleString('ja-JP',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})});
+  });
+  S.todayCount+=answered; save(); updateSidebar();
+  const pct=answered>0?Math.round(correct/answered*100):0,pass=pct>=60;
+  const ra=document.getElementById('exam-result-area');
+  ra.style.display='block';
+  ra.innerHTML='<div class="exam-result">'+
+    '<div class="exam-result-score '+(pass?'result-pass':'result-fail')+'">'+pct+'%</div>'+
+    '<div class="exam-result-label">'+(pass?'🎉 合格！おめでとうございます！':'📚 もう少し！次回頑張りましょう')+'</div>'+
+    '<div class="exam-result-grid">'+
+    '<div class="exam-info-item"><div class="exam-info-val">'+answered+'</div><div class="exam-info-label">回答数</div></div>'+
+    '<div class="exam-info-item"><div class="exam-info-val" style="color:var(--teal);">'+correct+'</div><div class="exam-info-label">正解数</div></div>'+
+    '<div class="exam-info-item"><div class="exam-info-val" style="color:var(--sakura);">'+(answered-correct)+'</div><div class="exam-info-label">不正解数</div></div>'+
+    '</div>'+
+    '<div style="text-align:left;border-top:1px solid var(--gray1);padding-top:20px;"><div class="section-title" style="margin-bottom:16px;">問題ごとの結果</div>'+
+    S.examQuestions.map((q,i)=>{const sel=S.examAnswers[i],ok=sel===q.answer;return '<div style="background:'+(ok?'var(--teal-l)':'#FFF0F3')+';border-radius:var(--r-sm);padding:12px 16px;margin-bottom:8px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;"><span>'+(ok?'✅':'❌')+'</span><span style="font-size:13px;font-weight:600;">'+q.question.slice(0,50)+'…</span></div><div style="font-size:12px;color:var(--gray4);">あなたの回答：<strong>'+(sel!==undefined?q.options[sel]:'未回答')+'</strong>'+(!ok?' / 正解：<strong style="color:var(--teal);">'+q.options[q.answer]+'</strong>':'')+'</div><div style="font-size:12px;color:var(--navy2);margin-top:6px;line-height:1.6;">'+q.explanation.slice(0,80)+'…</div></div>';}).join('')+
+    '</div><div style="display:flex;gap:12px;justify-content:center;margin-top:24px;">'+
+    '<button class="btn btn-outline" onclick="renderExamSetup()">もう一度</button>'+
+    '<button class="btn btn-primary" onclick="showPage(\'wrong\',document.querySelectorAll(\'nav button\')[4])">錯題本を確認</button>'+
+    '</div></div>';
+}
+
+// WRONG NOTE
+function renderWrongNote(){
+  document.getElementById('wrong-review-area').innerHTML='';
+  document.getElementById('wrong-review-exp').classList.remove('visible');
+  document.getElementById('wrong-review-actions').innerHTML='';
+  document.getElementById('wrong-review-header').style.display='none';
+  const list=document.getElementById('wrong-list'),btn=document.getElementById('wrong-review-btn');
+  const entries=Object.values(S.wrongNote);
+  if(!entries.length){list.innerHTML='<div class="empty-state"><div class="empty-state-icon">🎉</div><p>錯題はありません。</p></div>';btn.disabled=true;return;}
+  btn.disabled=false;
+  list.innerHTML=entries.sort((a,b)=>b.count-a.count).map(w=>'<div class="wrong-note-item" onclick="showWrongDetail('+w.id+')"><div class="wrong-note-q">'+w.question+'</div><div class="wrong-note-meta"><span class="tag" style="background:var(--gray1);color:var(--gray4);">'+w.categoryName+'</span>'+diffBadge(w.difficulty)+'<span class="wrong-note-count">✗ '+w.count+'回</span><span style="font-size:11px;color:var(--gray3);margin-left:auto;">'+w.lastDate+'</span></div></div>').join('');
+}
+function showWrongDetail(id){
+  const q=PAST_QUESTIONS.find(q=>q.id===id); if(!q) return;
+  document.getElementById('modal-content').innerHTML='<button class="modal-close" onclick="closeModal()">×</button><h3>問題詳細</h3>'+(q.scenario?'<div class="q-scenario" style="margin-bottom:16px;">'+q.scenario+'</div>':'')+'<div style="font-size:15px;font-weight:500;line-height:1.7;margin-bottom:16px;">'+q.question+'</div><div style="font-size:13px;color:var(--gray4);margin-bottom:12px;">正解：<strong style="color:var(--teal);">'+['A','B','C','D'][q.answer]+'. '+q.options[q.answer]+'</strong></div><div style="background:var(--teal-l);border-radius:var(--r-sm);padding:14px 16px;font-size:14px;line-height:1.7;">'+q.explanation+'</div><div class="exp-tags" style="margin-top:12px;">'+(q.tags||[]).map(t=>'<span class="exp-tag">'+t+'</span>').join('')+'</div>';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closeModal(e){ if(!e||e.target===document.getElementById('modal-overlay')) document.getElementById('modal-overlay').classList.remove('open'); }
+function startWrongReview(){
+  const entries=Object.values(S.wrongNote); if(!entries.length) return;
+  S.wrongReviewQueue=PAST_QUESTIONS.filter(q=>entries.map(e=>e.id).includes(q.id)).sort(()=>Math.random()-.5);
+  S.wrongReviewIdx=0; S.wrongReviewAnswered=false; window['_s_wrong-review']=undefined;
+  document.getElementById('wrong-list').innerHTML='';
+  document.getElementById('wrong-review-btn').textContent='一覧に戻る';
+  document.getElementById('wrong-review-btn').onclick=()=>{renderWrongNote();document.getElementById('wrong-review-btn').textContent='復習する';document.getElementById('wrong-review-btn').onclick=startWrongReview;};
+  document.getElementById('wrong-review-header').style.display='flex';
+  loadWRQ();
+}
+function loadWRQ(){ const q=S.wrongReviewQueue[S.wrongReviewIdx];if(!q)return;S.wrongReviewAnswered=false;window['_s_wrong-review']=undefined;renderQ(q,'wrong-review-area','wrong-review-exp','wrong-review-actions','wrong-review',S.wrongReviewIdx,S.wrongReviewQueue.length); }
+function clearWrongNote(){ if(confirm('錯題本をすべてリセットしますか？')){S.wrongNote={};save();updateSidebar();renderWrongNote();} }
+
+// AI
+async function callAI(prompt){
+  const isArt=window._isArtifact===true;
+  if(isArt){
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:4000,messages:[{role:'user',content:prompt}]})});
+    const data=await res.json();
+    if(data.error) throw new Error(data.error.message||'API error');
+    return data.content.map(i=>i.text||'').join('');
+  } else {
+    const apiKey=localStorage.getItem('np_gemini_key')||'';
+    if(!apiKey) throw new Error('Gemini APIキーを入力してください');
+    const res=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key='+apiKey,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.7,maxOutputTokens:4096}})});
+    const data=await res.json();
+    if(data.error) throw new Error(data.error.message||'Gemini API error');
+    return data.candidates&&data.candidates[0]&&data.candidates[0].content&&data.candidates[0].content.parts[0]?data.candidates[0].content.parts[0].text:'';
+  }
+}
+async function generateAIQuestion(){
+  const category=document.getElementById('ai-category').value;
+  const difficulty=document.getElementById('ai-difficulty').value;
+  const count=Math.min(10,Math.max(1,parseInt(document.getElementById('ai-count').value)||3));
+  const resultDiv=document.getElementById('ai-result');
+  resultDiv.style.display='block';
+  resultDiv.innerHTML='<div class="ai-loading"><div class="spinner"></div>AIが'+category+'の問題を生成中…</div>';
+  document.getElementById('ai-q-area').innerHTML='';
+  document.getElementById('ai-exp').classList.remove('visible');
+  document.getElementById('ai-actions').innerHTML='';
+  document.getElementById('ai-header').innerHTML='';
+  const prompt='あなたは日本の看護師国家試験対策の専門家です。以下の条件で問題を'+count+'問作成してください。カテゴリ：'+category+'、難易度：'+difficulty+'。看護師国家試験の出題形式に沿った4択問題。実際の臨床場面を想定。正確な医療知識に基づくこと。必ず以下のJSON形式のみで返答（コードブロック不要）：{"questions":[{"question":"問題文","scenario":"症例（なければnull）","options":["A","B","C","D"],"answer":0,"explanation":"解説200字以上","tags":["タグ1"]}]}';
+  try{
+    const text=await callAI(prompt);
+    const parsed=JSON.parse(text.replace(/```json|```/g,'').trim());
+    S.aiQuestions=parsed.questions.map((q,i)=>Object.assign({},q,{id:'ai_'+Date.now()+'_'+i,type:'ai',categoryName:category,category:'ai',year:null,difficulty:difficulty}));
+    S.aiIdx=0;S.aiAnswered=false;window['_s_ai']=undefined;
+    resultDiv.innerHTML='<div style="font-size:13px;color:var(--teal);font-weight:600;">✅ '+S.aiQuestions.length+'問生成しました（'+category+' / '+difficulty+'）</div>';
+    setTimeout(()=>{resultDiv.style.display='none';},2500);
+    loadAIQuestion(0);
+  }catch(err){resultDiv.innerHTML='<div style="font-size:13px;color:var(--sakura);">⚠️ 生成に失敗しました。('+(err.message||'')+')</div>';}
+}
+function loadAIQuestion(idx){ const q=S.aiQuestions[idx];if(!q)return;S.aiAnswered=false;window['_s_ai']=undefined;renderQ(q,'ai-q-area','ai-exp','ai-actions','ai',idx,S.aiQuestions.length); }
+
+// STATS
+function renderStats(){
+  const total=S.history.length,correct=S.history.filter(h=>h.correct).length;
+  document.getElementById('stat-total').textContent=total;
+  document.getElementById('stat-correct').textContent=correct;
+  document.getElementById('stat-pct').textContent=total>0?Math.round(correct/total*100)+'%':'—%';
+  const cats={};
+  S.history.forEach(h=>{if(!cats[h.category])cats[h.category]={total:0,correct:0};cats[h.category].total++;if(h.correct)cats[h.category].correct++;});
+  const colors={'基礎看護学':'#C75B7A','内科系看護':'#2A9D8F','外科系看護':'#C9832A','小児看護学':'#5563A8','精神看護学':'#20B2AA','母性看護学':'#C75B7A','老年看護学':'#C9832A','在宅看護論':'#5563A8'};
+  const catEl=document.getElementById('cat-stats');
+  if(!Object.keys(cats).length){catEl.innerHTML='<div class="empty-state"><div class="empty-state-icon">📊</div><p>まだデータがありません。</p></div>';return;}
+  catEl.innerHTML=Object.entries(cats).map(([cat,d])=>{const pct=Math.round(d.correct/d.total*100),color=colors[cat]||'#2A9D8F';return '<div class="cat-progress-item"><div class="cat-progress-row"><span class="cat-progress-name">'+cat+'</span><span class="cat-progress-pct" style="color:'+color+';">'+pct+'%</span></div><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:'+pct+'%;background:'+color+';"></div></div><div style="font-size:11px;color:var(--gray3);">'+d.correct+' / '+d.total+' 問正解</div></div>';}).join('');
+  const histEl=document.getElementById('history-list');
+  if(!S.history.length){histEl.innerHTML='<div class="empty-state"><div class="empty-state-icon">📜</div><p>解答履歴がありません。</p></div>';return;}
+  histEl.innerHTML=[...S.history].reverse().slice(0,20).map(h=>'<div class="history-item"><div class="hist-icon '+(h.correct?'hist-correct':'hist-wrong')+'">'+(h.correct?'✅':'❌')+'</div><div class="hist-text"><strong>'+h.question+'</strong><br><span style="font-size:11px;color:var(--gray4);">'+h.category+'</span></div><div class="hist-date">'+h.date+'</div></div>').join('');
+}
+
+// HOME
+function renderDailyQuestion(){
+  const q=PAST_QUESTIONS[new Date().getDate()%PAST_QUESTIONS.length];
+  document.getElementById('daily-q-area').innerHTML=
+    '<div style="background:var(--card);border:1px solid var(--gray2);border-radius:var(--r);padding:22px 26px;box-shadow:var(--shadow);">'+
+    '<div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;"><span class="q-badge badge-past">過去問</span>'+diffBadge(q.difficulty)+'<span class="tag" style="background:var(--gray1);color:var(--gray4);">'+q.categoryName+'</span></div>'+
+    (q.scenario?'<div class="q-scenario">'+q.scenario+'</div>':'')+
+    '<div class="q-text" style="font-size:14px;">'+q.question+'</div>'+
+    '<button class="btn btn-primary" onclick="showPage(\'practice\',document.querySelectorAll(\'nav button\')[1])">この問題を解く →</button>'+
+    '</div>';
+}
+
+function saveGeminiKey(){
+  var v=document.getElementById('gemini-api-key').value.trim();
+  if(!v) return;
+  localStorage.setItem('np_gemini_key',v);
+  var keyRow=document.getElementById('ai-key-row');
+  var note=document.getElementById('ai-env-note');
+  if(keyRow) keyRow.style.display='none';
+  if(note){
+    note.innerHTML='✅ APIキー保存済み';
+    var a=document.createElement('a');
+    a.href='#';a.textContent=' — 変更する';a.style.color='var(--teal)';
+    a.onclick=function(){keyRow.style.display='block';note.textContent='Gemini APIキーを更新できます。';return false;};
+    note.appendChild(a);
+  }
+}
+
+// GEMINI KEY INPUT EVENT
+document.getElementById('gemini-api-key').addEventListener('input', function(){ localStorage.setItem('np_gemini_key', this.value); });
+
+// INIT
+updateSidebar();
+renderDailyQuestion();
+renderExamSetup();
+(function(){
+  // Detect: inside claude.ai iframe = Anthropic API (no key needed)
+  // Standalone browser (PC/mobile) = Gemini API (key needed)
+  const isArtifact = (function(){
+    try { return window.self !== window.top; } catch(e) { return true; }
+  })();
+  window._isArtifact = isArtifact;
+  const note=document.getElementById('ai-env-note');
+  const keyRow=document.getElementById('ai-key-row');
+  if(isArtifact){
+    if(note) note.textContent='Claude.ai上で動作中 — APIキー不要でそのまま使えます。';
+    if(keyRow) keyRow.style.display='none';
+  } else {
+    const saved=localStorage.getItem('np_gemini_key');
+    if(note){
+      if(saved){
+        note.textContent='✅ APIキー保存済み';
+      } else {
+        note.textContent='⚠️ AI機能にはGemini APIキーが必要です。';
+      }
+    }
+    if(keyRow) keyRow.style.display = saved ? 'none' : 'block';
+    if(saved){const inp=document.getElementById('gemini-api-key');if(inp)inp.value=saved;}
+  }
+})();
+</script>
+</body>
+</html>
