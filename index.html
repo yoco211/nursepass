@@ -2510,7 +2510,7 @@ async function startExam(){
     const prompt='あなたは日本の看護師国家試験対策の専門家です。看護師国家試験の出題形式に沿った4択問題を'+aiCount+'問作成してください。カテゴリは自由、難易度も混合で構いません。必ず以下のJSON形式のみで返答（コードブロック不要）：{"questions":[{"question":"問題文","scenario":"症例（なければnull）","options":["A","B","C","D"],"answer":0,"explanation":"解説200字以上","tags":["タグ"],"categoryName":"カテゴリ名","difficulty":"基本または標準または応用"}]}';
     try{
       const text=await callAI(prompt);
-      const parsed=JSON.parse(text.replace(/```json|```/g,'').trim());
+      const parsed=parseAIJson(text);
       const aiQs=parsed.questions.map((q,i)=>Object.assign({},q,{id:'ei_'+Date.now()+'_'+i,type:'ai',category:'ai',year:null}));
       let pastQs=[];
       if(pastCount>0){const pool=cat==='all'?PAST_QUESTIONS:PAST_QUESTIONS.filter(q=>q.category===cat);pastQs=[...pool].sort(()=>Math.random()-.5).slice(0,Math.min(pastCount,pool.length));}
@@ -2618,6 +2618,35 @@ function loadWRQ(){ const q=S.wrongReviewQueue[S.wrongReviewIdx];if(!q)return;S.
 function clearWrongNote(){ if(confirm('錯題本をすべてリセットしますか？')){S.wrongNote={};save();updateSidebar();renderWrongNote();} }
 
 // AI
+function parseAIJson(text){
+  const cleaned=(text||'').replace(/```(?:json)?/gi,'').replace(/```/g,'').trim();
+  try{
+    const parsed=JSON.parse(cleaned);
+    if(!parsed.questions||!Array.isArray(parsed.questions)) throw new Error('questions配列が見つかりません');
+    return parsed;
+  }catch(firstErr){
+    const startCandidates=['{','['].map(ch=>cleaned.indexOf(ch)).filter(i=>i>=0);
+    if(!startCandidates.length) throw firstErr;
+    const start=Math.min.apply(null,startCandidates);
+    const open=cleaned[start],close=open==='{'?'}':']';
+    let depth=0,inString=false,escape=false;
+    for(let i=start;i<cleaned.length;i++){
+      const ch=cleaned[i];
+      if(escape){escape=false;continue;}
+      if(ch==='\\'){escape=true;continue;}
+      if(ch==='"'){inString=!inString;continue;}
+      if(inString) continue;
+      if(ch===open) depth++;
+      if(ch===close) depth--;
+      if(depth===0){
+        const parsed=JSON.parse(cleaned.slice(start,i+1));
+        if(!parsed.questions||!Array.isArray(parsed.questions)) throw new Error('questions配列が見つかりません');
+        return parsed;
+      }
+    }
+    throw firstErr;
+  }
+}
 async function callAI(prompt){
   const isArt=window._isArtifact===true;
   if(isArt){
@@ -2628,7 +2657,7 @@ async function callAI(prompt){
   } else {
     const apiKey=localStorage.getItem('np_gemini_key')||'';
     if(!apiKey) throw new Error('Gemini APIキーを入力してください');
-    const res=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key='+apiKey,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.7,maxOutputTokens:4096}})});
+    const res=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key='+apiKey,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.7,maxOutputTokens:4096,responseMimeType:'application/json'}})});
     const data=await res.json();
     if(data.error) throw new Error(data.error.message||'Gemini API error');
     return data.candidates&&data.candidates[0]&&data.candidates[0].content&&data.candidates[0].content.parts[0]?data.candidates[0].content.parts[0].text:'';
@@ -2648,7 +2677,7 @@ async function generateAIQuestion(){
   const prompt='あなたは日本の看護師国家試験対策の専門家です。以下の条件で問題を'+count+'問作成してください。カテゴリ：'+category+'、難易度：'+difficulty+'。看護師国家試験の出題形式に沿った4択問題。実際の臨床場面を想定。正確な医療知識に基づくこと。必ず以下のJSON形式のみで返答（コードブロック不要）：{"questions":[{"question":"問題文","scenario":"症例（なければnull）","options":["A","B","C","D"],"answer":0,"explanation":"解説200字以上","tags":["タグ1"]}]}';
   try{
     const text=await callAI(prompt);
-    const parsed=JSON.parse(text.replace(/```json|```/g,'').trim());
+    const parsed=parseAIJson(text);
     S.aiQuestions=parsed.questions.map((q,i)=>Object.assign({},q,{id:'ai_'+Date.now()+'_'+i,type:'ai',categoryName:category,category:'ai',year:null,difficulty:difficulty}));
     S.aiIdx=0;S.aiAnswered=false;window['_s_ai']=undefined;
     resultDiv.innerHTML='<div style="font-size:13px;color:var(--teal);font-weight:600;">✅ '+S.aiQuestions.length+'問生成しました（'+category+' / '+difficulty+'）</div>';
